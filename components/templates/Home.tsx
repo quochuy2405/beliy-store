@@ -1,12 +1,12 @@
-import { ProductList, PromoteSection } from "../organisms";
+import { ProductList, PromoteSection } from '../organisms'
 
 const Home = () => {
-	return (
-		<div>
-			<PromoteSection />
-			<ProductList />
-		</div>
-	);
-};
+  return (
+    <div>
+      <PromoteSection />
+      <ProductList />
+    </div>
+  )
+}
 
-export default Home;
+export default Home
