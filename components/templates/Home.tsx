@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <PromoteSection />
-      <ProductList />
+      <ProductList keyCondition="all" title="Sản phẩm nổi bật" />
     </div>
   )
 }

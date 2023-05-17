@@ -4,11 +4,14 @@ import { ProductList } from '../organisms'
 const Product = () => {
   return (
     <div>
-      <ProductList />
-      <ProductList />
-      <ProductList />
-      <ProductList />
-      <ProductList />
+      <ProductList keyCondition="category" valueCondition="Q" title="Áo khoác" />
+      <ProductList keyCondition="category" valueCondition="Q" title="Áo khoác" />
+      <ProductList keyCondition="category" valueCondition="Q" title="Áo khoác" />
+      <ProductList keyCondition="category" valueCondition="Q" title="Áo khoác" />
+      {/* <ProductList keyCondition="all" />
+      <ProductList keyCondition="all" />
+      <ProductList keyCondition="all" />
+      <ProductList keyCondition="all" /> */}
     </div>
   )
 }
