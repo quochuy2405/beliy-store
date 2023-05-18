@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <PromoteSection />
-      <ProductList keyCondition="all" title="Sản phẩm nổi bật" />
+      <ProductList conditions={[]} title="Sản phẩm nổi bật" />
     </div>
   )
 }

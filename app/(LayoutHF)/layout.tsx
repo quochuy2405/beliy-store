@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from '@/redux/features/store'
 import { SnackbarProvider } from 'notistack'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], preload: false })
 
 export const metadata = {
   title: 'Create Next App',
