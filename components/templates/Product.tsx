@@ -6,7 +6,7 @@ import { FaTshirt } from 'react-icons/fa'
 import Link from 'next/link'
 
 interface ProductProps {
-  gender: 'women' | 'men' | 'all'
+  gender?: 'women' | 'men' | 'all'
 }
 const Product: React.FC<ProductProps> = ({}) => {
   return (
