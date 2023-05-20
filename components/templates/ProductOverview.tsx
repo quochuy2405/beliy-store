@@ -315,7 +315,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
                     <li key={highlight} className="text-gray-400">
                     </li>
                   ))} */}
-                  <span className="text-gray-600">{data.highlights}</span>
+                  <span className="text-gray-600">{data?.highlights}</span>
                 </ul>
               </div>
             </div>
@@ -324,7 +324,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
               <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{data.details}</p>
+                <p className="text-sm text-gray-600">{data?.details}</p>
               </div>
             </div>
           </div>
