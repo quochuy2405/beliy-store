@@ -25,7 +25,6 @@ export default function ProductOverviewPage() {
   useEffect(() => {
     if (params.id) {
       read('products', params.id).then(async (product) => {
-        console.log(product)
         const names = [1, 2, 3, 4]
         try {
         } catch (error) {}
