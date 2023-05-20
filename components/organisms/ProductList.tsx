@@ -78,14 +78,13 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
 
     if (conditions.length == 0) {
       await readAll(productRef)
-        .then(async (data) => {
+        .then(async (data: Array<ProductType>) => {
           setValue('products', await refactorData(data))
         })
         .catch((error) => console.log(error))
     } else {
       await findAll<ProductType>(productRef, conditions)
-        .then(async (data) => {
-          console.log('products', await refactorData(data))
+        .then(async (data: Array<ProductType>) => {
           if (data) setValue('products', await refactorData(data))
         })
         .catch((error) => console.log(error))
