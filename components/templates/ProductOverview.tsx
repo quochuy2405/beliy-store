@@ -302,7 +302,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <h3 className="sr-only">Description</h3>
 
               <div className="space-y-6">
-                <p className="text-base text-gray-900">{data.details}</p>
+                <p className="text-base text-gray-900">{data?.details}</p>
               </div>
             </div>
 
