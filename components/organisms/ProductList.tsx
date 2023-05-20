@@ -32,7 +32,8 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
             .toLocaleLowerCase()
-            .replace(/\s/g, '_')
+            .replace(/\s/g, '_') +
+          '/1'
       )
       const imageURL = await getDownloadURL(imageRef).catch(() => '')
 
