@@ -1,9 +1,9 @@
 'usec client'
-import React from 'react'
-import { ProductList } from '../organisms'
-import { GiSleevelessJacket, GiArmoredPants } from 'react-icons/gi'
-import { FaTshirt } from 'react-icons/fa'
 import Link from 'next/link'
+import React from 'react'
+import { FaTshirt } from 'react-icons/fa'
+import { GiArmoredPants, GiSleevelessJacket } from 'react-icons/gi'
+import { ProductList } from '../organisms'
 
 interface ProductProps {
   gender?: 'women' | 'men' | 'all'

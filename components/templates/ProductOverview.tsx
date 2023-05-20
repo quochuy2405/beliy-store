@@ -1,6 +1,8 @@
 'use client'
+import { ProductType } from '@/types/product'
 import { RadioGroup } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/20/solid'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -57,8 +59,11 @@ const reviews = { href: '#', average: 4, totalCount: 117 }
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
-export default function ProductOverview({ addToCart }) {
+interface ProductOverviewProps {
+  data?: ProductType
+  addToCart: (data: any) => void
+}
+const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
 
@@ -90,13 +95,7 @@ export default function ProductOverview({ addToCart }) {
               </li>
             ))}
             <li className="text-sm">
-              <Link
-                href={product.href}
-                aria-current="page"
-                className="font-medium text-gray-500 hover:text-gray-600"
-              >
-                {product.name}
-              </Link>
+              <p className="font-medium text-gray-500 hover:text-gray-600">{data?.name}</p>
             </li>
           </ol>
         </nav>
@@ -104,32 +103,40 @@ export default function ProductOverview({ addToCart }) {
         {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-            <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
+            <Image
+              src={data?.imagesURL[0]}
+              alt={''}
+              width={1000}
+              height={1000}
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
+              <Image
+                src={data?.imagesURL[1]}
+                alt={''}
+                width={1000}
+                height={1000}
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-              <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
+              <Image
+                src={data?.imagesURL[2]}
+                alt={''}
+                width={1000}
+                height={1000}
                 className="h-full w-full object-cover object-center"
               />
             </div>
           </div>
           <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-            <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
+            <Image
+              src={data?.imagesURL[3]}
+              alt={''}
+              width={1000}
+              height={1000}
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -139,14 +146,14 @@ export default function ProductOverview({ addToCart }) {
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              {product.name}
+              {data?.name}
             </h1>
           </div>
 
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+            <p className="text-3xl tracking-tight text-gray-900">{data?.price}</p>
 
             {/* Reviews */}
             <div className="mt-6">
@@ -182,26 +189,23 @@ export default function ProductOverview({ addToCart }) {
                 <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                   <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
                   <div className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
+                    {data?.colors.map((color) => (
                       <RadioGroup.Option
-                        key={color.name}
+                        key={color}
                         value={color}
                         className={({ active, checked }) =>
                           classNames(
-                            color.selectedClass,
+                            color,
                             active && checked ? 'ring ring-offset-1' : '',
                             !active && checked ? 'ring-2' : '',
                             'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
                           )
                         }
                       >
-                        <RadioGroup.Label as="span" className="sr-only">
-                          {color.name}
-                        </RadioGroup.Label>
                         <span
                           aria-hidden="true"
                           className={classNames(
-                            color.class,
+                            color,
                             'h-8 w-8 rounded-full border border-black border-opacity-10'
                           )}
                         />
@@ -230,10 +234,10 @@ export default function ProductOverview({ addToCart }) {
                       <RadioGroup.Option
                         key={size.name}
                         value={size}
-                        disabled={!size.inStock}
+                        disabled={!size}
                         className={({ active }) =>
                           classNames(
-                            size.inStock
+                            size
                               ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
                               : 'cursor-not-allowed bg-gray-50 text-gray-200',
                             active ? 'ring-2 ring-indigo-500' : '',
@@ -298,7 +302,7 @@ export default function ProductOverview({ addToCart }) {
               <h3 className="sr-only">Description</h3>
 
               <div className="space-y-6">
-                <p className="text-base text-gray-900">{product.description}</p>
+                <p className="text-base text-gray-900">{data.details}</p>
               </div>
             </div>
 
@@ -307,11 +311,11 @@ export default function ProductOverview({ addToCart }) {
 
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {product.highlights.map((highlight) => (
+                  {/* {product.highlights.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
                     </li>
-                  ))}
+                  ))} */}
+                  <span className="text-gray-600">{data.highlights}</span>
                 </ul>
               </div>
             </div>
@@ -320,7 +324,7 @@ export default function ProductOverview({ addToCart }) {
               <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
               <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
+                <p className="text-sm text-gray-600">{data.details}</p>
               </div>
             </div>
           </div>
@@ -329,3 +333,4 @@ export default function ProductOverview({ addToCart }) {
     </div>
   )
 }
+export default ProductOverview

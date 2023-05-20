@@ -2,9 +2,12 @@ export type ProductType = {
   id?: string
   name: string
   imageName: string
-  size: string
-  imageURL?: string
+  sizes: Array<string>
+  imagesURL?: string
   price: number
-  color: string
+  colors: Array<string>
+  quantity: number
+  highlights: string
+  details: string
   category: string
 }
