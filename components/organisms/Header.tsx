@@ -13,7 +13,7 @@ const navigation = {
     { name: 'Tất cả sản phẩm', href: '/product' },
     { name: 'Dành cho nữ', href: '/product' },
     { name: 'Dành cho nam', href: '/product' },
-    { name: 'Bộ Phối', href: '/product' },
+    { name: 'Bộ phối', href: '/product' },
     { name: 'Về chúng tui', href: '/product' }
   ]
 }
