@@ -84,7 +84,7 @@ const Header = () => {
 
               {/* Cart */}
               <div className="ml-4 flow-root lg:ml-6">
-                <Link href="/purchase/order" className="group -m-2 flex items-center p-2">
+                <Link href="/orders" className="group -m-2 flex items-center p-2">
                   <ShoppingBagIcon
                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"

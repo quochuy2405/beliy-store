@@ -6,22 +6,21 @@ import { addCart } from '@/redux/features/slices/cart'
 import { ProductType } from '@/types/product'
 import { getDownloadURL, ref } from 'firebase/storage'
 import { useParams } from 'next/navigation'
-
-import { useSnackbar } from 'notistack'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 export default function ProductOverviewPage() {
   const dispatch = useDispatch()
-  const { enqueueSnackbar } = useSnackbar()
 
   const params = useParams()
   const [data, setData] = useState<ProductType>()
 
-  const addToCart = () => {
-    enqueueSnackbar('Đã thêm sản phẩm', { variant: 'success' })
-    dispatch(addCart({ id: 1, quantity: 1 }))
+  const addToCart = (product: ProductType) => {
+    // Product does not exist in the cart, add new product
+    const newProduct = product
+    dispatch(addCart(newProduct))
   }
+
   useEffect(() => {
     if (params.id) {
       read('products', params.id).then(async (product) => {

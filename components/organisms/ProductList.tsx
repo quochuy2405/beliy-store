@@ -129,7 +129,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                             <p
                               key={item + index}
                               className={clsx(
-                                'w-6 h-6 rounded-md border-2 cursor-pointer border-black flex items-center text-black justify-center font-bold text-[9px]'
+                                'w-6 h-6 rounded-full border-2 cursor-pointer border-gray-500 flex items-center text-black justify-center font-bold text-[9px]'
                               )}
                             >
                               {item}

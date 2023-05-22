@@ -1,28 +1,35 @@
+import { ProductType } from '@/types/product'
 import clsx from 'clsx'
 import Link from 'next/link'
-
-const OrderSumaries = () => {
+interface OrderSumariesProps {
+  orders: ProductType[]
+}
+const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders }) => {
   return (
     <div className="h-auto max-w-5xl m-auto pt-10">
       <h1 className="mb-10 text-2xl font-bold">Giỏ hàng</h1>
       <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div className="rounded-lg md:w-2/3">
-          {[1, 2, 3].map((item) => (
+          {orders.map((item) => (
             <div
-              key={item}
+              key={item.id}
               className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start"
             >
               <div className="h-44 w-36 overflow-hidden rounded-lg  bg-[url('/JACKET4-2.png')] bg-cover bg-no-repeat"></div>
               <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                 <div className="mt-5 sm:mt-0">
-                  <h2 className="text-lg font-bold text-gray-900">Áo khoác Beliy</h2>
-                  <p
-                    className={clsx(
-                      'w-6 h-6 rounded-md border-2 cursor-pointer border-black flex items-center text-black justify-center font-bold text-[9px]'
-                    )}
-                  >
-                    M
-                  </p>
+                  <h2 className="text-lg font-bold text-gray-900">{item.name}</h2>
+                  <div className="flex  items-center gap-2">
+                    {item.sizes.map((size) => (
+                      <p
+                        className={clsx(
+                          'w-6 h-6 rounded-full border-2 cursor-pointer border-black flex items-center text-black justify-center font-bold text-[9px]'
+                        )}
+                      >
+                        {size}
+                      </p>
+                    ))}
+                  </div>
                 </div>
                 <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                   <div className="flex items-center border-gray-100">
@@ -42,7 +49,9 @@ const OrderSumaries = () => {
                     </span>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <p className="text-sm">259.000 VND</p>
+                    <p className="text-sm">
+                      {(item.quantity * item.price * 1000).toLocaleString()} VND
+                    </p>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -77,7 +86,7 @@ const OrderSumaries = () => {
               <p className="text-sm text-gray-700">Đã bao gồm VAT</p>
             </div>
           </div>
-          <Link href="./purchase/payment">
+          <Link href="/payment">
             <button className="mt-6 w-full rounded-md bg-gray-900 py-1.5 font-medium text-white hover:bg-black">
               Thanh toán
             </button>

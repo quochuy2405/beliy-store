@@ -1,35 +1,45 @@
+import { ProductType } from '@/types/product'
 import { createSlice } from '@reduxjs/toolkit'
-const initialState: Array<{ id: string; quantity: number }> = []
+import { find } from 'lodash'
+import { enqueueSnackbar } from 'notistack'
+const initialState: Array<ProductType> = []
 export const loadingSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addCart: (state, actions) => {
       const cart = {
-        id: actions.payload.id,
-        quantity: actions.payload.quantity
+        ...actions.payload
       }
-      const exisCart = state.find((e) => e.id === cart.id)
 
-      // if (exisCart) {
-      //     exisCart.quantity = cart.quantity
-      // } else {
-      state = [...state, cart]
-
-      // }
-      return state
+      const existingProduct = find(state, { id: cart.id })
+      if (existingProduct) {
+        enqueueSnackbar('Bạn ơi! Giỏ hàng đã có rồi ạ :v', { variant: 'info' })
+        return state
+      } else {
+        enqueueSnackbar('Đã thêm sản phẩm mới.', { variant: 'success' })
+        return [...state, cart]
+      }
     },
     resetCart: (state) => {
       state = []
       return state
     },
-    setCart: (state) => {
-      state = []
-      return state
+    updateCart: (state, actions) => {
+      const cart = {
+        ...actions.payload
+      }
+      const updatedState = state.map((product) => {
+        if (product.id === cart.id) {
+          return { ...product, quantity: cart.quantity }
+        }
+        return product
+      })
+      return updatedState
     }
   }
 })
 
-export const { setCart, resetCart, addCart } = loadingSlice.actions
+export const { updateCart, resetCart, addCart } = loadingSlice.actions
 
 export default loadingSlice.reducer
