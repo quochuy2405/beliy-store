@@ -14,18 +14,7 @@ interface ProductListProps {
   id?: string
   conditions: Condition<any>[]
 }
-const colors = [
-  '#025464',
-  '#E57C23',
-  '#F8F1F1',
-  '#9CA777',
-  '#7C9070',
-  '#263A29',
-  '#000000',
-  '#E96479',
-  '#B99B6B',
-  '#E4C988'
-]
+
 const catDetails = {
   QD: 'Quần Dài',
   QN: 'Quần Short',
@@ -108,7 +97,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                   <Link href={`/product/${item.id}`} key={item.id}>
                     <div
                       key={item?.imagesURL[0]}
-                      className="w-[90%] min-w-[270px] md:max-w-[280px] md:w-[33.333%] lg:w-[25%] bg-white rounded-2xl flex flex-col p-4 gap-2 shadow-2xl hover:scale-95 transition-all ease-linear h-full flex-1"
+                      className="w-[90%] min-w-[270px] md:max-w-[280px] md:w-[33.333%] lg:w-[25%] bg-white rounded-lg flex flex-col p-4 gap-2 shadow-lg transition-all ease-linear h-full flex-1"
                     >
                       <div className="w-full h-[240px] relative overflow-hidden">
                         <Image
@@ -121,45 +110,20 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                         />
                       </div>
                       <div className="flex items-start justify-between flex-1">
-                        <p className="w-fit p-2 h-7 rounded-md border-2 border-black flex items-center text-black justify-center font-bold text-xs">
+                        <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-xs">
                           {item.name}
                         </p>
-                        <p className="w-fit p-2 h-7 rounded-md border-2 border-black flex items-center text-black justify-center font-bold text-xs">
-                          Thể loại: {catDetails[item.category]}
+                        <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-xs">
+                          {catDetails[item.category]}
                         </p>
                       </div>
 
-                      <div className="w-full text-white text-sm flex-1 flex items-start justify-between gap-2">
-                        <p className="text-white bg-red-600 font-medium rounded-lg text-xs px-4 py-2">
-                          Giá: {Number(item.price)?.toLocaleString()}
+                      <div className="w-full text-white text-sm flex-1 flex items-start justify-between gap-2 px-2">
+                        <p className="text-black font-medium rounded-lg text-xs ">
+                          Giá: {(Number(item.price) * 1000)?.toLocaleString()}
                         </p>
-                        <div className="flex flex-1 flex-wrap justify-end gap-1">
-                          <div className="flex flex-1 flex-wrap gap-1">
-                            {colors.map(
-                              (color) =>
-                                item.colors?.includes(color) && (
-                                  <p
-                                    key={color}
-                                    className={clsx(`w-4 h-4 rounded-full border-2`, {
-                                      'border-black': item.colors?.includes(color),
-                                      'bg-[#025464]': color === '#025464',
-                                      'bg-[#E57C23]': color === '#E57C23',
-                                      'bg-[#F8F1F1]': color === '#F8F1F1',
-                                      'bg-[#9CA777]': color === '#9CA777',
-                                      'bg-[#7C9070]': color === '#7C9070',
-                                      'bg-[#263A29]': color === '#263A29',
-                                      'bg-[#000000]': color === '#000000',
-                                      'bg-[#E96479]': color === '#E96479',
-                                      'bg-[#B99B6B]': color === '#B99B6B',
-                                      'bg-[#E4C988]': color === '#E4C988'
-                                    })}
-                                  />
-                                )
-                            )}
-                          </div>
-                        </div>
                       </div>
-                      <div className="w-full text-white text-sm flex-1 flex items-start justify-between gap-2">
+                      <div className="w-full text-white text-sm flex-1 flex items-start justify-between gap-2 px-2">
                         <div className="flex gap-1 flex-1 flex-wrap justify-start">
                           {[...item.sizes].map((item, index) => (
                             <p

@@ -182,7 +182,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
                 <p className="sr-only">{reviews.average} out of 5 stars</p>
                 <Link
                   href={reviews.href}
-                  className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                  className="ml-3 text-sm font-medium text-black hover:text-indigo-500"
                 >
                   {reviews.totalCount} reviews
                 </Link>
@@ -227,10 +227,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <Link
-                    href="#"
-                    className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
+                  <Link href="#" className="text-sm font-medium text-black hover:text-indigo-500">
                     Size guide
                   </Link>
                 </div>
@@ -297,7 +294,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <button
                 type="button"
                 onClick={addToCart}
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Add to bag
               </button>

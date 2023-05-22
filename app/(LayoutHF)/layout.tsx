@@ -7,7 +7,11 @@ import store from '@/redux/features/store'
 import { SnackbarProvider } from 'notistack'
 import 'metadata'
 
-const inter = Inter({ subsets: ['latin'], preload: false })
+const inter = Inter({
+  subsets: ['latin'],
+  preload: false,
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+})
 
 export default function RootLayout({ children }) {
   return (
