@@ -35,11 +35,11 @@ const Checkout: React.FC<CheckoutProps> = ({
   return (
     <form className="p-4 pb-40 select-none" onSubmit={dataForm.handleSubmit(onSubmit)}>
       <div className="w-24 h-w-24 items-center bg-white text-sm font-medium text-white">
-        <div className="flex-1 flex justify-center items-center lg:ml-0">
+        <p className="flex-1 flex justify-center items-center lg:ml-0">
           <LogoSvg />
-        </div>
+        </p>
       </div>
-      <div className="grid max-w-screen-2xl grid-cols-1 md:grid-cols-2">
+      <section className="grid max-w-screen-2xl grid-cols-1 md:grid-cols-2">
         <div className="bg-white border rounded-md p-3 flex flex-col gap-3">
           <Controller
             name="name"
@@ -290,7 +290,7 @@ const Checkout: React.FC<CheckoutProps> = ({
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </form>
   )
 }
