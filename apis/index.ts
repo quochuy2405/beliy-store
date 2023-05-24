@@ -1,7 +1,6 @@
 import AxiosServices from './AxiosServices'
 
 export const getProvinces = async () => {
-  return []
   return await AxiosServices.get<Array<any>>('https://provinces.open-api.vn/api/')
 }
 
