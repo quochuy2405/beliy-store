@@ -30,7 +30,7 @@ const Header = () => {
         <FaInstagram />
       </div>
       <div className="flex h-10 items-center justify-center bg-white px-4 mt-2 text-sm font-medium text-white sm:px-6 lg:px-8">
-        <Link href="/" className="ml-4 flex-1 flex justify-center items-center lg:ml-0" passHref>
+        <Link href="/" className="ml-4 flex justify-center items-center lg:ml-0 w-36 h-36" passHref>
           <LogoSvg />
         </Link>
       </div>

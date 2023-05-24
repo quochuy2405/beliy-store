@@ -7,6 +7,7 @@ export type ProductType = {
   price: number
   colors: Array<string>
   quantity: number
+  quantityOrder: number
   highlights: string
   details: string
   descriptions: string

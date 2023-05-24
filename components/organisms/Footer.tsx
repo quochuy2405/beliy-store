@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <Link
               href="/"
-              className="ml-4 flex-1 flex justify-center items-center lg:ml-0"
+              className="ml-4 flex-1 flex justify-center items-center lg:ml-0 w-36 h-36"
               passHref
             >
               <LogoSvg />

@@ -4,6 +4,7 @@ import { RadioGroup } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 import Link from 'next/link'
+import { enqueueSnackbar } from 'notistack'
 import { useState } from 'react'
 
 const breadcrumbs = [
@@ -21,7 +22,14 @@ interface ProductOverviewProps {
   addToCart: (data: ProductType) => void
 }
 const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) => {
-  const [selectedSize, setSelectedSize] = useState(data?.sizes[0])
+  const [selectedSize, setSelectedSize] = useState(null)
+  const handelAddToCart = () => {
+    if (selectedSize) {
+      addToCart({ ...data, sizes: [selectedSize], quantityOrder: 1 })
+    } else {
+      enqueueSnackbar('Vui lòng chọn size nhó :v', { variant: 'info' })
+    }
+  }
 
   return (
     <div className="bg-white">
@@ -218,7 +226,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
 
               <button
                 type="button"
-                onClick={() => addToCart(data)}
+                onClick={handelAddToCart}
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:bg-white hover:text-black hover:border-black hover:border ease-linear transition-all focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               >
                 Thêm vào giỏ hàng
@@ -231,7 +239,9 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <h3 className="text-sm font-medium text-gray-900">Mô tả sản phẩm</h3>
 
               <div className="space-y-6">
-                <p className="text-sm text-gray-600">{data?.descriptions}</p>
+                <div className="text-sm text-gray-600">
+                  <div dangerouslySetInnerHTML={{ __html: data?.descriptions }}></div>
+                </div>
               </div>
             </div>
 
@@ -240,11 +250,9 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
 
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {/* {product.highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                    </li>
-                  ))} */}
-                  <span className="text-gray-600">{data?.highlights}</span>
+                  <div className="text-sm text-gray-600">
+                    <div dangerouslySetInnerHTML={{ __html: data?.highlights }}></div>
+                  </div>
                 </ul>
               </div>
             </div>
@@ -253,7 +261,9 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <h2 className="text-sm font-medium text-gray-900">Chi tiết khác</h2>
 
               <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{data?.details}</p>
+                <div className="text-sm text-gray-600">
+                  <div dangerouslySetInnerHTML={{ __html: data?.details }}></div>
+                </div>
               </div>
             </div>
           </div>

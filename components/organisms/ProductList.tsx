@@ -102,11 +102,10 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                       <div className="w-full h-[240px] relative overflow-hidden">
                         <Image
                           src={item.imagesURL[0] || 'https://www.freeiconspng.com/img/23494'}
-                          unoptimized
-                          width={10}
-                          height={100}
+                          width={1000}
+                          height={1000}
                           alt=""
-                          className="w-full max-h-[240px] object-contain md:object-cover"
+                          className="w-full max-h-[240px] object-contain md:object-cover rounded-md"
                         />
                       </div>
                       <div className="flex items-start justify-between flex-1">

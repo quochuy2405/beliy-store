@@ -47,7 +47,7 @@ export default function ProductOverviewPage() {
             return ''
           }
         })
-        console.log(product)
+
         setData({
           ...product,
           imagesURL: await Promise.all(imagesURL)
