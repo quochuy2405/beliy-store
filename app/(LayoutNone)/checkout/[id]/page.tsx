@@ -4,14 +4,14 @@ import { RootState } from '@/redux/features/store'
 import { schema } from '@/resolvers/checkout'
 import { OptionType, OrderType } from '@/types/common'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { getAwards, getDistrict, getProvinces } from 'apis'
+import { getwards, getDistrict, getProvinces } from 'apis'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 export type StateCheckoutPageType = {
   provinces: Array<OptionType>
   districts: Array<OptionType>
-  awards: Array<OptionType>
+  wards: Array<OptionType>
 }
 const CheckoutPage = () => {
   const stateStore = useForm<StateCheckoutPageType>({})
@@ -24,7 +24,6 @@ const CheckoutPage = () => {
   }
   useEffect(() => {
     getProvinces().then(({ data }: any) => {
-      console.log(data)
       if (data) {
         const provinceOpts = data.map((item) => ({
           label: item.name,
@@ -35,8 +34,12 @@ const CheckoutPage = () => {
       }
     })
   }, [])
-  const onChangeProvince = async () => {
-    const proviceId = dataForm.getValues('province')
+  const onChangeProvince = async (proviceId: string) => {
+    dataForm.setValue('district', '')
+    dataForm.setValue('award', '')
+    stateStore.resetField('districts')
+    stateStore.resetField('wards')
+    console.log('reset')
     await getDistrict(proviceId).then(({ data }: any) => {
       const districts = data.districts
       if (districts) {
@@ -50,17 +53,18 @@ const CheckoutPage = () => {
     })
   }
 
-  const onChangeDistricts = async () => {
-    const districtId = dataForm.getValues('district')
-    await getAwards(districtId).then(({ data }: any) => {
-      const awards = data.awards
-      if (awards) {
-        const awardsOpts = awards.map((item) => ({
+  const onChangeDistricts = async (districtId: string) => {
+    dataForm.setValue('award', '')
+    // stateStore.resetField('wards')
+    await getwards(districtId).then(({ data }: any) => {
+      const wards = data.wards
+      if (wards) {
+        const wardsOpts = wards.map((item) => ({
           label: item.name,
           value: item.code
         })) as unknown as OptionType[]
 
-        stateStore.setValue('awards', awardsOpts)
+        stateStore.setValue('wards', wardsOpts)
       }
     })
   }

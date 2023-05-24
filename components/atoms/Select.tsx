@@ -1,7 +1,7 @@
 'use client'
 import { OptionType } from '@/types/common'
 import clsx from 'clsx'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, memo } from 'react'
 import { FieldError } from 'react-hook-form'
 import ReactSelect, {
   ControlProps,
@@ -49,7 +49,7 @@ const Select: React.FC<ISelectProps> = forwardRef<HTMLSelectElement, ISelectProp
       return (
         <components.MenuList
           {...menuProps}
-          className={clsx('bg-[#f5f4f4]', { 'h-[130px]': options.length })}
+          className={clsx('bg-[#f5f4f4]', { 'h-[230px]': options.length })}
         >
           <div className="flex flex-col divide-y text-black bg-[#f5f4f4]">{children}</div>
         </components.MenuList>
@@ -120,12 +120,10 @@ const Select: React.FC<ISelectProps> = forwardRef<HTMLSelectElement, ISelectProp
           instanceId="react-select-3-live-region"
           placeholder="Lựa chọn"
           options={options}
-          value={options.find((item) => item.value === value)}
+          value={!value ? null : options.find((item) => item.value === value)}
           onChange={(opt) => {
             const option = opt as OptionType
-            if (option) {
-              onChange(option.value)
-            }
+            onChange(option.value)
           }}
           noOptionsMessage={({ inputValue }) =>
             !inputValue ? 'Danh sách trống' : 'Không tìm thấy'
@@ -170,4 +168,4 @@ const Select: React.FC<ISelectProps> = forwardRef<HTMLSelectElement, ISelectProp
   }
 )
 Select.displayName = 'select'
-export default Select
+export default memo(Select)

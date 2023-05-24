@@ -10,4 +10,5 @@ export type OrderType = {
   province: string
   district: string
   phone: string
+  addressNumber: string
 }

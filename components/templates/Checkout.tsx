@@ -14,8 +14,8 @@ interface CheckoutProps {
   dataForm: UseFormReturn<OrderType, any>
   orders: Array<ProductType>
   onSubmit: (data: any) => void
-  onChangeDistricts: () => void
-  onChangeProvince: () => void
+  onChangeDistricts: (id: string) => void
+  onChangeProvince: (id: string) => void
 }
 const Checkout: React.FC<CheckoutProps> = ({
   orders,
@@ -80,11 +80,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                     error={fieldState.error}
                     title="Tỉnh/Thành phố"
                     onChange={(value) => {
-                      if (field.value !== value && value) {
-                        dataForm.resetField('district')
-                        dataForm.resetField('award')
-                      }
-                      onChangeProvince()
+                      onChangeProvince(value)
                       field.onChange(value)
                     }}
                     options={opts}
@@ -101,7 +97,7 @@ const Checkout: React.FC<CheckoutProps> = ({
               <Controller
                 name="district"
                 control={dataForm.control}
-                defaultValue={undefined}
+                defaultValue={''}
                 render={({ field: { onChange, ...params }, fieldState }) => (
                   <Select
                     {...params}
@@ -110,7 +106,7 @@ const Checkout: React.FC<CheckoutProps> = ({
                     options={opts}
                     onChange={(value) => {
                       onChange(value)
-                      onChangeDistricts()
+                      onChangeDistricts(value)
                     }}
                     disabled={!opts?.length}
                   />
@@ -119,19 +115,19 @@ const Checkout: React.FC<CheckoutProps> = ({
             )}
           />
           <Controller
-            name="awards"
+            name="wards"
             control={stateStore.control}
             defaultValue={[]}
             render={({ field: { value: opts } }) => (
               <Controller
                 name="award"
                 control={dataForm.control}
-                defaultValue={undefined}
+                defaultValue={''}
                 render={({ field, fieldState }) => (
                   <Select
                     {...field}
                     error={fieldState.error}
-                    title="Số nhà, đường"
+                    title="Phường/Xã"
                     options={opts}
                     disabled={!opts?.length}
                   />
@@ -139,8 +135,16 @@ const Checkout: React.FC<CheckoutProps> = ({
               />
             )}
           />
+          <Controller
+            name="addressNumber"
+            control={dataForm.control}
+            defaultValue=""
+            render={({ field, fieldState }) => (
+              <TextField {...field} errors={fieldState.error} title="Số nhà, đường" required />
+            )}
+          />
         </div>
-        <div className="bg-white ">
+        <section className="bg-white ">
           <div className="max-w-lg px-4 lg:px-8">
             <div className="flex flex-col gap-4 w-full">
               <div className="rounded-lg w-full bg-white p-6 border shadow-md flex flex-col gap-2">
@@ -289,7 +293,7 @@ const Checkout: React.FC<CheckoutProps> = ({
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
     </form>
   )
