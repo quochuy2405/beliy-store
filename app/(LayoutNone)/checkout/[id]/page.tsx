@@ -24,6 +24,7 @@ const CheckoutPage = () => {
   }
   useEffect(() => {
     getProvinces().then(({ data }: any) => {
+      console.log(data)
       if (data) {
         const provinceOpts = data.map((item) => ({
           label: item.name,

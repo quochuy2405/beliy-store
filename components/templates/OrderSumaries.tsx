@@ -146,7 +146,7 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders }) => {
             </div>
           </div>
 
-          <Link href="/checkout/ƯIDWIUEK">
+          <Link href="/checkout/iDWkUEK">
             <button className="mt-3 w-full text-sm rounded-md bg-black py-2 font-medium text-white hover:bg-gray-800">
               Tiến hành thanh toán
             </button>
