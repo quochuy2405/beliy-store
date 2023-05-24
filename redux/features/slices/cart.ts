@@ -2,7 +2,8 @@ import { ProductType } from '@/types/product'
 import { createSlice } from '@reduxjs/toolkit'
 import { find, isEqual, sortBy } from 'lodash'
 import { enqueueSnackbar } from 'notistack'
-const initialState: Array<ProductType> = JSON.parse(window.localStorage.getItem('orders')) || []
+const initialState: Array<ProductType> =
+  (window && JSON.parse(window.localStorage.getItem('orders'))) || []
 export const loadingSlice = createSlice({
   name: 'cart',
   initialState,
