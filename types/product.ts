@@ -9,5 +9,6 @@ export type ProductType = {
   quantity: number
   highlights: string
   details: string
+  descriptions: string
   category: string
 }

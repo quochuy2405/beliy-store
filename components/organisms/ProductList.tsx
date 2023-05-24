@@ -110,7 +110,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                         />
                       </div>
                       <div className="flex items-start justify-between flex-1">
-                        <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-xs">
+                        <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-sm">
                           {item.name}
                         </p>
                         <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-xs">
