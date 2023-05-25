@@ -22,7 +22,7 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
   return (
     <div className="h-auto max-w-5xl m-auto px-10 select-none">
       <h1 className="mb-10 text-2xl font-bold">Giỏ hàng</h1>
-      <form className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+      <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div className="rounded-lg md:w-2/3">
           {orders.map((item) => (
             <div
@@ -160,7 +160,7 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
             </button>
           </Link>
         </div>
-      </form>
+      </div>
     </div>
   )
 }

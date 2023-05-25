@@ -16,10 +16,10 @@ const OrderSumariesPage = () => {
   const dataForm = useForm<DataFormType>({
     defaultValues: { orders }
   })
-  const onCheckout = () => {
-    const id = shortid.generate()
-    setCookies('checkout_id', id)
-    router.push('/checkout/' + id)
+  const onCheckout = async () => {
+    const id = await shortid.generate()
+    await setCookies('checkout_id', id)
+    await router.push('/checkout/' + id)
   }
   const props = {
     orders,

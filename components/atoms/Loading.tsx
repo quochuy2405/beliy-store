@@ -6,17 +6,9 @@ export interface LoadingProps {
   className?: string
   mode?: 'default' | 'success' | 'error' | 'mail'
 }
-const Loading: React.FC<LoadingProps> = ({
-  title = 'Loading...',
-  mode = 'default',
-  className
-}) => {
+const Loading: React.FC<LoadingProps> = ({ title = 'Loading...', mode = 'default', className }) => {
   return (
-    <div
-      aria-label="Loading..."
-      role="status"
-      className="flex items-center space-x-2 flex-col"
-    >
+    <div aria-label="Loading..." role="status" className="flex items-center space-x-2 flex-col">
       {mode === 'default' && (
         <svg
           className={clsx('h-8 w-8 animate-spin', {
@@ -100,15 +92,9 @@ const Loading: React.FC<LoadingProps> = ({
         </svg>
       )}
 
-      {mode === 'success' && (
-        <Image src="/success.gif" alt="success" width={100} height={100} />
-      )}
-      {mode === 'mail' && (
-        <Image src="/send-mail.gif" alt="success" width={100} height={100} />
-      )}
-      {mode === 'error' && (
-        <Image src="/error.gif" alt="success" width={100} height={100} />
-      )}
+      {mode === 'success' && <Image src="/success.gif" alt="success" width={100} height={100} />}
+      {mode === 'mail' && <Image src="/send-mail.gif" alt="success" width={100} height={100} />}
+      {mode === 'error' && <Image src="/error.gif" alt="success" width={100} height={100} />}
 
       <span className="text-xs font-semibold  text-black">{title}</span>
     </div>
