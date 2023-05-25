@@ -1,13 +1,21 @@
 'use client'
-import { Checkout } from '@/components/templates'
+import { Checkout, Finish } from '@/components/templates'
+import { create } from '@/firebase/base'
+import { db } from '@/firebase/config'
+import { closeLoading, setLoading } from '@/redux/features/slices/loading'
 import { RootState } from '@/redux/features/store'
 import { schema } from '@/resolvers/checkout'
 import { OptionType, OrderType } from '@/types/common'
+import { collection } from '@firebase/firestore'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { getwards, getDistrict, getProvinces } from 'apis'
-import React, { useEffect } from 'react'
+import { getDistrict, getProvinces, getwards } from 'apis'
+import { deleteCookie, getCookie } from 'cookies-next'
+import Link from 'next/link'
+import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import shortid from 'shortid'
 export type StateCheckoutPageType = {
   provinces: Array<OptionType>
   districts: Array<OptionType>
@@ -18,9 +26,54 @@ const CheckoutPage = () => {
   const dataForm = useForm<OrderType>({
     resolver: yupResolver(schema)
   })
+  const refButton = useRef('payment_on_delivery')
+  const dispatch = useDispatch()
+  const params = useParams()
+  const router = useRouter()
   const orders = useSelector((state: RootState) => state.cart)
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = async (data: OrderType) => {
+    if (getCookie('checkout_id')) {
+      dispatch(setLoading({ status: true, mode: 'default', title: 'Đang tạo đơn hàng' }))
+      const order = {
+        checkoutId: getCookie('checkout_id'),
+        orders: orders,
+        ...data,
+        paymentMethods: refButton.current
+      }
+
+      const productsRef = collection(db, 'orders')
+      await create(productsRef, order)
+        .then(() => {
+          dispatch(closeLoading())
+          if (refButton.current === 'payment_on_delivery')
+            router.push(`/checkout/${params.id}/status`)
+          if (refButton.current === 'momo') router.push(`/checkout/${params.id}/payment/momo`)
+          if (refButton.current === 'banking') router.push(`/checkout/${params.id}/payment/momo`)
+        })
+        .catch(() => {
+          dispatch(
+            setLoading({
+              status: true,
+              mode: 'error',
+              title: (
+                <>
+                  <p>'Tạo đơn hàng lỗi!'</p>
+                  <Link
+                    href="/"
+                    onClick={() => {
+                      deleteCookie('checkout_id')
+                      dispatch(closeLoading())
+                    }}
+                    className="w-36 mx-auto mt-3 flex gap-1 justify-center items-center text-sm rounded-md bg-black py-2 font-medium text-blue-50 hover:bg-gray-700"
+                  >
+                    Về trang chủ
+                  </Link>
+                </>
+              )
+            })
+          )
+        })
+    }
   }
   useEffect(() => {
     getProvinces().then(({ data }: any) => {
@@ -68,7 +121,17 @@ const CheckoutPage = () => {
       }
     })
   }
-  const props = { stateStore, dataForm, orders, onSubmit, onChangeDistricts, onChangeProvince }
+  const props = {
+    stateStore,
+    dataForm,
+    orders,
+    refButton,
+    onSubmit,
+    onChangeDistricts,
+    onChangeProvince
+  }
+  if (!shortid.isValid(params.id) || params.id != getCookie('checkout_id'))
+    return <Finish status="error" />
   return <Checkout {...props} />
 }
 

@@ -1,5 +1,5 @@
 'use client'
-import { Footer, Header } from '@/components/organisms'
+import { Footer, Header, LoadingPopUp } from '@/components/organisms'
 import '../../styles/global.css'
 import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux'
@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className} suppressHydrationWarning={true}>
         <Provider store={store}>
           <SnackbarProvider>
+            <LoadingPopUp />
             <Header />
             {children}
             <Footer />

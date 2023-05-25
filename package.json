@@ -21,6 +21,7 @@
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
     "clsx": "^1.2.1",
+    "cookies-next": "^2.1.1",
     "firebase": "^9.22.0",
     "lodash": "^4.17.21",
     "next": "13.4.2",
@@ -33,6 +34,7 @@
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
     "react-select": "^5.7.3",
+    "shortid": "^2.2.16",
     "tailwindcss": "3.3.2",
     "yup": "^1.1.1"
   },

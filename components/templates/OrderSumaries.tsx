@@ -8,8 +8,9 @@ import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 interface OrderSumariesProps {
   orders: ProductType[]
+  onCheckout: () => void
 }
-const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders }) => {
+const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => {
   const dispatch = useDispatch()
   const total = useCallback(() => {
     return (
@@ -146,11 +147,13 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders }) => {
             </div>
           </div>
 
-          <Link href="/checkout/iDWkUEK">
-            <button className="mt-3 w-full text-sm rounded-md bg-black py-2 font-medium text-white hover:bg-gray-800">
-              Tiến hành thanh toán
-            </button>
-          </Link>
+          <button
+            className="mt-3 w-full text-sm rounded-md bg-black py-2 font-medium text-white hover:bg-gray-800"
+            onClick={onCheckout}
+          >
+            Tiến hành thanh toán
+          </button>
+
           <Link href="/products">
             <button className="w-full mt-3 flex gap-1 justify-center items-center text-sm rounded-md bg-[#005BAA] py-2 font-medium text-blue-50 hover:bg-blue-600">
               Tiếp tục mua hàng

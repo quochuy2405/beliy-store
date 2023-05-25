@@ -1,11 +1,12 @@
 import { ProductType } from '@/types/product'
 import { createSlice } from '@reduxjs/toolkit'
+import { getCookie, setCookie } from 'cookies-next'
 import { find, isEqual, sortBy } from 'lodash'
 import { enqueueSnackbar } from 'notistack'
 let initialState: Array<ProductType> = []
 
-if (typeof window !== 'undefined') {
-  initialState = JSON.parse(window.localStorage.getItem('orders')) || []
+if (getCookie('orders')) {
+  initialState = JSON.parse(getCookie('orders') as string) || []
 }
 export const loadingSlice = createSlice({
   name: 'cart',
@@ -22,7 +23,7 @@ export const loadingSlice = createSlice({
         return state
       } else {
         enqueueSnackbar('Đã thêm sản phẩm mới.', { variant: 'success' })
-        window.localStorage.setItem('orders', JSON.stringify([...state, cart]))
+        setCookie('orders', JSON.stringify([...state, cart]))
         return [...state, cart]
       }
     },
@@ -40,7 +41,7 @@ export const loadingSlice = createSlice({
         }
         return product
       })
-      window.localStorage.setItem('orders', JSON.stringify([...updatedState]))
+      setCookie('orders', JSON.stringify([...updatedState]))
       return updatedState
     },
     removeInCart: (state, actions) => {
@@ -50,7 +51,7 @@ export const loadingSlice = createSlice({
       const updatedState = state.filter(
         (product) => !(product.id === cart.id && isEqual(sortBy(product.sizes), sortBy(cart.sizes)))
       )
-      window.localStorage.setItem('orders', JSON.stringify([...updatedState]))
+      setCookie('orders', JSON.stringify([...updatedState]))
       return updatedState
     }
   }

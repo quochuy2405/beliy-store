@@ -1,4 +1,10 @@
-const Payment = () => {
+'use client'
+import { deleteCookie, getCookie } from 'cookies-next'
+import Link from 'next/link'
+import React, { useRef } from 'react'
+
+const PaymentMomo: React.FC = () => {
+  const refId = useRef(getCookie('checkout_id' as any))
   return (
     <section className="body-font h-auto bg-gray-100 py-6 text-gray-600">
       <div className="container mx-auto mt-10 flex max-w-3xl flex-wrap justify-center rounded-lg bg-white px-5 py-24">
@@ -14,14 +20,21 @@ const Payment = () => {
               <h1 className="font-laonoto mt-4 text-center text-xl font-bold">Vui lòng quét mã</h1>
               <p className="mt-2 text-center font-semibold text-gray-600">DIEU LINH MEOW MEOW</p>
               <p className="mt-2 text-center font-semibold text-gray-600">
-                Nội dung tin nhắn: madonhang:00281721
+                Nội dung tin nhắn: MDH:{refId.current}
               </p>
               <p className="mt-1 text-center font-medium text-red-500">0963329201</p>
             </div>
-
-            <button className="mx-auto block rounded-md border bg-blue-500 px-6 py-2 text-white outline-none">
-              Đã thanh toán xong
-            </button>
+            <Link
+              href={'/'}
+              onClick={() => {
+                deleteCookie('checkout_id')
+                deleteCookie('orders')
+              }}
+            >
+              <button className="mx-auto block rounded-md border bg-black px-6 py-2 text-white outline-none">
+                Đã thanh toán xong
+              </button>
+            </Link>
           </div>
           {/* Step Checkout */}
           <div className="mt-8 max-w-sm md:mt-0 md:ml-10 md:w-2/3">
@@ -29,7 +42,7 @@ const Payment = () => {
               <div className="absolute inset-0 flex h-full w-10 items-center justify-center">
                 <div className="pointer-events-none h-full w-1 bg-gray-200" />
               </div>
-              <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
+              <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-black text-white">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -56,7 +69,7 @@ const Payment = () => {
               <div className="absolute inset-0 flex h-full w-10 items-center justify-center">
                 <div className="pointer-events-none h-full w-1 bg-gray-200" />
               </div>
-              <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
+              <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-black text-white">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -76,6 +89,7 @@ const Payment = () => {
                 <p className="font-laonoto leading-relaxed">
                   Chuyển tiền đủ số tiền được hiển thị trên màn hình
                   <b>
+                    <br />
                     Lưu ý <span className="text-red-500">gửi kèm theo mã đơn hàng</span>{' '}
                   </b>
                   .
@@ -83,7 +97,7 @@ const Payment = () => {
               </div>
             </div>
             <div className="relative flex pb-12">
-              <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
+              <div className="relative z-10 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-black text-white">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -113,4 +127,4 @@ const Payment = () => {
   )
 }
 
-export default Payment
+export default PaymentMomo
