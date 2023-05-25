@@ -34,9 +34,16 @@ const CheckoutPage = () => {
   const onSubmit = async (data: OrderType) => {
     if (getCookie('checkout_id')) {
       dispatch(setLoading({ status: true, mode: 'default', title: 'Đang tạo đơn hàng' }))
+      const ord = orders.map(({ id, quantityOrder, name, sizes, price }) => ({
+        id,
+        quantityOrder,
+        name,
+        sizes,
+        price
+      }))
       const order = {
         checkoutId: getCookie('checkout_id'),
-        orders: orders,
+        orders: ord,
         ...data,
         paymentMethods: refButton.current,
         status: 0
