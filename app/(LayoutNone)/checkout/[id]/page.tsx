@@ -38,7 +38,8 @@ const CheckoutPage = () => {
         checkoutId: getCookie('checkout_id'),
         orders: orders,
         ...data,
-        paymentMethods: refButton.current
+        paymentMethods: refButton.current,
+        status: 0
       }
 
       const productsRef = collection(db, 'orders')
