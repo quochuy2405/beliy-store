@@ -2,31 +2,38 @@
 import LogoSvg from '@/assets/LogoSvg'
 import { RootState } from '@/redux/features/store'
 import { Popover } from '@headlessui/react'
-import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/20/solid'
+import { Bars3Icon, ShoppingBagIcon } from '@heroicons/react/20/solid'
+import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 
 const navigation = {
   pages: [
     { name: 'Trang chủ', href: '/' },
-    { name: 'Tất cả sản phẩm', href: '/product' },
-    { name: 'Dành cho nữ', href: '/product' },
-    { name: 'Dành cho nam', href: '/product' },
-    { name: 'Bộ phối', href: '/product' },
-    { name: 'Về chúng tui', href: '/product' }
+    { name: 'Tất cả sản phẩm', href: '/products' },
+    { name: 'Dành cho nữ', href: '/products?type=women' },
+    { name: 'Dành cho nam', href: '/products?type=men' },
+    { name: 'Bộ phối', href: '/products' },
+    { name: 'Về chúng tui', href: '/about' }
   ]
 }
 
 const Header = () => {
+  const { asPath } = useRouter()
+
   const cart = useSelector((state: RootState) => state.cart)
   return (
-    <header className="sticky bg-white w-full z-40 top-0">
+    <header className="sticky bg-white w-full z-40 top-0 shadow-sm">
       <div className="flex h-10 items-center justify-start gap-4 bg-black px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
         <div className="flex items-center">
           <FaTiktok />
         </div>
-        <FaFacebook />
+        <a href="https://www.facebook.com/beliystores">
+          <FaFacebook />
+        </a>
+
         <FaInstagram />
       </div>
       <div className="flex h-10 items-center justify-center bg-white px-4 mt-2 text-sm font-medium text-white sm:px-6 lg:px-8">
@@ -49,7 +56,12 @@ const Header = () => {
                   <Link
                     key={page.name}
                     href={page.href}
-                    className="flex items-center text-xs font-medium text-gray-700 hover:text-gray-800"
+                    className={clsx(
+                      'flex items-center text-xs font-medium text-gray-700 hover:text-gray-800',
+                      {
+                        '!font-bold': asPath === page.href
+                      }
+                    )}
                   >
                     {page.name}
                   </Link>
@@ -75,12 +87,12 @@ const Header = () => {
               </div>
 
               {/* Search */}
-              <div className="flex lg:ml-6">
+              {/* <div className="flex lg:ml-6">
                 <Link href="#" className="p-2 text-gray-400 hover:text-gray-500">
                   <span className="sr-only">Search</span>
                   <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
                 </Link>
-              </div>
+              </div> */}
 
               {/* Cart */}
               <div className="ml-4 flow-root lg:ml-6">

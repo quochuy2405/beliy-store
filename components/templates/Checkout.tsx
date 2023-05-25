@@ -2,12 +2,12 @@
 import LogoSvg from '@/assets/LogoSvg'
 import { OrderType } from '@/types/common'
 import { ProductType } from '@/types/product'
-import { StateCheckoutPageType } from 'app/(LayoutNone)/checkout/[id]/page'
 import clsx from 'clsx'
 import Image from 'next/image'
 import React, { MutableRefObject, useCallback } from 'react'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { Select, TextField } from '../atoms'
+import { StateCheckoutPageType } from '@/pages/checkout/[id]'
 interface CheckoutProps {
   stateStore: UseFormReturn<StateCheckoutPageType, any>
   dataForm: UseFormReturn<OrderType, any>

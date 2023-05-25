@@ -6,7 +6,7 @@ import React, { useRef } from 'react'
 const PaymentBanking: React.FC = () => {
   const refId = useRef(getCookie('checkout_id' as any))
   return (
-    <section className="body-font h-auto bg-gray-100 py-6 text-gray-600">
+    <section className="body-font h-auto bg-[#2668cc] py-6 text-gray-600">
       <div className="container mx-auto mt-10 flex max-w-3xl flex-wrap justify-center rounded-lg bg-white px-5 py-24">
         {/* QR Code Number Account & Uploadfile */}
         <div className="flex-wrap lg:flex-nowrap md:flex">
@@ -18,9 +18,9 @@ const PaymentBanking: React.FC = () => {
             />
             <div>
               <h1 className="font-laonoto mt-4 text-center text-xl font-bold">Vui lòng quét mã</h1>
-              <p className="mt-2 text-center font-semibold text-gray-600">DIEU LINH MEOW MEOW</p>
+              <p className="mt-2 text-center font-semibold text-gray-600">BELIY STORE</p>
               <p className="mt-2 text-center font-semibold text-gray-600">
-                Nội dung tin nhắn: MDH:{refId.current}
+                Nội dung tin nhắn: <span className="text-red-500">MDH:{refId.current}</span>
               </p>
               <p className="mt-1 text-center font-medium text-red-500">0963329201</p>
             </div>

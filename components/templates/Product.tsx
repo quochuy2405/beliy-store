@@ -1,16 +1,18 @@
 'usec client'
 import Link from 'next/link'
 import React from 'react'
+import { Controller, UseFormReturn } from 'react-hook-form'
 import { FaTshirt } from 'react-icons/fa'
 import { GiArmoredPants, GiSleevelessJacket } from 'react-icons/gi'
 import { ProductList } from '../organisms'
 
 interface ProductProps {
-  gender?: 'women' | 'men' | 'all'
+  gender?: string
+  stateStore: UseFormReturn<any, any>
 }
-const Product: React.FC<ProductProps> = ({}) => {
+const Product: React.FC<ProductProps> = ({ gender, stateStore }) => {
   return (
-    <div>
+    <div className="py-6">
       <div className="fixed w-10 h-fit flex flex-col gap-1 top-[30%] right-[5%]">
         <Link
           href="/product#AT"
@@ -37,10 +39,30 @@ const Product: React.FC<ProductProps> = ({}) => {
           <GiArmoredPants size={18} />
         </Link>
       </div>
-      <ProductList id="AT" conditions={[['category', 'AT']]} title="Áo thun - T-shirt" />
-      <ProductList id="AK" conditions={[['category', 'AK']]} title="Áo khoác - Jacket" />
-      <ProductList id="Q" conditions={[['category', 'Q']]} title="Quần - Pants" />
-      <ProductList id="AK" conditions={[['category', 'AK']]} title="Áo khoác" />
+      <Controller
+        name="categories"
+        control={stateStore.control}
+        render={({ field }) => {
+          return (
+            <>
+              {field.value.map((item) => (
+                <ProductList
+                  id={item.code}
+                  conditions={
+                    gender
+                      ? [
+                          ['category', item.code],
+                          ['gender', gender]
+                        ]
+                      : [['category', item.code]]
+                  }
+                  title={item.name}
+                />
+              ))}
+            </>
+          )
+        }}
+      />
     </div>
   )
 }

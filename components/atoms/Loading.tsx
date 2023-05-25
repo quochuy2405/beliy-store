@@ -96,7 +96,7 @@ const Loading: React.FC<LoadingProps> = ({ title = 'Loading...', mode = 'default
       {mode === 'mail' && <Image src="/send-mail.gif" alt="success" width={100} height={100} />}
       {mode === 'error' && <Image src="/error.gif" alt="success" width={100} height={100} />}
 
-      <span className="text-xs font-semibold  text-black">{title}</span>
+      <div className="text-xs font-semibold  text-black">{title}</div>
     </div>
   )
 }

@@ -20,7 +20,7 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
     )
   }, [orders])
   return (
-    <div className="h-auto max-w-5xl m-auto px-10 select-none">
+    <div className="h-auto max-w-5xl m-auto py-6 px-10 select-none">
       <h1 className="mb-10 text-2xl font-bold">Giỏ hàng</h1>
       <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div className="rounded-lg md:w-2/3">
@@ -148,8 +148,11 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
           </div>
 
           <button
-            className="mt-3 w-full text-sm rounded-md bg-black py-2 font-medium text-white hover:bg-gray-800"
+            className={clsx(
+              'mt-3 w-full text-sm rounded-md bg-black py-2 font-medium text-white disabled:hover:bg-gray-700 disabled:bg-gray-700 disabled:cursor-not-allowed'
+            )}
             onClick={onCheckout}
+            disabled={!orders.length}
           >
             Tiến hành thanh toán
           </button>
