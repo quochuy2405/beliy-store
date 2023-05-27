@@ -1,6 +1,6 @@
 'use client'
 import { Checkout, Finish } from '@/components/templates'
-import { create } from '@/firebase/base'
+import { checkQuantityBeforeAddOrder, create } from '@/firebase/base'
 import { db } from '@/firebase/config'
 import { DefaultLayout } from '@/layouts/Layouts'
 import { closeLoading, setLoading } from '@/redux/features/slices/loading'
@@ -11,12 +11,12 @@ import { collection } from '@firebase/firestore'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { getDistrict, getProvinces, getwards } from 'apis'
 import { deleteCookie, getCookie } from 'cookies-next'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ReactElement, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import shortid from 'shortid'
+import emailjs from 'emailjs-com'
 export type StateCheckoutPageType = {
   provinces: Array<OptionType>
   districts: Array<OptionType>
@@ -34,54 +34,108 @@ const CheckoutPage = () => {
   const onSubmit = async (data: OrderType) => {
     if (getCookie('checkout_id')) {
       dispatch(setLoading({ status: true, mode: 'default', title: 'Đang tạo đơn hàng' }))
-      const ord = orders.map(({ id, quantityOrder, name, sizes, price }) => ({
-        id,
-        quantityOrder,
-        name,
-        sizes,
-        price
-      }))
-      const order = {
-        checkoutId: getCookie('checkout_id'),
-        orders: ord,
-        ...data,
-        paymentMethods: refButton.current,
-        status: 0
-      }
+      const message = await checkQuantityBeforeAddOrder(orders)
+      if (message === 'pass') {
+        const ord = orders.map(({ id, quantityOrder, name, sizes, price }) => ({
+          id,
+          quantityOrder,
+          name,
+          sizes,
+          price
+        }))
+        const order = {
+          checkoutId: getCookie('checkout_id'),
+          orders: ord,
+          ...data,
+          paymentMethods: refButton.current,
+          status: 0
+        }
 
-      const productsRef = collection(db, 'orders')
-      await create(productsRef, order)
-        .then(() => {
-          dispatch(closeLoading())
-          if (refButton.current === 'payment_on_delivery')
-            router.push(`/checkout/${router.query.id}/status`)
-          if (refButton.current === 'momo') router.push(`/checkout/${router.query.id}/payment/momo`)
-          if (refButton.current === 'banking')
-            router.push(`/checkout/${router.query.id}/payment/banking`)
-        })
-        .catch(() => {
-          dispatch(
-            setLoading({
-              status: true,
-              mode: 'error',
-              title: (
-                <>
-                  <p>'Tạo đơn hàng lỗi!'</p>
-                  <Link
-                    href="/"
-                    onClick={() => {
-                      deleteCookie('checkout_id')
-                      dispatch(closeLoading())
-                    }}
-                    className="w-36 mx-auto mt-3 flex gap-1 justify-center items-center text-sm rounded-md bg-black py-2 font-medium text-blue-50 hover:bg-gray-700"
-                  >
-                    Về trang chủ
-                  </Link>
-                </>
+        const ordersRef = collection(db, 'orders')
+        await create(ordersRef, order)
+          .then(async () => {
+            await dispatch(closeLoading())
+
+            const currentDate = new Date()
+            const formattedDate = `${currentDate.getDate()}/${
+              currentDate.getMonth() + 1
+            }/${currentDate.getFullYear()}`
+
+            const templateParams = {
+              name: data.name,
+              to_email: data.email,
+              code: order.checkoutId,
+              date: formattedDate,
+              payment: refButton.current,
+              address: [data.addressNumber, data.award, data.district, data.province].join('/')
+            } as any
+            try {
+              emailjs.send(
+                'service_lzz7b0g',
+                'template_y2qzybl',
+                templateParams,
+                'user_ZnFDDoy5P7tFdH0eaml2J'
               )
-            })
-          )
-        })
+            } catch (error) {
+              console.log(error)
+            }
+
+            if (refButton.current === 'payment_on_delivery')
+              router.push(`/checkout/${router.query.id}/status`)
+            if (refButton.current === 'momo')
+              router.push(`/checkout/${router.query.id}/payment/momo`)
+            if (refButton.current === 'banking')
+              router.push(`/checkout/${router.query.id}/payment/banking`)
+          })
+          .catch(() => {
+            dispatch(
+              setLoading({
+                status: true,
+                mode: 'error',
+                title: (
+                  <>
+                    <p>'Tạo đơn hàng lỗi!'</p>
+                    <div
+                      onClick={() => {
+                        deleteCookie('checkout_id')
+                        dispatch(closeLoading())
+                        router.push('/')
+                      }}
+                      className="w-36 mx-auto mt-3 flex gap-1 justify-center items-center text-sm rounded-md bg-black py-2 font-medium text-blue-50 hover:bg-gray-700"
+                    >
+                      Về trang chủ
+                    </div>
+                  </>
+                )
+              })
+            )
+          })
+      } else {
+        dispatch(
+          setLoading({
+            status: true,
+            mode: 'error',
+            title: (
+              <div className="flex items-center justify-center flex-col">
+                <p className="text-base">Ối dồi ôi!!!</p>
+                <p className="text-sm">
+                  Ai đó đã cướp mất đơn hàng của bạn rồi í.Hãy giảm số lượng đặt lại nhé!
+                </p>
+                <div
+                  onClick={() => {
+                    deleteCookie('checkout_id')
+                    dispatch(closeLoading())
+                    router.push('/orders')
+                  }}
+                  className="w-36 mx-auto mt-3 flex gap-1 justify-center items-center text-sm rounded-md bg-black py-2 font-medium text-blue-50 hover:bg-gray-700"
+                >
+                  Về giỏ hàng
+                </div>
+              </div>
+            )
+          })
+        )
+      }
     }
   }
   useEffect(() => {

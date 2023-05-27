@@ -3,7 +3,6 @@ import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
-
 const firebaseConfig = {
   apiKey: 'AIzaSyCrVC4qMogDlwnYlRWL2Ajzxg0AmuY9FNg',
   authDomain: 'beliystoreadmin.firebaseapp.com',

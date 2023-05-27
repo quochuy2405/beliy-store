@@ -1,10 +1,12 @@
 'use client'
 import { OrderSumaries } from '@/components/templates'
+import { checkQuantityBeforeAddOrder } from '@/firebase/base'
 import { HFLayout } from '@/layouts/Layouts'
 import { RootState } from '@/redux/features/store'
 import { ProductType } from '@/types/product'
 import { setCookies } from 'cookies-next'
 import { useRouter } from 'next/navigation'
+import { enqueueSnackbar } from 'notistack'
 import { ReactElement } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
@@ -19,10 +21,20 @@ const OrderSumariesPage = () => {
     defaultValues: { orders }
   })
   const onCheckout = async () => {
-    if (orders.length) {
-      const id = await shortid.generate()
-      await setCookies('checkout_id', id)
-      await router.push('/checkout/' + id)
+    const message = await checkQuantityBeforeAddOrder(orders)
+    if (message === 'pass') {
+      if (orders.length) {
+        const id = await shortid.generate()
+        await setCookies('checkout_id', id)
+        await router.push('/checkout/' + id)
+      }
+    } else {
+      enqueueSnackbar(
+        <div className="h-fit w-60">
+          <p>{message}</p>
+        </div>,
+        { variant: 'info' }
+      )
     }
   }
   const props = {

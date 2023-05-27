@@ -1,4 +1,4 @@
-'usec client'
+'use client'
 import {
   QueryDocumentSnapshot,
   QuerySnapshot,
@@ -12,6 +12,7 @@ import {
 } from 'firebase/firestore'
 import { ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from './config'
+import { ProductType } from '@/types/product'
 
 // Create a new document
 const create = async (collectionRef: any, data: object) => {
@@ -76,4 +77,26 @@ const addImage = async (file: File, path: string): Promise<string> => {
   return snapshot.metadata.fullPath
 }
 
-export { create, deleteItem, read, readAll, update, addImage, findAll }
+// Check quantity of items before adding an order
+const checkQuantityBeforeAddOrder = async (items: Array<ProductType>) => {
+  const invalidItems = []
+
+  for (const item of items) {
+    // Retrieve the item document from the 'items' collection
+    const itemDoc = await read('products', item.id)
+
+    if (itemDoc) {
+      const itemQuantity = itemDoc.quantity
+
+      // Check if the item's quantity is sufficient for the order
+      if (itemQuantity < item.quantityOrder) {
+        return `Bạn ơi! Sản phẩm ${item.name} Kho hiện tại chỉ còn ${itemQuantity} thôi ạ.`
+      }
+    }
+  }
+  return 'pass'
+
+  return invalidItems
+}
+
+export { create, deleteItem, read, readAll, update, addImage, findAll, checkQuantityBeforeAddOrder }
