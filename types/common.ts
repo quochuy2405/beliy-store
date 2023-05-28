@@ -6,9 +6,9 @@ export type OptionType = {
 export type OrderType = {
   name: string
   email: string
-  award: string
-  province: string
-  district: string
+  award: OptionType
+  province: OptionType
+  district: OptionType
   phone: string
   addressNumber: string
 }

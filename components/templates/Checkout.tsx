@@ -75,15 +75,15 @@ const Checkout: React.FC<CheckoutProps> = ({
                 <Controller
                   name="province"
                   control={dataForm.control}
-                  defaultValue=""
+                  defaultValue={null}
                   render={({ field, fieldState }) => (
                     <Select
                       {...field}
                       error={fieldState.error}
                       title="Tỉnh/Thành phố"
-                      onChange={(value) => {
-                        onChangeProvince(value)
-                        field.onChange(value)
+                      onChange={(opt) => {
+                        field.onChange(opt)
+                        onChangeProvince(opt?.value)
                       }}
                       options={opts}
                     />
@@ -99,16 +99,16 @@ const Checkout: React.FC<CheckoutProps> = ({
                 <Controller
                   name="district"
                   control={dataForm.control}
-                  defaultValue={''}
+                  defaultValue={null}
                   render={({ field: { onChange, ...params }, fieldState }) => (
                     <Select
                       {...params}
                       error={fieldState.error}
                       title="Quận/Huyện"
                       options={opts}
-                      onChange={(value) => {
-                        onChange(value)
-                        onChangeDistricts(value)
+                      onChange={(option) => {
+                        onChange(option)
+                        onChangeDistricts(option.value)
                       }}
                       disabled={!opts?.length}
                     />
@@ -126,7 +126,7 @@ const Checkout: React.FC<CheckoutProps> = ({
               <Controller
                 name="award"
                 control={dataForm.control}
-                defaultValue={''}
+                defaultValue={null}
                 render={({ field, fieldState }) => (
                   <Select
                     {...field}

@@ -15,7 +15,7 @@ import ReactSelect, {
 } from 'react-select'
 
 export interface ISelectProps {
-  value: string
+  value: OptionType
   title: string
   className?: string
   error?: FieldError
@@ -23,7 +23,7 @@ export interface ISelectProps {
   isMulti?: boolean
   disabled?: boolean
   isClearable?: boolean
-  onChange: (value: string) => void
+  onChange: (value: OptionType) => void
 }
 
 const Select: React.FC<ISelectProps> = forwardRef<HTMLSelectElement, ISelectProps>(
@@ -120,10 +120,10 @@ const Select: React.FC<ISelectProps> = forwardRef<HTMLSelectElement, ISelectProp
           instanceId="react-select-3-live-region"
           placeholder="Lựa chọn"
           options={options}
-          value={!value ? null : options.find((item) => item.value === value)}
+          value={!value ? null : options.find((item) => item?.value === value?.value)}
           onChange={(opt) => {
             const option = opt as OptionType
-            onChange(option.value)
+            onChange(option)
           }}
           noOptionsMessage={({ inputValue }) =>
             !inputValue ? 'Danh sách trống' : 'Không tìm thấy'

@@ -47,6 +47,9 @@ const CheckoutPage = () => {
           checkoutId: getCookie('checkout_id'),
           orders: ord,
           ...data,
+          award: data.award.label,
+          province: data.province.label,
+          district: data.district.label,
           paymentMethods: refButton.current,
           status: 0
         }
@@ -151,8 +154,8 @@ const CheckoutPage = () => {
     })
   }, [])
   const onChangeProvince = async (proviceId: string) => {
-    dataForm.setValue('district', '')
-    dataForm.setValue('award', '')
+    dataForm.setValue('district', null)
+    dataForm.setValue('award', null)
     stateStore.resetField('districts')
     stateStore.resetField('wards')
     console.log('reset')
@@ -170,7 +173,7 @@ const CheckoutPage = () => {
   }
 
   const onChangeDistricts = async (districtId: string) => {
-    dataForm.setValue('award', '')
+    dataForm.setValue('award', null)
     // stateStore.resetField('wards')
     await getwards(districtId).then(({ data }: any) => {
       const wards = data.wards
