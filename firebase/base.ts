@@ -16,7 +16,9 @@ import { ProductType } from '@/types/product'
 
 // Create a new document
 const create = async (collectionRef: any, data: object) => {
-  const docRef = await addDoc(collectionRef, data)
+  const createdAt = new Date().toISOString()
+  const newData = { ...data, createdAt }
+  const docRef = await addDoc(collectionRef, newData)
   return docRef.id
 }
 // Read a single document
