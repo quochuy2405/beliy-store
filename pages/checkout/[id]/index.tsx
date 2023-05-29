@@ -51,7 +51,8 @@ const CheckoutPage = () => {
           province: data.province.label,
           district: data.district.label,
           paymentMethods: refButton.current,
-          status: 0
+          status: 0,
+          isCharge: false
         }
 
         const ordersRef = collection(db, 'orders')
