@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
+import { GrClose } from 'react-icons/gr'
 
 const navigation = {
   pages: [
@@ -21,11 +22,12 @@ const navigation = {
 }
 
 const Header = () => {
-  const { asPath } = useRouter()
+  const { push, asPath } = useRouter()
 
   const cart = useSelector((state: RootState) => state.cart)
   return (
-    <header className="sticky bg-white w-full z-40 top-0 shadow-sm">
+    <header className="sticky bg-white w-full h-fit z-40 top-0 shadow-sm">
+      <input id="hamburger" type="checkbox" className="hidden" defaultChecked />
       <div className="flex h-10 items-center justify-start gap-4 bg-black px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
         <div className="flex items-center">
           <FaTiktok />
@@ -44,10 +46,14 @@ const Header = () => {
       <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-b border-gray-200">
           <div className="flex h-16 items-center">
-            <button type="button" className="rounded-md bg-white p-2 text-gray-400 lg:hidden">
+            <label
+              className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
+              aria-label="Menu"
+              htmlFor="hamburger"
+            >
               <span className="sr-only">Open menu</span>
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </button>
+            </label>
 
             {/* Flyout menus */}
             <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
@@ -111,6 +117,37 @@ const Header = () => {
           </div>
         </div>
       </nav>
+      <aside
+        id="bar-mobile"
+        className="z-20 h-[70vh] absolute top-[150px] left-0 w-full md:w-[50%] flex-shrink-0  overflow-y-auto bg-white md:block lg:hidden shadow-lg pt-10"
+      >
+        <label htmlFor="hamburger" className="absolute top-3 right-3">
+          <GrClose size={20} />
+        </label>
+        <div className="text-gray-500">
+          <div className="w-full">
+            <ul className="pb-4 flex flex-col gap-2">
+              {navigation.pages.map((item) => (
+                <label htmlFor="hamburger">
+                  <li className="relative py w-full">
+                    <div
+                      onClick={() => push(item.href)}
+                      className={clsx(
+                        'flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 p-2 rounded-md',
+                        {
+                          'bg-[#F2F2F2] text-black': item.href === asPath
+                        }
+                      )}
+                    >
+                      <span className="ml-2">{item.name}</span>
+                    </div>
+                  </li>
+                </label>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
     </header>
   )
 }

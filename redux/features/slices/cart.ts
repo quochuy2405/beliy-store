@@ -57,6 +57,6 @@ export const loadingSlice = createSlice({
   }
 })
 
-export const { updateCart, resetCart, addCart } = loadingSlice.actions
+export const { updateCart, resetCart, addCart, removeInCart } = loadingSlice.actions
 
 export default loadingSlice.reducer

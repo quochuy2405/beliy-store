@@ -149,7 +149,7 @@ const Checkout: React.FC<CheckoutProps> = ({
           />
         </div>
         <section className="bg-white ">
-          <div className="max-w-lg px-4 lg:px-8">
+          <div className="w-full lg:max-w-lg mt-3 md:mt-0 md:px-4 lg:px-8">
             <div className="flex flex-col gap-4 w-full">
               <div className="rounded-lg w-full bg-white p-6 border shadow-md flex flex-col gap-2">
                 {orders.map((item) => (
@@ -170,16 +170,19 @@ const Checkout: React.FC<CheckoutProps> = ({
                       <div className="mt-5 sm:mt-0">
                         <h2 className="text-lg font-bold text-gray-900">{item.name}</h2>
                         <div className="flex  items-center gap-2">
-                          {item.sizes.map((size) => (
-                            <p
-                              key={size}
-                              className={clsx(
-                                'w-6 h-6 rounded-full border-2 cursor-pointer border-black flex items-center text-black justify-center font-bold text-[9px]'
-                              )}
-                            >
-                              {size}
-                            </p>
-                          ))}
+                          <div className="text-sm mt-2 flex items-center gap-1">
+                            Size:{' '}
+                            {item.sizes.map((size) => (
+                              <p
+                                key={size}
+                                className={clsx(
+                                  'w-6 h-6 rounded-full border-2 cursor-pointer border-black flex items-center text-black justify-center font-bold text-[9px]'
+                                )}
+                              >
+                                {size}
+                              </p>
+                            ))}
+                          </div>
                         </div>
                         <p className="text-sm mt-2">Số lượng: {item.quantityOrder}</p>
                         <p className="text-sm mt-2">

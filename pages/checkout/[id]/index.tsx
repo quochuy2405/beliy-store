@@ -1,6 +1,6 @@
 'use client'
 import { Checkout, Finish } from '@/components/templates'
-import { checkQuantityBeforeAddOrder, create } from '@/firebase/base'
+import { checkQuantityBeforeAddOrder, create, read, update } from '@/firebase/base'
 import { db } from '@/firebase/config'
 import { DefaultLayout } from '@/layouts/Layouts'
 import { closeLoading, setLoading } from '@/redux/features/slices/loading'
@@ -11,16 +11,22 @@ import { collection } from '@firebase/firestore'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { getDistrict, getProvinces, getwards } from 'apis'
 import { deleteCookie, getCookie } from 'cookies-next'
+import emailjs from 'emailjs-com'
 import { useRouter } from 'next/router'
+import { enqueueSnackbar } from 'notistack'
 import { ReactElement, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import shortid from 'shortid'
-import emailjs from 'emailjs-com'
 export type StateCheckoutPageType = {
   provinces: Array<OptionType>
   districts: Array<OptionType>
   wards: Array<OptionType>
+}
+const PAYMENT_METHODS = {
+  payment_on_delivery: 'Thanh toán khi nhận hàng',
+  momo: ' Ví điện từ momo',
+  banking: ' Chuyển khoản qua ngân hàng'
 }
 const CheckoutPage = () => {
   const stateStore = useForm<StateCheckoutPageType>({})
@@ -59,23 +65,58 @@ const CheckoutPage = () => {
         await create(ordersRef, order)
           .then(async () => {
             await dispatch(closeLoading())
+            await ord.forEach(async (item) => {
+              const productRef = collection(db, 'products')
+              const productDoc = await read('products', item.id)
+              if (productDoc) {
+                const productData = productDoc
+                const updatedQuantity = productData.quantity - item.quantityOrder
+                if (updatedQuantity >= 0) {
+                  await update(productRef, item.id, { quantity: updatedQuantity })
+                } else {
+                  enqueueSnackbar(`Sản phẩm ${item.name} đã hết`, { variant: 'warning' })
+                }
+              }
+              //code reduce quantity product using firebase
+            })
 
             const currentDate = new Date()
             const formattedDate = `${currentDate.getDate()}/${
               currentDate.getMonth() + 1
             }/${currentDate.getFullYear()}`
 
+            const tableContent = ord
+              .map((item) => {
+                return `
+                -----------------------------\n
+                Tên sản phẩm: ${item.name}\n
+                Size: ${item.sizes}\n
+                Số lượng: ${item.quantityOrder}\n
+                Đơn giá: ${item.price.toLocaleString()} VND\n
+                -----------------------------\n
+                `
+              })
+              .join('\n')
+
             const templateParams = {
               name: data.name,
               to_email: data.email,
               code: order.checkoutId,
               date: formattedDate,
-              payment: refButton.current,
-              address: [data.addressNumber, data.award, data.district, data.province].join('/')
+              payment: PAYMENT_METHODS[refButton.current],
+              table_orders: tableContent,
+              address: [
+                data.addressNumber,
+                data.award.label,
+                data.district.label,
+                data.province.label
+              ]
+                .filter((item) => !!item)
+                .join(' ,')
             } as any
             try {
               emailjs.send(
-                'service_lzz7b0g',
+                'service_si5w2fb',
                 'template_y2qzybl',
                 templateParams,
                 'user_ZnFDDoy5P7tFdH0eaml2J'
@@ -84,12 +125,12 @@ const CheckoutPage = () => {
               console.log(error)
             }
 
-            if (refButton.current === 'payment_on_delivery')
-              router.push(`/checkout/${router.query.id}/status`)
-            if (refButton.current === 'momo')
-              router.push(`/checkout/${router.query.id}/payment/momo`)
-            if (refButton.current === 'banking')
-              router.push(`/checkout/${router.query.id}/payment/banking`)
+            // if (refButton.current === 'payment_on_delivery')
+            //   router.push(`/checkout/${router.query.id}/status`)
+            // if (refButton.current === 'momo')
+            //   router.push(`/checkout/${router.query.id}/payment/momo`)
+            // if (refButton.current === 'banking')
+            //   router.push(`/checkout/${router.query.id}/payment/banking`)
           })
           .catch(() => {
             dispatch(

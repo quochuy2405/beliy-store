@@ -1,5 +1,5 @@
 'use client'
-import { updateCart } from '@/redux/features/slices/cart'
+import { removeInCart, updateCart } from '@/redux/features/slices/cart'
 import { ProductType } from '@/types/product'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -19,9 +19,12 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
       }, 0) * 1000
     )
   }, [orders])
+  const removeItem = (item) => {
+    dispatch(removeInCart(item))
+  }
   return (
-    <div className="h-auto max-w-5xl m-auto py-6 px-10 select-none">
-      <h1 className="mb-10 text-2xl font-bold">Giỏ hàng</h1>
+    <div className="h-auto max-w-5xl m-auto py-6 md:px-10 select-none">
+      <h1 className="mb-10 text-2xl font-bold px-3">Giỏ hàng</h1>
       <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
         <div className="rounded-lg md:w-2/3">
           {orders.map((item) => (
@@ -67,8 +70,8 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
                   </div>
                 </div>
 
-                <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
-                  <div className="flex items-center justify-end flex-1 border-gray-100">
+                <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6 gap-4">
+                  <div className="flex items-center justify-end flex-1 border-gray-100 gap-2">
                     <span
                       className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-black hover:text-white"
                       onClick={() => {
@@ -106,7 +109,7 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
                     </span>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <p className="text-sm">
+                    <p className="text-sm font-semibold">
                       {(item.quantityOrder * item.price * 1000).toLocaleString()} VND
                     </p>
                     <svg
@@ -116,6 +119,7 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
                       strokeWidth="1.5"
                       stroke="currentColor"
                       className="h-5 w-5 cursor-pointer duration-150 hover:text-red-500"
+                      onClick={() => removeItem(item)}
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>

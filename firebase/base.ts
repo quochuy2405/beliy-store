@@ -1,9 +1,9 @@
 'use client'
+import { ProductType } from '@/types/product'
 import {
   QueryDocumentSnapshot,
   QuerySnapshot,
   addDoc,
-  collection,
   deleteDoc,
   doc,
   getDoc,
@@ -12,7 +12,6 @@ import {
 } from 'firebase/firestore'
 import { ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from './config'
-import { ProductType } from '@/types/product'
 
 // Create a new document
 const create = async (collectionRef: any, data: object) => {
@@ -23,7 +22,7 @@ const create = async (collectionRef: any, data: object) => {
 }
 // Read a single document
 const read = async (collectionName: string, id: string) => {
-  const docRef = doc(collection(db, collectionName), id)
+  const docRef = doc(db, collectionName, id)
   const docSnap = await getDoc(docRef)
   if (docSnap.exists()) {
     return { id: docSnap.id, ...(docSnap.data() as any) }
