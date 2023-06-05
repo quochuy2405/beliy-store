@@ -66,10 +66,10 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
 
         {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-h-4 w-full hidden overflow-hidden rounded-lg lg:block">
+          <div className="aspect-h-4 w-full overflow-hidden rounded-lg lg:block">
             {data?.imagesURL[0] && <ImageOptimizing src={data?.imagesURL[0]} objectFit="contain" />}
           </div>
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+          <div className=" lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 w-full overflow-hidden rounded-lg">
               {data?.imagesURL[1] && (
                 <ImageOptimizing src={data?.imagesURL[1]} objectFit="contain" />

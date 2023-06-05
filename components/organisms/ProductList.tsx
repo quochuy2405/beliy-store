@@ -96,13 +96,13 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                 {title && (
                   <h2 className="text-2xl font-bold tracking-tight text-gray-900">{title}</h2>
                 )}
-                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10 fit:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                   {[...field.value].map((item) => (
                     <>
                       <Link href={`/products/${item.id}`} key={item.id}>
                         <div
                           key={item?.imagesURL[0]}
-                          className="w-[50%] min-w-[270px] md:max-w-[280px] md:w-[33.333%] lg:w-[25%] bg-white rounded-lg flex flex-col p-4 gap-2 shadow-lg transition-all ease-linear h-full flex-1 hover:shadow-2xl"
+                          className="sxx:w-full ss:w-[50%] min-w-[270px] md:max-w-[280px] md:w-[33.333%] lg:w-[25%] bg-white rounded-lg flex flex-col p-4 gap-2 shadow-lg transition-all ease-linear h-full flex-1 hover:shadow-2xl"
                         >
                           <div className="w-full h-[240px] relative overflow-hidden rounded-lg">
                             <ImageOptimizing src={item.imagesURL[0]} objectFit="contain" />
