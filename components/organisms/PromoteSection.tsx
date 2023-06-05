@@ -27,29 +27,50 @@ export default function PromoteSection() {
                   <div className="flex items-center space-x-6 lg:space-x-8">
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100 ">
-                        <ImageOptimizing src="/JACKET1-2.png" />
+                        <ImageOptimizing
+                          src="/JACKET1-2.png"
+                          blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                        />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <ImageOptimizing src="/JACKET4-2.png" />
-                      </div>
-                    </div>
-                    <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <ImageOptimizing src="/JACKET2-2.png" />
-                      </div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <ImageOptimizing src="/JACKET2-1.png" />
-                      </div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <ImageOptimizing src="/JACKET3-1.png" />
+                        <ImageOptimizing
+                          src="/JACKET4-2.png"
+                          blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                        />
                       </div>
                     </div>
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <ImageOptimizing src="/JACKET3-2.png" />
+                        <ImageOptimizing
+                          src="/JACKET2-2.png"
+                          blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                        />
                       </div>
                       <div className="h-64 w-44 overflow-hidden rounded-lg">
-                        <ImageOptimizing src="/JACKET4-1.png" />
+                        <ImageOptimizing
+                          src="/JACKET2-1.png"
+                          blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing
+                          src="/JACKET3-1.png"
+                          blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing
+                          src="/JACKET3-2.png"
+                          blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing
+                          src="/JACKET4-1.png"
+                          blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                        />
                       </div>
                     </div>
                   </div>
