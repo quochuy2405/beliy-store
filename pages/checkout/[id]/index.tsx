@@ -125,12 +125,12 @@ const CheckoutPage = () => {
               console.log(error)
             }
 
-            // if (refButton.current === 'payment_on_delivery')
-            //   router.push(`/checkout/${router.query.id}/status`)
-            // if (refButton.current === 'momo')
-            //   router.push(`/checkout/${router.query.id}/payment/momo`)
-            // if (refButton.current === 'banking')
-            //   router.push(`/checkout/${router.query.id}/payment/banking`)
+            if (refButton.current === 'payment_on_delivery')
+              router.push(`/checkout/${router.query.id}/status`)
+            if (refButton.current === 'momo')
+              router.push(`/checkout/${router.query.id}/payment/momo`)
+            if (refButton.current === 'banking')
+              router.push(`/checkout/${router.query.id}/payment/banking`)
           })
           .catch(() => {
             dispatch(
