@@ -71,7 +71,7 @@ const Header = () => {
             {/* Logo */}
             <div className="ml-auto flex items-center">
               <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                <Link
+                {/* <Link
                   href="/login"
                   className="text-xs font-medium text-gray-700 hover:text-gray-800"
                 >
@@ -83,7 +83,7 @@ const Header = () => {
                   className="text-xs font-medium text-gray-700 hover:text-gray-800"
                 >
                   Đăng ký thành viên
-                </Link>
+                </Link> */}
               </div>
 
               {/* Search */}
@@ -101,6 +101,7 @@ const Header = () => {
                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                     aria-hidden="true"
                   />
+
                   <span className="ml-2 text-sm font-bold text-gray-700 group-hover:text-gray-800">
                     {cart?.length || 0}
                   </span>
