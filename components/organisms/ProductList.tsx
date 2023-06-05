@@ -5,10 +5,10 @@ import { ProductType } from '@/types/product'
 import clsx from 'clsx'
 import { collection } from 'firebase/firestore'
 import { getDownloadURL, ref } from 'firebase/storage'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { ImageOptimizing } from '../atoms'
 interface ProductListProps {
   title?: string
   id?: string
@@ -104,15 +104,8 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                           key={item?.imagesURL[0]}
                           className="w-[90%] min-w-[270px] md:max-w-[280px] md:w-[33.333%] lg:w-[25%] bg-white rounded-lg flex flex-col p-4 gap-2 shadow-lg transition-all ease-linear h-full flex-1 hover:shadow-2xl"
                         >
-                          <div className="w-full h-[240px] relative overflow-hidden">
-                            <Image
-                              src={item.imagesURL[0] || 'https://www.freeiconspng.com/img/23494'}
-                              width={1000}
-                              height={1000}
-                              alt=""
-                              loading="lazy"
-                              className="w-full max-h-[240px] object-contain md:object-cover rounded-md"
-                            />
+                          <div className="w-full h-[240px] relative overflow-hidden rounded-lg">
+                            <ImageOptimizing src={item.imagesURL[0]} objectFit="contain" />
                           </div>
                           <div className="flex items-start justify-between flex-1">
                             <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-sm">

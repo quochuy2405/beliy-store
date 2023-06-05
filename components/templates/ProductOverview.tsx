@@ -2,10 +2,10 @@
 import { ProductType } from '@/types/product'
 import { RadioGroup } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/20/solid'
-import Image from 'next/image'
 import Link from 'next/link'
 import { enqueueSnackbar } from 'notistack'
 import { useState } from 'react'
+import { ImageOptimizing } from '../atoms'
 
 const breadcrumbs = [
   { id: 1, name: 'Trang chủ', href: '#' },
@@ -66,51 +66,23 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
 
         {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-            {data?.imagesURL[0] && (
-              <Image
-                src={data?.imagesURL[0]}
-                alt={''}
-                width={1000}
-                height={1000}
-                className="h-full w-full object-cover object-center"
-              />
-            )}
+          <div className="aspect-h-4 w-full hidden overflow-hidden rounded-lg lg:block">
+            {data?.imagesURL[0] && <ImageOptimizing src={data?.imagesURL[0]} objectFit="contain" />}
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+            <div className="aspect-h-2 w-full overflow-hidden rounded-lg">
               {data?.imagesURL[1] && (
-                <Image
-                  src={data?.imagesURL[1]}
-                  alt={''}
-                  width={1000}
-                  height={1000}
-                  className="h-full w-full object-cover object-center"
-                />
+                <ImageOptimizing src={data?.imagesURL[1]} objectFit="contain" />
               )}
             </div>
-            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
+            <div className="aspect-h-2 w-full overflow-hidden rounded-lg">
               {data?.imagesURL[2] && (
-                <Image
-                  src={data?.imagesURL[2]}
-                  alt={''}
-                  width={1000}
-                  height={1000}
-                  className="h-full w-full object-cover object-center"
-                />
+                <ImageOptimizing src={data?.imagesURL[2]} objectFit="contain" />
               )}
             </div>
           </div>
-          <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-            {data?.imagesURL[3] && (
-              <Image
-                src={data?.imagesURL[3]}
-                alt={''}
-                width={1000}
-                height={1000}
-                className="h-full w-full object-cover object-center"
-              />
-            )}
+          <div className="w-full aspect-h-4 overflow-hidden lg:w-full sm:overflow-hidden sm:rounded-lg">
+            {data?.imagesURL[3] && <ImageOptimizing src={data?.imagesURL[3]} objectFit="contain" />}
           </div>
         </div>
 
