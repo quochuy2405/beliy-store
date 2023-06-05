@@ -1,3 +1,5 @@
+import { ImageOptimizing } from '../atoms'
+
 export default function PromoteSection() {
   return (
     <div className="relative overflow-hidden bg-white pt-4">
@@ -24,17 +26,31 @@ export default function PromoteSection() {
                 <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
                   <div className="flex items-center space-x-6 lg:space-x-8">
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                      <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100  bg-[url('/JACKET1-2.png')] bg-cover bg-no-repeat"></div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg  bg-[url('/JACKET4-2.png')] bg-cover bg-no-repeat"></div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100 ">
+                        <ImageOptimizing src="/JACKET1-2.png" />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing src="/JACKET4-2.png" />
+                      </div>
                     </div>
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                      <div className="h-64 w-44 overflow-hidden rounded-lg  bg-[url('/JACKET2-2.png')] bg-cover bg-no-repeat"></div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg  bg-[url('/JACKET2-1.png')] bg-cover bg-no-repeat"></div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg  bg-[url('/JACKET3-1.png')] bg-cover bg-no-repeat"></div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing src="/JACKET2-2.png" />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing src="/JACKET2-1.png" />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing src="/JACKET3-1.png" />
+                      </div>
                     </div>
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                      <div className="h-64 w-44 overflow-hidden rounded-lg  bg-[url('/JACKET3-2.png')] bg-cover bg-no-repeat"></div>
-                      <div className="h-64 w-44 overflow-hidden rounded-lg  bg-[url('/JACKET4-1.png')] bg-cover bg-no-repeat"></div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing src="/JACKET3-2.png" />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <ImageOptimizing src="/JACKET4-1.png" />
+                      </div>
                     </div>
                   </div>
                 </div>
