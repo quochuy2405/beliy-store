@@ -6,10 +6,11 @@ interface MetadataProps {
   image?: string
 }
 
-function Metadata({ title, description, image = '/logo/logo.png' }: MetadataProps) {
+function Metadata({ title, description, image = '/logo.png' }: MetadataProps) {
   return (
     <NextHead>
       <title>{title}</title>
+      <link rel="shortcut icon" href={image} type="image/x-icon" />
       <meta key="meta-title" name="title" content={title} />
       <meta key="meta-description" name="description" content={description} />
 

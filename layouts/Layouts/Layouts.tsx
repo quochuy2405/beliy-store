@@ -20,7 +20,11 @@ interface MainLayoutProps {
 function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className={inter.className}>
-      <Metadata title="Beliy StressWear" description="Khám phá phong cách độc đáo" />
+      <Metadata
+        title="Beliy StressWear"
+        image="/logo_2.png"
+        description="Khám phá phong cách độc đáo"
+      />
       {children}
     </div>
   )
