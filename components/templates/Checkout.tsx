@@ -218,7 +218,7 @@ const Checkout: React.FC<CheckoutProps> = ({
               <div className="flex-1 flex flex-col">
                 <button
                   type="submit"
-                  onClick={() => (refButton.current = 'banking')}
+                  onClick={() => (refButton.current = 'momo')}
                   className="mt-3 w-full flex gap-1 justify-center items-center text-sm rounded-md bg-[#AE2070] py-2 font-medium text-blue-50 hover:bg-[#cc2684]"
                 >
                   <svg
@@ -238,7 +238,7 @@ const Checkout: React.FC<CheckoutProps> = ({
 
                 <button
                   type="submit"
-                  onClick={() => (refButton.current = 'momo')}
+                  onClick={() => (refButton.current = 'banking')}
                   className="w-full mt-3 flex gap-1 justify-center items-center text-sm rounded-md bg-[#005BAA] py-2 font-medium text-blue-50 hover:bg-blue-600"
                 >
                   <svg
