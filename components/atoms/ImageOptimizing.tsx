@@ -51,9 +51,9 @@ const ImageOptimizing: React.FC<ImageOptimizingProps> = ({
         <LazyLoadImage
           alt={alt}
           src={src}
-          // height="100%"
-          // width="100%"
-          className={clsx('h-full w-full object-cover object-center', {
+          height="100%"
+          width="100%"
+          className={clsx('h-full w-full object-bottom', {
             'object-contain': objectFit == 'contain',
             'object-cover': objectFit == 'cover',
             'object-fill': objectFit == 'fill'

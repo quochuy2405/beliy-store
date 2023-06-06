@@ -5,7 +5,9 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { enqueueSnackbar } from 'notistack'
 import { useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { ImageOptimizing } from '../atoms'
+import 'swiper/swiper.min.css'
 
 const breadcrumbs = [
   { id: 1, name: 'Trang chủ', href: '#' },
@@ -64,25 +66,93 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
           </ol>
         </nav>
 
+        <div className="grid grid-cols-2 columns-2xs gap-4 relative w-[80%] m-auto grid-rows-[500px] p-2">
+          <div className="grid  grid-cols-2 gap-4">
+            <div className="rounded-2xl overflow-hidden">
+              {data?.imagesURL[1] && <ImageOptimizing src={data?.imagesURL[1]} objectFit="cover" />}
+            </div>
+            <div className="rounded-2xl overflow-hidden row-span-1">
+              {data?.imagesURL[2] && <ImageOptimizing src={data?.imagesURL[2]} objectFit="cover" />}
+            </div>
+          </div>
+
+          <div className="rounded-2xl overflow-hidden">
+            {data?.imagesURL[0] && <ImageOptimizing src={data?.imagesURL[0]} objectFit="cover" />}
+          </div>
+          <div className="rounded-2xl h-[65vh] overflow-hidden col-span-2 row-span-1">
+            {data?.imagesURL[3] && <ImageOptimizing src={data?.imagesURL[3]} objectFit="cover" />}
+          </div>
+        </div>
+
         {/* Image gallery */}
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-h-4 w-full overflow-hidden rounded-lg lg:block">
-            {data?.imagesURL[0] && <ImageOptimizing src={data?.imagesURL[0]} objectFit="contain" />}
-          </div>
-          <div className=" lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-h-2 w-full overflow-hidden rounded-lg">
-              {data?.imagesURL[1] && (
-                <ImageOptimizing src={data?.imagesURL[1]} objectFit="contain" />
-              )}
-            </div>
-            <div className="aspect-h-2 w-full overflow-hidden rounded-lg">
-              {data?.imagesURL[2] && (
-                <ImageOptimizing src={data?.imagesURL[2]} objectFit="contain" />
-              )}
-            </div>
-          </div>
-          <div className="w-full aspect-h-4 overflow-hidden lg:w-full sm:overflow-hidden sm:rounded-lg">
-            {data?.imagesURL[3] && <ImageOptimizing src={data?.imagesURL[3]} objectFit="contain" />}
+        <div className="relative w-[80%] m-auto h-[400px] overflow-hidden lg:hidden">
+          <Swiper
+            spaceBetween={1}
+            slidesPerView={1}
+            className="relative h-[400px]"
+            cubeEffect={{ shadow: true }}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            <SwiperSlide>
+              {data?.imagesURL[0] && <ImageOptimizing src={data?.imagesURL[0]} objectFit="cover" />}
+            </SwiperSlide>
+            <SwiperSlide>
+              {data?.imagesURL[1] && <ImageOptimizing src={data?.imagesURL[1]} objectFit="cover" />}
+            </SwiperSlide>
+            <SwiperSlide>
+              {data?.imagesURL[2] && <ImageOptimizing src={data?.imagesURL[2]} objectFit="cover" />}
+            </SwiperSlide>
+            <SwiperSlide>
+              {data?.imagesURL[3] && <ImageOptimizing src={data?.imagesURL[3]} objectFit="cover" />}
+            </SwiperSlide>
+          </Swiper>
+
+          <div className="flex justify-center items-center pt-4">
+            <button
+              type="button"
+              className="flex justify-center items-center mr-4 h-full cursor-pointer group focus:outline-none"
+              data-carousel-prev
+            >
+              <span className="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+                <svg
+                  aria-hidden="true"
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="sr-only">Previous</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              className="flex justify-center items-center h-full cursor-pointer group focus:outline-none"
+              data-carousel-next
+            >
+              <span className="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+                <svg
+                  aria-hidden="true"
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span className="sr-only">Next</span>
+              </span>
+            </button>
           </div>
         </div>
 
