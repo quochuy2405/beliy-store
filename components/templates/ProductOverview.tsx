@@ -66,7 +66,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
           </ol>
         </nav>
 
-        <div className="grid grid-cols-2 columns-2xs gap-4 relative w-[80%] m-auto grid-rows-[500px] p-2">
+        <div className="grid-cols-2 hidden lg:grid columns-2xs gap-4 relative w-[80%] m-auto grid-rows-[500px] p-2">
           <div className="grid  grid-cols-2 gap-4">
             <div className="rounded-2xl overflow-hidden">
               {data?.imagesURL[1] && <ImageOptimizing src={data?.imagesURL[1]} objectFit="cover" />}
@@ -85,7 +85,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
         </div>
 
         {/* Image gallery */}
-        <div className="relative w-[80%] m-auto h-[400px] overflow-hidden lg:hidden">
+        <div className="relative w-[95%] md:w-[80%] m-auto h-[400px] overflow-hidden lg:hidden rounded-2xl mt-2">
           <Swiper
             spaceBetween={1}
             slidesPerView={1}
