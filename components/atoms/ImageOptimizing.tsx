@@ -18,7 +18,7 @@ interface ImageOptimizingProps {
 
 const ImageOptimizing: React.FC<ImageOptimizingProps> = ({
   alt,
-  blurhash = 'LEC@7^?Ybw%1_Kx-H[a#.6%2$-oh',
+  blurhash = 'MFSigQof_3j[M{t7j[ofWBRj~qj[4nj[xu',
   src,
   scrollPosition,
   objectFit = 'cover'
