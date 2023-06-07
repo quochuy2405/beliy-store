@@ -4,10 +4,13 @@ import { RadioGroup } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 import { enqueueSnackbar } from 'notistack'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { ImageOptimizing } from '../atoms'
-import 'swiper/swiper.min.css'
+import 'swiper/css/effect-cards'
+import 'swiper/css'
+import { EffectCards, Autoplay } from 'swiper'
+import Image from 'next/image'
 
 const breadcrumbs = [
   { id: 1, name: 'Trang chủ', href: '#' },
@@ -33,6 +36,12 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
     }
   }
 
+  const progressContent = useRef(null)
+  const [progressCircle, setProgressCircle] = useState(0)
+  const onAutoplayTimeLeft = (s, time, progress) => {
+    setProgressCircle(1 - progress)
+    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`
+  }
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -87,25 +96,76 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
         {/* Image gallery */}
         <div className="relative w-[95%] md:w-[80%] m-auto h-[400px] overflow-hidden lg:hidden rounded-2xl mt-2">
           <Swiper
-            spaceBetween={1}
-            slidesPerView={1}
-            className="relative h-[400px]"
-            cubeEffect={{ shadow: true }}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            className="relative h-[400px] mySwiper"
+            effect={'cards'}
+            grabCursor={true}
+            modules={[EffectCards, Autoplay]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false
+            }}
+            centeredSlides={true}
+            onAutoplayTimeLeft={onAutoplayTimeLeft}
           >
             <SwiperSlide>
-              {data?.imagesURL[0] && <ImageOptimizing src={data?.imagesURL[0]} objectFit="cover" />}
+              {data?.imagesURL[0] && (
+                <Image
+                  width={1000}
+                  height={1000}
+                  alt=""
+                  src={data?.imagesURL[0]}
+                  className="w-[90%] m-auto rounded-2xl h-full object-cover"
+                />
+              )}
             </SwiperSlide>
             <SwiperSlide>
-              {data?.imagesURL[1] && <ImageOptimizing src={data?.imagesURL[1]} objectFit="cover" />}
+              {data?.imagesURL[1] && (
+                <Image
+                  width={1000}
+                  height={1000}
+                  alt=""
+                  src={data?.imagesURL[1]}
+                  className="w-[90%] m-auto rounded-2xl h-full object-cover"
+                />
+              )}
             </SwiperSlide>
             <SwiperSlide>
-              {data?.imagesURL[2] && <ImageOptimizing src={data?.imagesURL[2]} objectFit="cover" />}
+              {data?.imagesURL[2] && (
+                <Image
+                  width={1000}
+                  height={1000}
+                  alt=""
+                  src={data?.imagesURL[2]}
+                  className="w-[90%] m-auto rounded-2xl h-full object-cover"
+                />
+              )}
             </SwiperSlide>
             <SwiperSlide>
-              {data?.imagesURL[3] && <ImageOptimizing src={data?.imagesURL[3]} objectFit="cover" />}
+              {data?.imagesURL[3] && (
+                <Image
+                  width={1000}
+                  height={1000}
+                  alt=""
+                  src={data?.imagesURL[3]}
+                  className="w-[90%] m-auto rounded-2xl h-full object-cover"
+                />
+              )}
             </SwiperSlide>
+            <div
+              className="absolute right-4 bottom-3 z-40 w-12 h-12 flex items-center justify-center
+              text-black"
+              slot="container-end"
+            >
+              <svg
+                viewBox="0 0 48 48"
+                strokeDashoffset={125.6 * (1 - progressCircle)}
+                strokeDasharray={125}
+                className="rotate-90 fill-none stroke-[4px] rounded-sm stroke-white w-full h-full"
+              >
+                <circle cx="24" cy="24" r="20" strokeLinecap="round"></circle>
+              </svg>
+              <span className="text-white text-sm absolute" ref={progressContent}></span>
+            </div>
           </Swiper>
 
           <div className="flex justify-center items-center pt-4">
@@ -243,7 +303,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
                                 className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
                               >
                                 <svg
-                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                  className="absolute inset-0 h-full w-[90%] m-auto rounded-2xl stroke-2 text-gray-200"
                                   viewBox="0 0 100 100"
                                   preserveAspectRatio="none"
                                   stroke="currentColor"
@@ -269,7 +329,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <button
                 type="button"
                 onClick={handelAddToCart}
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:bg-white hover:text-black hover:border-black hover:border ease-linear transition-all focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+                className="mt-10 flex w-[90%] m-auto rounded-2xl items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:bg-white hover:text-black hover:border-black hover:border ease-linear transition-all focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               >
                 Thêm vào giỏ hàng
               </button>
