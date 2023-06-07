@@ -13,12 +13,7 @@ function Metadata({ title, image = '/logo.png' }: MetadataProps) {
       <link rel="shortcut icon" href={image} type="image/x-icon" />
       <meta
         name="keywords"
-        content="Thời trang hàng đầu,
-Thời trang đẳng cấp,
-Thời trang phong cách,
-Áo quần nam nữ,
-Bộ sưu tập mới,
-Phong cách độc đáo"
+        content="Thời trang hàng đầu,Thời trang đẳng cấp,Thời trang phong cách,Áo quần nam nữ,Bộ sưu tập mới,Phong cách độc đáo, localbrand,Localbrand,Beliy,Stress,StressWear, stresswear, beliyclothing, beliy stresswear,beliystresswear, beliy localbrand, beliy style "
       />
       <meta key="meta-title" name="title" content="Beliy StressWear - Thời trang hàng đầu" />
       <meta
