@@ -106,7 +106,11 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                           md:min-w-[280px] first-letter:md:max-w-[280px] md:w-[33.333%] lg:w-[25%] bg-white rounded-lg flex flex-col p-4 gap-2 shadow-lg transition-all ease-linear h-full flex-1 hover:shadow-2xl"
                         >
                           <div className="w-full h-[240px] relative overflow-hidden rounded-lg">
-                            <ImageOptimizing src={item.imagesURL[0]} objectFit="cover" />
+                            <ImageOptimizing
+                              src={item.imagesURL[0]}
+                              objectFit="cover"
+                              className="object-center"
+                            />
                           </div>
                           <div className="flex items-start justify-between flex-1">
                             <h2 className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-sm">

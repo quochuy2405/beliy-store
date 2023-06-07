@@ -60,7 +60,7 @@ const About = () => {
             </div>
             <div className="p-4 pb-6 flex justify-center flex-col items-center">
               <div className=" rounded-lg h-36 w-36 overflow-hidden">
-                <ImageOptimizing src="/dl.png" />
+                <ImageOptimizing src="/dl.png" className="object-center" />
               </div>
               <h1 className="font-medium text-sm leading-5 text-gray-800 mt-4">
                 Diệu Linh (co-founder)

@@ -14,6 +14,7 @@ interface ImageOptimizingProps {
   blurhash?: string
   scrollPosition?: any
   objectFit?: 'cover' | 'contain' | 'fill'
+  className?: string
 }
 
 const ImageOptimizing: React.FC<ImageOptimizingProps> = ({
@@ -21,6 +22,7 @@ const ImageOptimizing: React.FC<ImageOptimizingProps> = ({
   blurhash = 'MFSigQof_3j[M{t7j[ofWBRj~qj[4nj[xu',
   src,
   scrollPosition,
+  className,
   objectFit = 'cover'
 }) => {
   const [isLoaded, setLoaded] = useState(false)
@@ -56,7 +58,8 @@ const ImageOptimizing: React.FC<ImageOptimizingProps> = ({
           className={clsx('h-full w-full object-bottom', {
             'object-contain': objectFit == 'contain',
             'object-cover': objectFit == 'cover',
-            'object-fill': objectFit == 'fill'
+            'object-fill': objectFit == 'fill',
+            [className as string]: className
           })}
           afterLoad={handleLoad}
           // effect="blur"

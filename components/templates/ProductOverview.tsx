@@ -86,10 +86,22 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
           </div>
 
           <div className="rounded-2xl overflow-hidden">
-            {data?.imagesURL[0] && <ImageOptimizing src={data?.imagesURL[0]} objectFit="cover" />}
+            {data?.imagesURL[0] && (
+              <ImageOptimizing
+                src={data?.imagesURL[0]}
+                objectFit="cover"
+                className="object-center"
+              />
+            )}
           </div>
           <div className="rounded-2xl h-[65vh] overflow-hidden col-span-2 row-span-1">
-            {data?.imagesURL[3] && <ImageOptimizing src={data?.imagesURL[3]} objectFit="cover" />}
+            {data?.imagesURL[3] && (
+              <ImageOptimizing
+                src={data?.imagesURL[3]}
+                objectFit="cover"
+                className="object-center"
+              />
+            )}
           </div>
         </div>
 
