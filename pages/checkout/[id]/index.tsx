@@ -92,7 +92,7 @@ const CheckoutPage = () => {
                 Tên sản phẩm: ${item.name}\n
                 Size: ${item.sizes}\n
                 Số lượng: ${item.quantityOrder}\n
-                Đơn giá: ${item.price.toLocaleString()} VND\n
+                Đơn giá: ${(item.price * 1000).toLocaleString()} VND\n
                 -----------------------------\n
                 `
               })
