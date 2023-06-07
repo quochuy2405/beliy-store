@@ -1,5 +1,5 @@
 'use client'
-import LogoSvg from '@/assets/LogoSvg'
+import { LogoSvg } from '@/components/atoms'
 import { RootState } from '@/redux/features/store'
 import { Popover } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon } from '@heroicons/react/20/solid'
@@ -69,7 +69,7 @@ const Header = () => {
                       }
                     )}
                   >
-                    {page.name}
+                    <h2>{page.name}</h2>
                   </Link>
                 ))}
               </div>

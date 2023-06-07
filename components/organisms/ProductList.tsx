@@ -94,7 +94,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
             return (
               <>
                 {title && (
-                  <h2 className="text-2xl font-bold tracking-tight text-gray-900">{title}</h2>
+                  <h1 className="text-2xl font-bold tracking-tight text-gray-900">{title}</h1>
                 )}
                 <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10 fit:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
                   {[...field.value].map((item) => (
@@ -109,12 +109,12 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                             <ImageOptimizing src={item.imagesURL[0]} objectFit="cover" />
                           </div>
                           <div className="flex items-start justify-between flex-1">
-                            <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-sm">
+                            <h2 className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-sm">
                               {item.name}
-                            </p>
-                            <p className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-xs">
+                            </h2>
+                            <h3 className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-xs">
                               {catDetails[item.category]}
-                            </p>
+                            </h3>
                           </div>
 
                           <div className="w-full text-white text-sm flex-1 flex items-start justify-between gap-2 px-2">

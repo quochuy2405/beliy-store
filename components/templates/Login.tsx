@@ -12,12 +12,12 @@ const Login = ({ methods, handleSubmit }) => {
               <div className="bg-[url('/logo.png')] w-28 h-28 bg-cover" />
             </div>
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Sign in to your account
+              Đăng nhập
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={methods.handleSubmit(handleSubmit)}>
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
-                  Your email
+                  Email
                 </label>
                 <Controller
                   name="email"
@@ -45,7 +45,7 @@ const Login = ({ methods, handleSubmit }) => {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Password
+                  Mật khẩu
                 </label>
                 <Controller
                   name="password"
@@ -81,7 +81,7 @@ const Login = ({ methods, handleSubmit }) => {
                   </div>
                   <div className="ml-3 text-sm">
                     <label htmlFor="remember" className="text-gray-500">
-                      Remember me
+                      Ghi nhớ mật khẩu
                     </label>
                   </div>
                 </div>
@@ -89,14 +89,14 @@ const Login = ({ methods, handleSubmit }) => {
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Forgot password?
+                  Quên mật khẩu
                 </Link>
               </div>
               <button
                 type="submit"
                 className="w-full text-white border font-semibold bg-purple-700 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg text-base px-5 py-2.5 text-center"
               >
-                Sign in
+                Đăng nhập
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{' '}

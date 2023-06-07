@@ -1,4 +1,4 @@
-import LogoSvg from '@/assets/LogoSvg'
+import { LogoSvg } from '@/components/atoms'
 import Link from 'next/link'
 import React from 'react'
 

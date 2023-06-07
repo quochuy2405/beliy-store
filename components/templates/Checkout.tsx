@@ -1,5 +1,5 @@
 'use client'
-import LogoSvg from '@/assets/LogoSvg'
+import LogoSvg from '@/components/atoms/LogoSvg'
 import { OrderType } from '@/types/common'
 import { ProductType } from '@/types/product'
 import clsx from 'clsx'

@@ -43,7 +43,7 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
               </div>
               <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                 <div className="mt-5 sm:mt-0">
-                  <h2 className="text-lg font-bold text-gray-900">{item.name}</h2>
+                  <h1 className="text-lg font-bold text-gray-900">{item.name}</h1>
                   <div className="flex  items-center gap-2">
                     {item.sizes.map((size) => (
                       <p
@@ -60,12 +60,12 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
                     <div className="text-xs">
                       Nổi bật:
                       <br />
-                      <div dangerouslySetInnerHTML={{ __html: item.highlights }}></div>
+                      <h3 dangerouslySetInnerHTML={{ __html: item.highlights }}></h3>
                     </div>
                     <div className="text-xs">
                       Chi tiết:
                       <br />
-                      <div dangerouslySetInnerHTML={{ __html: item.details }}></div>
+                      <h3 dangerouslySetInnerHTML={{ __html: item.details }}></h3>
                     </div>
                   </div>
                 </div>
