@@ -50,7 +50,7 @@ const About = () => {
         <div className="w-full lg:w-8/12 lg:pt-8">
           <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
             <div className="p-4 pb-6 flex justify-center flex-col items-center">
-              <div className="md:block hidden rounded-lg h-36 w-36 overflow-hidden">
+              <div className="rounded-lg h-36 w-36 overflow-hidden">
                 <ImageOptimizing src="/hb.png" />
               </div>
 
@@ -59,7 +59,7 @@ const About = () => {
               </h1>
             </div>
             <div className="p-4 pb-6 flex justify-center flex-col items-center">
-              <div className="md:block hidden rounded-lg h-36 w-36 overflow-hidden">
+              <div className=" rounded-lg h-36 w-36 overflow-hidden">
                 <ImageOptimizing src="/dl.png" />
               </div>
               <h1 className="font-medium text-sm leading-5 text-gray-800 mt-4">
