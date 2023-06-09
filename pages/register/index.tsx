@@ -7,11 +7,12 @@ import { closeLoading, setLoading } from '@/redux/features/slices/loading'
 import { schemaRegister } from '@/resolvers/resgiter'
 import { collection } from '@firebase/firestore'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { ReactElement } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 const RegisterPage = () => {
+  const router = useRouter()
   const methods = useForm({
     defaultValues: {
       email: '',
@@ -35,13 +36,15 @@ const RegisterPage = () => {
             title: (
               <div className="flex flex-col pt-3 justify-center items-center">
                 <p>Tạo thành công</p>
-                <Link
-                  href="/login"
-                  onClick={() => dispatch(closeLoading())}
+                <button
+                  onClick={() => {
+                    dispatch(closeLoading())
+                    router.push('/')
+                  }}
                   className="flex-1 mt-2 items-center py-2 px-4 text-xs font-medium text-center text-white bg-emerald-400 rounded-lg focus:ring-4 focus:ring-emerald-200 hover:bg-emerald-600"
                 >
                   Về trang đăng nhập
-                </Link>
+                </button>
               </div>
             )
           })
