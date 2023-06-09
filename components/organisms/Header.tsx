@@ -7,8 +7,9 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { GrClose } from 'react-icons/gr'
+import { resetUser } from '@/redux/features/slices/user'
 
 const navigation = {
   pages: [
@@ -25,6 +26,9 @@ const Header = () => {
   const { push, asPath } = useRouter()
 
   const cart = useSelector((state: RootState) => state.cart)
+  const user = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch()
+
   return (
     <header className="sticky bg-white w-full h-fit z-40 top-0 shadow-sm">
       <input id="hamburger" type="checkbox" className="hidden" defaultChecked />
@@ -75,22 +79,34 @@ const Header = () => {
               </div>
             </Popover.Group>
             {/* Logo */}
-            <div className="ml-auto flex items-center">
-              <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                {/* <Link
-                  href="/login"
-                  className="text-xs font-medium text-gray-700 hover:text-gray-800"
-                >
-                  Đăng nhập
-                </Link>
-                <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                <Link
-                  href="/register"
-                  className="text-xs font-medium text-gray-700 hover:text-gray-800"
-                >
-                  Đăng ký thành viên
-                </Link> */}
-              </div>
+            <section className="ml-auto flex items-center">
+              {user.id ? (
+                <div className="flex items-center gap-2">
+                  <span className="border rounded-full w-10 h-10 bg-[url('/user.png')] bg-cover"></span>
+                  <p
+                    onClick={() => dispatch(resetUser())}
+                    className="text-xs font-medium text-gray-700 hover:text-gray-800 cursor-pointer"
+                  >
+                    Đăng xuất
+                  </p>
+                </div>
+              ) : (
+                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                  <Link
+                    href="/login"
+                    className="text-xs font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Đăng nhập
+                  </Link>
+                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                  <Link
+                    href="/register"
+                    className="text-xs font-medium text-gray-700 hover:text-gray-800"
+                  >
+                    Đăng ký thành viên
+                  </Link>
+                </div>
+              )}
 
               {/* Search */}
               {/* <div className="flex lg:ml-6">
@@ -113,7 +129,7 @@ const Header = () => {
                   </span>
                 </Link>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </nav>

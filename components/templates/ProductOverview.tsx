@@ -2,31 +2,29 @@
 import { ProductType } from '@/types/product'
 import { RadioGroup } from '@headlessui/react'
 import { StarIcon } from '@heroicons/react/20/solid'
+import Image from 'next/image'
 import Link from 'next/link'
 import { enqueueSnackbar } from 'notistack'
 import { useRef, useState } from 'react'
+import { Autoplay, EffectCards } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/effect-cards'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { ImageOptimizing } from '../atoms'
-import 'swiper/css/effect-cards'
-import 'swiper/css'
-import { EffectCards, Autoplay } from 'swiper'
-import Image from 'next/image'
 
 const breadcrumbs = [
   { id: 1, name: 'Trang chủ', href: '#' },
   { id: 2, name: 'Sản phẩm', href: '#' }
 ]
-
-const reviews = { href: '#', average: 4, totalCount: 117 }
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 interface ProductOverviewProps {
   data?: ProductType
   addToCart: (data: ProductType) => void
+  addRatting: (ratting: number) => void
 }
-const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) => {
+const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data, addRatting }) => {
   const [selectedSize, setSelectedSize] = useState(null)
   const handelAddToCart = () => {
     if (selectedSize) {
@@ -252,20 +250,17 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                        'h-5 w-5 flex-shrink-0'
+                        data?.reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
+                        'h-5 w-5 flex-shrink-0 hover:scale-150 ease-linear transition-all '
                       )}
+                      onClick={() => addRatting(rating + 1)}
                       aria-hidden="true"
                     />
                   ))}
                 </div>
-                <p className="sr-only">{reviews.average} out of 5 stars</p>
-                <Link
-                  href={reviews.href}
-                  className="ml-3 text-sm font-medium text-black hover:text-indigo-500"
-                >
-                  {reviews.totalCount} reviews
-                </Link>
+                <p className="ml-3 text-sm font-medium text-black hover:text-indigo-500">
+                  {data?.reviews.totalCount} Đánh giá
+                </p>
               </div>
             </div>
 
@@ -274,13 +269,10 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <Link href="#" className="text-sm font-medium text-black hover:text-indigo-500">
-                    Hướng dẫn chọn size
-                  </Link>
                 </div>
 
                 <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                  <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only">Chọn size</RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                     {data?.sizes.map((size) => (
                       <RadioGroup.Option
@@ -377,6 +369,49 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data }) =>
               <div className="mt-4 space-y-6">
                 <div className="text-sm text-gray-600">
                   <div dangerouslySetInnerHTML={{ __html: data?.details }}></div>
+                </div>
+              </div>
+              <Link href="#" className="text-sm font-medium text-black hover:text-indigo-500">
+                Hướng dẫn chọn size
+              </Link>
+              <div className="flex flex-col shadow-md rounded-xl border">
+                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                  <div className="min-w-full py-2 sm:px-6 lg:px-8">
+                    <div className="overflow-hidden">
+                      <table className="min-w-full text-left text-sm font-light">
+                        <thead className="border-b font-medium">
+                          <tr>
+                            <th scope="col" className="px-6 py-4">
+                              #
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Dài
+                            </th>
+                            <th scope="col" className="px-6 py-4">
+                              Ngang
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y-2">
+                          <tr className="transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                            <td className="whitespace-nowrap px-6 py-4 font-medium">M</td>
+                            <td className="whitespace-nowrap px-6 py-4">52</td>
+                            <td className="whitespace-nowrap px-6 py-4">54</td>
+                          </tr>
+                          <tr className="transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                            <td className="whitespace-nowrap px-6 py-4 font-medium">L</td>
+                            <td className="whitespace-nowrap px-6 py-4">68</td>
+                            <td className="whitespace-nowrap px-6 py-4">70</td>
+                          </tr>
+                          {/* <tr className="transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                            <td className="whitespace-nowrap px-6 py-4 font-medium">XL</td>
+                            <td className="whitespace-nowrap px-6 py-4">30</td>
+                            <td className="whitespace-nowrap px-6 py-4">30</td>
+                          </tr> */}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

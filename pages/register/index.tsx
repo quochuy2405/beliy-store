@@ -4,7 +4,7 @@ import { create } from '@/firebase/base'
 import { db } from '@/firebase/config'
 import { DefaultLayout } from '@/layouts/Layouts'
 import { closeLoading, setLoading } from '@/redux/features/slices/loading'
-import { registerSchema } from '@/utils/register'
+import { schemaRegister } from '@/resolvers/resgiter'
 import { collection } from '@firebase/firestore'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
@@ -18,13 +18,13 @@ const RegisterPage = () => {
       password: '',
       confirm_password: ''
     },
-    resolver: yupResolver(registerSchema)
+    resolver: yupResolver(schemaRegister)
   })
   const dispatch = useDispatch()
 
   const handleSubmit = async (data) => {
     dispatch(setLoading({ status: true, mode: 'default', title: 'Đang tạo tài khoản' }))
-    const accountRef = collection(db, 'accounts')
+    const accountRef = collection(db, 'account_users')
     await create(accountRef, data).then(() => {
       dispatch(
         setLoading({

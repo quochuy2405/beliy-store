@@ -1,4 +1,4 @@
-import AppProvider from '@/providers/AppProvider'
+import AppProvider from 'providers/AppProvider'
 import { AppProps } from '@/types/next'
 import '../styles/global.css'
 function App({ Component, pageProps }: AppProps) {

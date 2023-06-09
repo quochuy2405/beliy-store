@@ -85,12 +85,12 @@ const Login = ({ methods, handleSubmit }) => {
                     </label>
                   </div>
                 </div>
-                <Link
+                {/* <Link
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Quên mật khẩu
-                </Link>
+                </Link> */}
               </div>
               <button
                 type="submit"
@@ -99,12 +99,12 @@ const Login = ({ methods, handleSubmit }) => {
                 Đăng nhập
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet?{' '}
+                Bạn chưa có tài khoản?{' '}
                 <Link
                   href="/register"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Sign up
+                  Đăng ký
                 </Link>
               </p>
             </form>

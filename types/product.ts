@@ -12,4 +12,8 @@ export type ProductType = {
   details: string
   descriptions: string
   category: string
+  reviews?: {
+    average?: number
+    totalCount?: number
+  }
 }
