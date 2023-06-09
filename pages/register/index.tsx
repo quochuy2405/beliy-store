@@ -30,8 +30,7 @@ const RegisterPage = () => {
     await findAll(accountRef, [['email', data.email]]).then(async (res) => {
       if (!res.length) {
         await create(accountRef, data)
-          .then((res) => {
-            console.log(res)
+          .then(() => {
             dispatch(
               setLoading({
                 status: true,
