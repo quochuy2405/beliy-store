@@ -80,7 +80,7 @@ const Header = () => {
             </Popover.Group>
             {/* Logo */}
             <section className="ml-auto flex items-center">
-              {user.id ? (
+              {user?.id ? (
                 <div className="flex items-center gap-2">
                   <span className="border rounded-full w-10 h-10 bg-[url('/user.png')] bg-cover"></span>
                   <p

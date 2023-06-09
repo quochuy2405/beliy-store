@@ -25,26 +25,31 @@ const RegisterPage = () => {
   const handleSubmit = async (data) => {
     dispatch(setLoading({ status: true, mode: 'default', title: 'Đang tạo tài khoản' }))
     const accountRef = collection(db, 'account_users')
-    await create(accountRef, data).then(() => {
-      dispatch(
-        setLoading({
-          status: true,
-          mode: 'success',
-          title: (
-            <div className="flex flex-col pt-3 justify-center items-center">
-              <p>Tạo thành công</p>
-              <Link
-                href="/login"
-                onClick={() => dispatch(closeLoading())}
-                className="flex-1 mt-2 items-center py-2 px-4 text-xs font-medium text-center text-white bg-emerald-400 rounded-lg focus:ring-4 focus:ring-emerald-200 hover:bg-emerald-600"
-              >
-                Về trang đăng nhập
-              </Link>
-            </div>
-          )
-        })
-      )
-    })
+    await create(accountRef, data)
+      .then((res) => {
+        console.log(res)
+        dispatch(
+          setLoading({
+            status: true,
+            mode: 'success',
+            title: (
+              <div className="flex flex-col pt-3 justify-center items-center">
+                <p>Tạo thành công</p>
+                <Link
+                  href="/login"
+                  onClick={() => dispatch(closeLoading())}
+                  className="flex-1 mt-2 items-center py-2 px-4 text-xs font-medium text-center text-white bg-emerald-400 rounded-lg focus:ring-4 focus:ring-emerald-200 hover:bg-emerald-600"
+                >
+                  Về trang đăng nhập
+                </Link>
+              </div>
+            )
+          })
+        )
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   const props = {
     methods,
