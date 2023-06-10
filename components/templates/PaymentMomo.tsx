@@ -2,6 +2,7 @@
 import { deleteCookie, getCookie } from 'cookies-next'
 import Link from 'next/link'
 import React, { useRef } from 'react'
+import { ImageOptimizing } from '../atoms'
 
 const PaymentMomo: React.FC = () => {
   const refId = useRef(getCookie('checkout_id' as any))
@@ -11,18 +12,16 @@ const PaymentMomo: React.FC = () => {
         {/* QR Code Number Account & Uploadfile */}
         <div className="flex-wrap lg:flex-nowrap md:flex">
           <div className="mx-auto">
-            <img
-              className="mx-auto mt-12 h-52 w-52 rounded-lg border p-2 md:mt-0"
-              src="https://i.imgur.com/FQS7fFC.png"
-              alt="step"
-            />
+            <div className="w-72 h-82 m-auto">
+              <ImageOptimizing src="/momo.png" />
+            </div>
+
             <div>
               <h1 className="font-laonoto mt-4 text-center text-xl font-bold">Vui lòng quét mã</h1>
               <p className="mt-2 text-center font-semibold text-gray-600">BELIY STORE</p>
               <p className="mt-2 text-center font-semibold text-gray-600">
                 Nội dung tin nhắn: <span className="text-red-500">MDH:{refId.current}</span>
               </p>
-              <p className="mt-1 text-center font-medium text-red-500">0963329201</p>
             </div>
             <Link
               href={'/'}
@@ -31,7 +30,7 @@ const PaymentMomo: React.FC = () => {
                 deleteCookie('orders')
               }}
             >
-              <button className="mx-auto block rounded-md border bg-black px-6 py-2 text-white outline-none">
+              <button className="mx-auto mt-2 block rounded-md border bg-black px-6 py-2 text-white outline-none">
                 Đã thanh toán xong
               </button>
             </Link>
@@ -57,7 +56,7 @@ const PaymentMomo: React.FC = () => {
               </div>
               <div className="flex-grow pl-4">
                 <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-gray-900">
-                  STEP 1
+                  Bước 1
                 </h2>
                 <p className="font-laonoto leading-relaxed">
                   Quét mã <br />
@@ -84,7 +83,7 @@ const PaymentMomo: React.FC = () => {
               </div>
               <div className="flex-grow pl-4">
                 <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-gray-900">
-                  STEP 2
+                  Bước 2
                 </h2>
                 <p className="font-laonoto leading-relaxed">
                   Chuyển tiền đủ số tiền được hiển thị trên màn hình
@@ -113,7 +112,7 @@ const PaymentMomo: React.FC = () => {
               </div>
               <div className="flex-grow pl-4">
                 <h2 className="title-font mb-1 text-sm font-medium tracking-wider text-gray-900">
-                  STEP 3
+                  Bước 3
                 </h2>
                 <p className="font-laonoto leading-relaxed">
                   Hoàn tất thành toán <b>Bấm nút và đợi nhân viên gọi xác nhận</b>.

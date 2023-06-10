@@ -1,11 +1,12 @@
 import clsx from 'clsx'
 import { deleteCookie } from 'cookies-next'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 interface FinishProps {
   status: 'error' | 'success'
 }
 const Finish: React.FC<FinishProps> = ({ status }) => {
+  const router = useRouter()
   return (
     <div className="bg-gray-100 h-screen flex items-center">
       <div className="bg-white p-6  md:mx-auto rounded-3xl">
@@ -30,17 +31,17 @@ const Finish: React.FC<FinishProps> = ({ status }) => {
             Cảm ơn bạn đã sử dụng các sản phẩm tại Beliy Stresswear.
           </p>
           <p> Chúc bạn một ngày mới thật bùng lổ! </p>
-          <div className="py-10 text-center">
-            <Link
-              href="/"
+          <div className="py-10 text-center ">
+            <p
               onClick={() => {
                 deleteCookie('checkout_id')
                 deleteCookie('orders')
+                router.push('/')
               }}
               className="w-36 mx-auto mt-3 flex gap-1 justify-center items-center text-sm rounded-md bg-black py-2 font-medium text-blue-50 hover:bg-gray-700"
             >
               Về trang chủ
-            </Link>
+            </p>
           </div>
         </div>
       </div>
