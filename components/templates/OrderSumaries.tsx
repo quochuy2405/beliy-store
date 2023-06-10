@@ -1,6 +1,7 @@
 'use client'
 import { removeInCart, updateCart } from '@/redux/features/slices/cart'
 import { ProductType } from '@/types/product'
+import { StarIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -56,17 +57,17 @@ const OrderSumaries: React.FC<OrderSumariesProps> = ({ orders, onCheckout }) => 
                       </p>
                     ))}
                   </div>
-                  <div className="py-2">
-                    <div className="text-xs">
-                      Nổi bật:
-                      <br />
-                      <h3 dangerouslySetInnerHTML={{ __html: item.highlights }}></h3>
-                    </div>
-                    <div className="text-xs">
-                      Chi tiết:
-                      <br />
-                      <h3 dangerouslySetInnerHTML={{ __html: item.details }}></h3>
-                    </div>
+                  <div className="py-2 flex gap-2 mt-2">
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <StarIcon
+                        key={rating}
+                        className={clsx(
+                          item?.reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
+                          'h-5 w-5 flex-shrink-0 hover:scale-150 ease-linear transition-all '
+                        )}
+                        aria-hidden="true"
+                      />
+                    ))}
                   </div>
                 </div>
 
