@@ -101,7 +101,7 @@ const ProductOverviewPage = () => {
         })
       })
     }
-  }, [query?.id, refresh])
+  }, [JSON.stringify(query?.id), refresh])
 
   const props = {
     addToCart,
