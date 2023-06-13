@@ -3,7 +3,6 @@ import { ProductType } from '@/types/product'
 import {
   QueryDocumentSnapshot,
   QuerySnapshot,
-  Timestamp,
   addDoc,
   deleteDoc,
   doc,
@@ -16,7 +15,7 @@ import { db, storage } from './config'
 
 // Create a new document
 const create = async (collectionRef: any, data: object) => {
-  const createdAt = Timestamp.now()
+  const createdAt = new Date().getTime()
 
   const newData = { ...data, createdAt }
   const docRef = await addDoc(collectionRef, newData)
