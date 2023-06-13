@@ -3,6 +3,7 @@ import { ProductType } from '@/types/product'
 import {
   QueryDocumentSnapshot,
   QuerySnapshot,
+  Timestamp,
   addDoc,
   deleteDoc,
   doc,
@@ -15,7 +16,8 @@ import { db, storage } from './config'
 
 // Create a new document
 const create = async (collectionRef: any, data: object) => {
-  const createdAt = new Date().toISOString()
+  const createdAt = Timestamp.now()
+
   const newData = { ...data, createdAt }
   const docRef = await addDoc(collectionRef, newData)
   return docRef.id
@@ -80,8 +82,6 @@ const addImage = async (file: File, path: string): Promise<string> => {
 
 // Check quantity of items before adding an order
 const checkQuantityBeforeAddOrder = async (items: Array<ProductType>) => {
-  const invalidItems = []
-
   for (const item of items) {
     // Retrieve the item document from the 'items' collection
     const itemDoc = await read('products', item.id)
@@ -96,8 +96,6 @@ const checkQuantityBeforeAddOrder = async (items: Array<ProductType>) => {
     }
   }
   return 'pass'
-
-  return invalidItems
 }
 
-export { create, deleteItem, read, readAll, update, addImage, findAll, checkQuantityBeforeAddOrder }
+export { addImage, checkQuantityBeforeAddOrder, create, deleteItem, findAll, read, readAll, update }
