@@ -10,7 +10,7 @@ export default function PromoteSection() {
               we are beliy
             </h1>
             <p className="my-2 text-lg  font-extrabold text-gray-900 uppercase">
-              Thời trang dành cho người stress
+              Tất cả các mẫu tại BeliyStressWear đều là bản giới hạn và cam kết không restock
             </p>
             <video height="240" loop autoPlay muted className="rounded-lg overflow-hidden w-full">
               <source src="/beliywear.mp4" type="video/mp4" className="h-11 w-full" />
