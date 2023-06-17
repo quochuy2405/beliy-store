@@ -26,7 +26,7 @@ const About = () => {
           </p>
         </div>
         <div className="w-full lg:w-4/12 ">
-          <img className="w-full h-full" src="/logo_2.png" alt="A group of People" />
+          <img className="w-full h-full" src="/logo.png" alt="Beliy" />
         </div>
       </div>
 

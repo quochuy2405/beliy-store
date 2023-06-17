@@ -1,5 +1,5 @@
 'use client'
-import { LogoSvg } from '@/components/atoms'
+import { resetUser } from '@/redux/features/slices/user'
 import { RootState } from '@/redux/features/store'
 import { Popover } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon } from '@heroicons/react/20/solid'
@@ -7,9 +7,8 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FaFacebook, FaInstagram, FaTiktok } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
 import { GrClose } from 'react-icons/gr'
-import { resetUser } from '@/redux/features/slices/user'
+import { useDispatch, useSelector } from 'react-redux'
 
 const navigation = {
   pages: [
@@ -42,9 +41,13 @@ const Header = () => {
 
         <FaInstagram />
       </div>
-      <div className="flex h-10 items-center justify-center bg-white px-4 mt-2 text-sm font-medium text-white sm:px-6 lg:px-8">
-        <Link href="/" className="ml-4 flex justify-center items-center lg:ml-0 w-36 h-36" passHref>
-          <LogoSvg />
+      <div className="flex h-16 items-center justify-center bg-white px-4 mt-2 text-sm font-medium text-white sm:px-6 lg:px-8 overflow-hidden">
+        <Link
+          href="/"
+          className="ml-4 flex justify-center overflow-hidden items-center lg:ml-0 w-36 h-36"
+          passHref
+        >
+          <div className="bg-[url('/logo.png')] bg-cover w-full h-full" />
         </Link>
       </div>
       <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -371,49 +371,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data, addR
                   <div dangerouslySetInnerHTML={{ __html: data?.details }}></div>
                 </div>
               </div>
-              <Link href="#" className="text-sm font-medium text-black hover:text-indigo-500">
-                Hướng dẫn chọn size
-              </Link>
-              <div className="flex flex-col shadow-md rounded-xl border">
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                  <div className="min-w-full py-2 sm:px-6 lg:px-8">
-                    <div className="overflow-hidden">
-                      <table className="min-w-full text-left text-sm font-light">
-                        <thead className="border-b font-medium">
-                          <tr>
-                            <th scope="col" className="px-6 py-4">
-                              #
-                            </th>
-                            <th scope="col" className="px-6 py-4">
-                              Dài
-                            </th>
-                            <th scope="col" className="px-6 py-4">
-                              Ngang
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y-2">
-                          <tr className="transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <td className="whitespace-nowrap px-6 py-4 font-medium">M</td>
-                            <td className="whitespace-nowrap px-6 py-4">52</td>
-                            <td className="whitespace-nowrap px-6 py-4">54</td>
-                          </tr>
-                          <tr className="transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <td className="whitespace-nowrap px-6 py-4 font-medium">L</td>
-                            <td className="whitespace-nowrap px-6 py-4">68</td>
-                            <td className="whitespace-nowrap px-6 py-4">70</td>
-                          </tr>
-                          {/* <tr className="transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <td className="whitespace-nowrap px-6 py-4 font-medium">XL</td>
-                            <td className="whitespace-nowrap px-6 py-4">30</td>
-                            <td className="whitespace-nowrap px-6 py-4">30</td>
-                          </tr> */}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

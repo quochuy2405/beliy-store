@@ -37,19 +37,22 @@ const Footer = () => {
               <ul className="text-gray-600  font-medium">
                 <li className="mb-4">
                   <a
-                    href="https://github.com/themesberg/flowbite"
+                    href="https://www.facebook.com/beliystores"
                     className="hover:underline text-xs "
                   >
                     Facebook
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a href="https://discord.gg/4eeurUVvTy" className="hover:underline text-xs">
+                  <a
+                    href="https://www.instagram.com/beliystore/"
+                    className="hover:underline text-xs"
+                  >
                     Instagram
                   </a>
                 </li>
                 <li>
-                  <a href="https://discord.gg/4eeurUVvTy" className="hover:underline text-xs">
+                  <a href="https://www.tiktok.com/@beliystore" className="hover:underline text-xs">
                     Tiktok
                   </a>
                 </li>
