@@ -1,4 +1,4 @@
-import { ImageOptimizing } from '../atoms'
+import Image from 'next/image'
 
 export default function PromoteSection() {
   return (
@@ -20,49 +20,70 @@ export default function PromoteSection() {
             <div className="flex items-center gap-8">
               <div className="grid  grid-cols-1 gap-8">
                 <div className="h-[100%] w-full overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100 ">
-                  <ImageOptimizing
+                  <Image
                     src="/JACKET1-2.png"
-                    blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full"
                   />
                 </div>
                 <div className="h-[100%] w-full overflow-hidden rounded-lg">
-                  <ImageOptimizing
+                  <Image
                     src="/JACKET4-2.png"
-                    blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-1 gap-8">
                 <div className="h-[100%] w-full overflow-hidden rounded-lg">
-                  <ImageOptimizing
+                  <Image
                     src="/JACKET2-2.png"
-                    blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full"
                   />
                 </div>
                 <div className="h-[100%] w-full overflow-hidden rounded-lg">
-                  <ImageOptimizing
+                  <Image
                     src="/JACKET2-1.png"
-                    blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full"
                   />
                 </div>
                 <div className="h-[100%] w-full overflow-hidden rounded-lg">
-                  <ImageOptimizing
+                  <Image
                     src="/JACKET3-1.png"
-                    blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full"
                   />
                 </div>
               </div>
               <div className="grid grid-cols-1 gap-8">
                 <div className="h-[100%] w-full overflow-hidden rounded-lg">
-                  <ImageOptimizing
+                  <Image
                     src="/JACKET3-2.png"
-                    blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full"
                   />
                 </div>
                 <div className="h-[100%] w-full overflow-hidden rounded-lg">
-                  <ImageOptimizing
+                  <Image
                     src="/JACKET4-1.png"
-                    blurhash="PNPi|+IV.A%1pIx]nOM{x]t7xtM_Mxt8%MsoOYtR%MRjH?Rkf*jt"
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    className="w-full h-full"
                   />
                 </div>
               </div>
