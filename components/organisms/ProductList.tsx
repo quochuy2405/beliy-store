@@ -31,7 +31,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
 
   const refactorData = async (data: Array<ProductType>) => {
     const products = data.map(async (item) => {
-      const names = [1, 2, 3, 4]
+      const names = [0, 1, 2, 3, 4]
       try {
       } catch (error) {}
       const imagesURL = names.map(async (name) => {
