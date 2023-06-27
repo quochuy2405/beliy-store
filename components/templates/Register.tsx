@@ -7,15 +7,15 @@ const Register = ({ methods, handleSubmit }) => {
       <div className="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto  md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8 relative">
-            <div className="bg-white rounded-full shadow-md mb-2 absolute top-0 -translate-x-1/2 left-1/2 -translate-y-2/3">
+            <div className="bg-white rounded-full shadow-md mb-1 absolute top-0 -translate-x-1/2 left-1/2 -translate-y-2/3 overflow-hidden">
               <div className="bg-[url('/logo.png')] w-28 h-28 bg-cover" />
             </div>
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Đăng ký tài khoản
             </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={methods.handleSubmit(handleSubmit)}>
+            <form className="flex flex-col gap-2" onSubmit={methods.handleSubmit(handleSubmit)}>
               <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
+                <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-900">
                   Email
                 </label>
                 <Controller
@@ -40,7 +40,7 @@ const Register = ({ methods, handleSubmit }) => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Mật khẩu
                 </label>
@@ -67,7 +67,7 @@ const Register = ({ methods, handleSubmit }) => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Xác nhận lại mật khẩu
                 </label>
