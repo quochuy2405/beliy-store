@@ -3,15 +3,15 @@ import { ProductList, PromoteSection } from '../organisms'
 
 const Home = () => {
   return (
-    <div>
-      <div className="h-[110vh]">
+    <div className="w-full">
+      <div className="w-full">
         <Image
           alt=""
           width={2000}
           height={2000}
           src="/banner2.png"
           className="
-        w-full h-full object-cover"
+        w-full h-full object-contain lg:object-cover"
         />
       </div>
       <PromoteSection />

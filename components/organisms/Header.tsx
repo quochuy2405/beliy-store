@@ -138,16 +138,16 @@ const Header = () => {
       </nav>
       <aside
         id="bar-mobile"
-        className="z-20 h-[70vh] absolute top-[150px] left-0 w-full md:w-[50%] flex-shrink-0  overflow-y-auto bg-white md:block lg:hidden shadow-lg pt-10"
+        className="z-20 h-[70vh] absolute top-[120px] left-0 w-full md:w-[50%] flex-shrink-0  overflow-y-auto bg-white md:block lg:hidden shadow-lg pt-10"
       >
         <label htmlFor="hamburger" className="absolute top-3 right-3">
           <GrClose size={20} />
         </label>
         <div className="text-gray-500">
           <div className="w-full">
-            <ul className="pb-4 flex flex-col gap-2">
+            <div className="pb-4 flex flex-col gap-2 list-none">
               {navigation.pages.map((item) => (
-                <label htmlFor="hamburger">
+                <label htmlFor="hamburger" key={item.name}>
                   <li className="relative py w-full">
                     <div
                       onClick={() => push(item.href)}
@@ -163,7 +163,7 @@ const Header = () => {
                   </li>
                 </label>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </aside>

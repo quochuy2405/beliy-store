@@ -11,7 +11,7 @@ interface ProductProps {
 const Product: React.FC<ProductProps> = ({ gender, stateStore }) => {
   return (
     <div className="pb-6">
-      <div className="h-[95vh]">
+      <div className="">
         <Image
           alt=""
           width={2000}
