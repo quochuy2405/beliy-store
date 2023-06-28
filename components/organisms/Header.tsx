@@ -16,7 +16,7 @@ const navigation = {
     { name: 'Tất cả sản phẩm', href: '/products' },
     { name: 'Dành cho nữ', href: '/products?type=women' },
     { name: 'Dành cho nam', href: '/products?type=men' },
-    // { name: 'Bộ phối', href: '/products' },
+    { name: 'Bộ phối', href: '/products?type=ourmix' },
     { name: 'Về chúng tui', href: '/about' }
   ]
 }
