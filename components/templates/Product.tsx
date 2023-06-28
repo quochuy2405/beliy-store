@@ -34,7 +34,7 @@ const Product: React.FC<ProductProps> = ({ gender, stateStore }) => {
                     gender
                       ? [
                           ['category', item.code],
-                          ['gender', gender]
+                          ['gender', ['all', gender]]
                         ]
                       : [['category', item.code]]
                   }

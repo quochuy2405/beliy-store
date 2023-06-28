@@ -63,6 +63,7 @@ const findAll = async <T>(collectionRef: any, conditions: Condition<T>[]): Promi
   })
   return data
 }
+
 // Update a document
 const update = async (collectionRef: any, id: string, data: object) => {
   await updateDoc(doc(collectionRef, id), data)

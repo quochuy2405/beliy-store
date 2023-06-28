@@ -15,7 +15,7 @@ const ProductPage = () => {
     }
   })
   const { query, isReady } = useRouter()
-  console.log(query)
+
   useEffect(() => {
     if (isReady) {
       const categoriesRef = collection(db, 'categories')

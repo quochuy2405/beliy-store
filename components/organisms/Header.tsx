@@ -23,7 +23,7 @@ const navigation = {
 
 const Header = () => {
   const { push, asPath } = useRouter()
-
+  console.log(asPath)
   const cart = useSelector((state: RootState) => state.cart)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -72,7 +72,7 @@ const Header = () => {
                     className={clsx(
                       'flex items-center text-xs font-medium text-gray-700 hover:text-gray-800',
                       {
-                        '!font-bold': asPath === page.href
+                        '!font-bold !text-gray-800': asPath === page.href
                       }
                     )}
                   >

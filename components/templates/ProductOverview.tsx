@@ -333,7 +333,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data, addR
               <button
                 type="button"
                 onClick={handelAddToCart}
-                className="mt-10 flex w-[90%] m-auto rounded-2xl items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:bg-white hover:text-black hover:border-black hover:border ease-linear transition-all focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
+                className="mt-10 flex w-[90%] m-auto items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white hover:bg-white hover:text-black hover:border-black hover:border ease-linear transition-all focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
               >
                 Thêm vào giỏ hàng
               </button>
