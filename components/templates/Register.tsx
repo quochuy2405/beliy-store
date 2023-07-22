@@ -5,7 +5,7 @@ const Register = ({ methods, handleSubmit }) => {
   return (
     <section className="bg-gradient-to-r from-[#000000] via-purple-500 to-[#000000]  flex items-center justify-center h-screen">
       <div className="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto  md:h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0">
+        <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8 relative">
             <div className="bg-white rounded-full shadow-md mb-1 absolute top-0 -translate-x-1/2 left-1/2 -translate-y-2/3 overflow-hidden">
               <div className="bg-[url('/logo.png')] w-28 h-28 bg-cover" />
@@ -38,10 +38,7 @@ const Register = ({ methods, handleSubmit }) => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900">
                   Mật khẩu
                 </label>
                 <Controller
@@ -65,10 +62,7 @@ const Register = ({ methods, handleSubmit }) => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-900">
                   Xác nhận lại mật khẩu
                 </label>
                 <Controller

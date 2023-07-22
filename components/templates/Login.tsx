@@ -6,12 +6,12 @@ const Login = ({ methods, handleSubmit }) => {
   return (
     <section className="bg-gradient-to-r from-[#000000] via-purple-500 to-[#000000] flex items-center justify-center h-screen">
       <div className="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 ">
+        <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8 relative">
             <div className="bg-white rounded-full shadow-md mb-2 absolute top-0 -translate-x-1/2 left-1/2 -translate-y-2/3 overflow-hidden">
               <div className="bg-[url('/logo.png')] w-28 h-28 bg-cover" />
             </div>
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Đăng nhập
             </h1>
             <form className="flex flex-col gap-2" onSubmit={methods.handleSubmit(handleSubmit)}>
@@ -41,10 +41,7 @@ const Login = ({ methods, handleSubmit }) => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">
                   Mật khẩu
                 </label>
                 <Controller
@@ -86,7 +83,7 @@ const Login = ({ methods, handleSubmit }) => {
                 </div>
                 {/* <Link
                   href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="text-sm font-medium text-primary-600 hover:underline"
                 >
                   Quên mật khẩu
                 </Link> */}
@@ -97,12 +94,9 @@ const Login = ({ methods, handleSubmit }) => {
               >
                 Đăng nhập
               </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+              <p className="text-sm font-light text-gray-500">
                 Bạn chưa có tài khoản?{' '}
-                <Link
-                  href="/register"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
+                <Link href="/register" className="font-medium text-primary-600 hover:underline">
                   Đăng ký
                 </Link>
               </p>

@@ -184,7 +184,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data, addR
               className="flex justify-center items-center mr-4 h-full cursor-pointer group focus:outline-none"
               data-carousel-prev
             >
-              <span className="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+              <span className="text-gray-400 hover:text-gray-900 group-focus:text-gray-900">
                 <svg
                   aria-hidden="true"
                   className="w-6 h-6"
@@ -206,7 +206,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({ addToCart, data, addR
               className="flex justify-center items-center h-full cursor-pointer group focus:outline-none"
               data-carousel-next
             >
-              <span className="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+              <span className="text-gray-400 hover:text-gray-900 group-focus:text-gray-900">
                 <svg
                   aria-hidden="true"
                   className="w-6 h-6"
