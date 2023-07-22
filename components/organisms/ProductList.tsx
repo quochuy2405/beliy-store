@@ -94,9 +94,11 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
             return (
               <>
                 {title && (
-                  <h1 className="text-2xl font-bold tracking-tight text-gray-900">{title}</h1>
+                  <h1 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
+                    {title}
+                  </h1>
                 )}
-                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10 fit:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+                <div className="mt-6 grid grid-cols-2 sm:grid-cols-2 gap-x-4 gap-y-10 fit:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
                   {[...field.value].map((item) => (
                     <>
                       <Link href={`/products/${item.id}`} key={item.id}>
@@ -105,7 +107,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                           className="sxx:w-full ss:w-[50%] 
                           md:min-w-[280px] first-letter:md:max-w-[280px] md:w-[33.333%] lg:w-[25%] bg-white rounded-lg flex flex-col p-4 gap-2 shadow-lg transition-all ease-linear h-full flex-1 hover:shadow-2xl"
                         >
-                          <div className="w-full h-[240px] relative overflow-hidden rounded-lg">
+                          <div className="h-[150px] w-full md:h-[240px] relative overflow-hidden rounded-lg">
                             <ImageOptimizing
                               src={item.imagesURL[0]}
                               objectFit="cover"
@@ -113,7 +115,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                             />
                           </div>
                           <div className="flex items-start justify-between flex-1">
-                            <h2 className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-sm">
+                            <h2 className="w-fit p-2 h-10 md:h-12  line-clamp-2 text-black justify-center font-bold text-[10px] md:text-sm ">
                               {item.name}
                             </h2>
                             <h3 className="w-fit p-2 h-7  flex items-center text-black justify-center font-bold text-xs">
@@ -121,7 +123,7 @@ const ProductList: React.FC<ProductListProps> = ({ id, conditions, title }) => {
                             </h3>
                           </div>
 
-                          <div className="w-full text-white text-sm flex-1 flex items-start justify-between gap-2 px-2">
+                          <div className="w-full text-[10px] text-white md:text-sm flex-1 flex items-start justify-between gap-2 px-2">
                             <p className="text-black font-medium rounded-lg text-xs ">
                               Giá: {(Number(item.price) * 1000)?.toLocaleString()}
                             </p>
