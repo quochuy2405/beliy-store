@@ -32,14 +32,15 @@ const Header = () => {
     <header className="sticky bg-white w-full h-fit z-40 top-0 shadow-sm">
       <input id="hamburger" type="checkbox" className="hidden" defaultChecked />
       <div className="flex h-10 items-center justify-start gap-4 bg-black px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-        <div className="flex items-center">
+        <a className="flex items-center" href="https://www.tiktok.com/@beliystresswear">
           <FaTiktok />
-        </div>
+        </a>
         <a href="https://www.facebook.com/beliystores">
           <FaFacebook />
         </a>
-
-        <FaInstagram />
+        <a href="https://www.instagram.com/beliystore">
+          <FaInstagram />
+        </a>
       </div>
       <div className="flex h-16 items-center justify-center bg-white px-4 mt-2 text-sm font-medium text-white sm:px-6 lg:px-8 overflow-hidden">
         <Link

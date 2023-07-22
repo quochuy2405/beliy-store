@@ -48,7 +48,10 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.tiktok.com/@beliystore" className="hover:underline text-xs">
+                  <a
+                    href="https://www.tiktok.com/@beliystresswear"
+                    className="hover:underline text-xs"
+                  >
                     Tiktok
                   </a>
                 </li>
@@ -75,7 +78,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-xs text-gray-500 sm:text-center ">
             © 2023{' '}
-            <a href="https://flowbite.com/" className="hover:underline text-xs">
+            <a href="/" className="hover:underline text-xs">
               BeliyStore
             </a>
             . All Rights Reserved.
