@@ -202,16 +202,17 @@ const Checkout: React.FC<CheckoutProps> = ({
                 </div>
                 <div className="flex justify-between">
                   <p className="text-gray-700">Phí ship</p>
-                  <p className="text-gray-700">30.000đ</p>
+                  <p className="text-gray-700 font-semibold">Miễn phí</p>
+                  {/* <p className="text-gray-700">30.000đ</p> */}
                 </div>
                 <hr className="my-4" />
                 <div className="flex justify-between">
                   <p className="text-lg font-bold">Tổng tiền</p>
                   <div>
                     <p className="mb-1 text-lg font-bold">
-                      {(total() ? total() + 30000 : 0).toLocaleString()}đ
+                      {(total() ? total() + 0 : 0).toLocaleString()}đ
                     </p>
-                    <p className="text-sm text-gray-700">Đã bao gồm VAT</p>
+                    <p className="text-sm text-gray-700">Đã bao gồm VAT 8%</p>
                   </div>
                 </div>
               </div>
