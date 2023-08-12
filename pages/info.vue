@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { VButton } from '@/components/atoms'
-import { Login } from '@/components/templates'
 definePageMeta({
     layoutTransition: {
         name: 'layout',

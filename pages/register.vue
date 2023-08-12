@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Register } from '@/components/templates'
-import { useVuelidate } from '@vuelidate/core'
-import { rules } from '@/resolvers/register.rule'
 import { VButton, VTextField } from '@/components/atoms'
+import { rules } from '@/resolvers/register.rule'
+import { useVuelidate } from '@vuelidate/core'
 export interface RegisterForm {
     email: string
     password: string
