@@ -50,7 +50,7 @@ const addToCart = () => {
             />
         </div>
         <NuxtLink
-            href="/"
+            :href="`/products/${data?.id}`"
             class="text-xs font-semibold uppercase h-8 line-clamp-2"
             >{{ data?.name || '' }}</NuxtLink
         >

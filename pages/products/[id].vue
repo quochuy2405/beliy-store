@@ -3,12 +3,16 @@ import { VButton } from '@/components/atoms'
 import { VImageProductSlide } from '@/components/molecules'
 import { read } from '@/composables/firebase/base'
 import { storage } from '@/composables/firebase/config'
+import { useCart } from '@/stores/nuxtStore'
 import { getDownloadURL, ref as storageRef } from 'firebase/storage'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const imageActive = ref(0)
 const countBuy = ref(1)
 const productDetails = ref(null)
+const { products } = storeToRefs(useCart())
+
 const onClick = (index: number) => {
     imageActive.value = index
 }
@@ -55,7 +59,16 @@ const reduce = () => {
     if (countBuy.value > 1) countBuy.value -= 1
 }
 const ratingCount = Math.ceil(Math.random() * (30 - 10) + 10)
-
+const addToCart = () => {
+    const data = productDetails
+    const existData = findItemInArray(products.value, data.value)
+    if (existData) {
+        existData.quantityOrder = countBuy
+    } else {
+        data.value.quantityOrder = countBuy
+        products.value = [...products.value, data.value]
+    }
+}
 onMounted(() => {
     const body = document.querySelector('body')
     body.scrollTo({ top: 0, behavior: 'smooth' })
@@ -136,7 +149,7 @@ onMounted(() => {
                 /></span>
             </div>
             <VButton
-                href="/"
+                @click="addToCart"
                 mode="default"
                 class="!bg-black !rounded-full !text-white !h-12 !font-semibold !w-fit !py-3 !px-14 z-10"
                 animation

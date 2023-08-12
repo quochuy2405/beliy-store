@@ -38,13 +38,17 @@ onMounted(() => {
             <input id="hamburger" type="checkbox" class="hidden" checked />
             <div class="w-full h-9 bg-black px-6 hidden"></div>
             <div class="w-full h-16 flex items-center px-6 justify-between">
-                <ClientOnly>
-                    <Icon name="logos:facebook" class="h-6 w-6 font-semibold" />
-                </ClientOnly>
+                <NuxtLink href="https://www.facebook.com/beliystores">
+                    <ClientOnly>
+                        <Icon
+                            name="logos:facebook"
+                            class="h-6 w-6 font-semibold"
+                        /> </ClientOnly
+                ></NuxtLink>
 
-                <div class="w-16 h-10">
+                <NuxtLink href="/" class="w-16 h-10">
                     <img src="@/assets/svg/logo.svg" />
-                </div>
+                </NuxtLink>
                 <div class="hidden">
                     <NuxtLink
                         v-for="tab in tabs"

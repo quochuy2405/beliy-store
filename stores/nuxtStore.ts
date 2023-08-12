@@ -8,3 +8,19 @@ export const useCart = defineStore('cart', {
         }
     },
 })
+
+interface IToast {
+    isShow: boolean
+    content: string
+    status: 'info' | 'success' | 'error' | 'warning'
+}
+export const useToast = defineStore('toast', {
+    // arrow function recommended for full type inference
+    state: (): IToast => {
+        return {
+            isShow: false,
+            content: '',
+            status: 'info',
+        }
+    },
+})
