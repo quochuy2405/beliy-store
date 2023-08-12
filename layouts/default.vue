@@ -1,21 +1,25 @@
 <script setup lang="ts">
+import { VToast } from '@/components/atoms'
 import { VGotoTop } from '@/components/molecules'
 import { VFooter, VHeader } from '@/components/organisms'
-const maintenance = true
+const maintenance = false
 </script>
 <template>
-    <div v-if="!maintenance">
-        <VHeader />
-        <VGotoTop />
-        <slot></slot>
-        <VFooter />
-    </div>
-    <div
-        v-if="maintenance"
-        class="flex items-center justify-center h-screen w-screen flex-col"
-    >
-        <img src="/img/maintenance.png" class="w-20 h-20" />
-        <h2>☹️ Xin lỗi vì bất tiện này</h2>
-        <h1 class="font-semibold">Beliy sẽ sớm quay lại ngay thôi! 🤗</h1>
+    <div>
+        <div v-if="!maintenance">
+            <VToast />
+            <VHeader />
+            <VGotoTop />
+            <slot></slot>
+            <VFooter />
+        </div>
+        <div
+            v-if="maintenance"
+            class="flex items-center justify-center h-screen w-screen flex-col"
+        >
+            <img src="/img/maintenance.png" class="w-20 h-20" />
+            <h2>☹️ Xin lỗi vì bất tiện này</h2>
+            <h1 class="font-semibold">Beliy sẽ sớm quay lại ngay thôi! 🤗</h1>
+        </div>
     </div>
 </template>

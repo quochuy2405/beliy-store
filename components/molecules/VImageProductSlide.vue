@@ -30,6 +30,8 @@ const moveSliderLeft = async () => {
             return
         }
         sliderPosition.value -= 100
+        if (visible.value === 1)
+            props.onClick(Math.abs(sliderPosition.value) / 100)
         onAutoPlay()
     }, 250)
 }
@@ -39,6 +41,7 @@ const moveSliderTo = async (index: number) => {
     clearInterval(timeOut)
     timeOut = setTimeout(() => {
         sliderPosition.value = -index * 100
+
         onAutoPlay()
     }, 250)
 }
@@ -52,6 +55,8 @@ const moveSliderRight = async () => {
             return
         }
         sliderPosition.value += 100
+        if (visible.value === 1)
+            props.onClick(Math.abs(sliderPosition.value) / 100)
         onAutoPlay()
     }, 250)
 }

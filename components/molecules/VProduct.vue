@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCart } from '@/stores/nuxtStore'
+import { useCart, useToast } from '@/stores/nuxtStore'
 import { ProductType } from '@/types/product'
 import { VButton } from '../atoms'
 import { storeToRefs } from 'pinia'
@@ -20,13 +20,22 @@ const props = withDefaults(defineProps<Props>(), {
 const { mode, data } = toRefs(props)
 
 const { products } = storeToRefs(useCart())
+const { isShow, status, content } = storeToRefs(useToast())
 // functions
 const addToCart = () => {
     const existData = findItemInArray(products.value, data.value)
     if (existData) {
+        isShow.value = true
+        status.value = 'success'
+        content.value = 'Đã cập nhật'
+
         existData.quantityOrder += 1
     } else {
+        isShow.value = true
+        status.value = 'success'
+        content.value = 'Đã thêm vào giỏ'
         data.value.quantityOrder = 1
+
         products.value = [...products.value, data.value]
     }
 }
