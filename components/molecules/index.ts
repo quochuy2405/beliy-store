@@ -1,0 +1,5 @@
+export { default as VProduct } from './VProduct.vue'
+export { default as VGotoTop } from './VGotoTop.vue'
+export { default as VSkeleton } from './VSkeleton.vue'
+export { default as VCartItem } from './VCartItem.vue'
+export { default as VImageProductSlide } from './VImageProductSlide.vue'
