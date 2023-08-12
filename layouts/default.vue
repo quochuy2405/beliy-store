@@ -16,6 +16,6 @@ const maintenance = true
     >
         <img src="/img/maintenance.png" class="w-20 h-20" />
         <h2>☹️ Xin lỗi vì bất tiện này</h2>
-        <h1 class="font-semibold">Beliy sẽ sớm quay lại hay thôi! 🤗</h1>
+        <h1 class="font-semibold">Beliy sẽ sớm quay lại ngay thôi! 🤗</h1>
     </div>
 </template>
