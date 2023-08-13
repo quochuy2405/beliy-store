@@ -179,6 +179,7 @@ onMounted(() => {
                             title="Họ và tên"
                             name="name"
                             v-model="formData.name"
+                            :value="formData.name"
                             :control="control.name"
                             required
                         />
@@ -187,6 +188,7 @@ onMounted(() => {
                             title="Số điện thoại"
                             name="phone"
                             v-model="formData.phone"
+                            :value="formData.phone"
                             :control="control.phone"
                             required
                         />
@@ -213,6 +215,7 @@ onMounted(() => {
                         <VTextField
                             title="Số Nhà,Đường"
                             name="name"
+                            :value="formData.subAddress"
                             v-model="formData.subAddress"
                             :control="control.subAddress"
                         />
