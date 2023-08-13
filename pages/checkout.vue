@@ -31,7 +31,7 @@ const formOpts = reactive({
     provinces: [],
 })
 const formData = reactive<OrderForm>({
-    note: dataOrder.value.note,
+    note: dataOrder.value ? dataOrder.value?.note : '',
     ward: null,
     district: null,
     province: null,
