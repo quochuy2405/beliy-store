@@ -29,7 +29,7 @@ const className = reactive({
     <NuxtLink :to="href" :class="{ 'w-full': wFull }">
         <button
             v-bind="props"
-            class="py-2 px-5 mr-2 mb-2 text-sm font-medium text-black focus:outline-none bg-black rounded-md focus:z-10 focus:ring-2 focus:ring-gray-200 w-full button-action relative overflow-hidden"
+            class="py-2 px-5 mr-2 mb-2 text-sm font-medium text-white focus:outline-none bg-black rounded-md focus:z-10 focus:ring-2 focus:ring-gray-200 w-full button-action relative overflow-hidden"
             :class="className"
         >
             <span v-if="animation" class="button-wait-tap"></span>

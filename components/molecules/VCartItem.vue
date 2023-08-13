@@ -12,6 +12,10 @@ const props = withDefaults(defineProps<Props>(), {})
 
 const { data } = toRefs(props)
 const { products } = storeToRefs(useCart())
+const router = useRouter()
+const gotoProductPage = (path: string) => {
+    router.push({ path })
+}
 
 const increase = () => {
     const existData = findItemInArray(products.value, data.value)
@@ -40,10 +44,12 @@ const remove = () => {
             class="w-24 h-full rounded-md object-cover"
         />
         <div class="flex gap-1 justify-between flex-1 flex-col">
-            <NuxtLink :href="`/products/${data.id}`"
+            <label
+                for="hamburger"
+                @click="gotoProductPage(`/products/${data.id}`)"
                 ><h1 class="text-sm font-medium text-black h-fit">
                     {{ data.name }}
-                </h1></NuxtLink
+                </h1></label
             >
             <div class="flex items-center space-x-1 py-2">
                 <div
@@ -99,7 +105,7 @@ const remove = () => {
         <div @click="remove">
             <ClientOnly>
                 <Icon
-                    name="solar:trash-bin-minimalistic-2-broken"
+                    name="solar:trash-bin-2-broken"
                     class="w-5 h-5 hover:text-red-500"
                 />
             </ClientOnly>

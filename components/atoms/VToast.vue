@@ -27,14 +27,14 @@ watch(toast, () => {
             'left-30': toast.$state.vertical === 'left',
             'absolute-vertical-center ': toast.$state.vertical === 'center',
             'right-8': toast.$state.vertical === 'right',
-            '!opacity-1 fade-in': toast.$state.isShow === true,
+            'fade-in': toast.$state.isShow === true,
             'fade-out': toast.$state.isShow === false,
-            'bg-black text-white': toast.$state.status === 'success',
+            'bg-gray-800 text-white': toast.$state.status === 'success',
             'bg-red-400 text-white': toast.$state.status === 'error',
             'bg-orange-400 text-white': toast.$state.status === 'warning',
             'bg-white text-black': toast.$state.status === 'info',
         }"
     >
-        <p class="text-xs">{{ toast.$state.content }}</p>
+        <p class="text-xs font-semibold">{{ toast.$state.content }}</p>
     </div>
 </template>

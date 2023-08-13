@@ -38,6 +38,7 @@
         "nuxt-swiper": "^1.2.0",
         "pinia": "^2.1.4",
         "puppeteer": "^20.9.0",
+        "shortid": "^2.2.16",
         "vee-validate": "^4.10.8"
     },
     "overrides": {
