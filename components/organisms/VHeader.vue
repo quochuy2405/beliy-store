@@ -193,7 +193,7 @@ watch(
                         <div class="flex-1 overflow-y-auto">
                             <VCartItem v-for="item in products" :data="item" />
                         </div>
-                        <div class="h-fit flex flex-col bottom-0 pb-16">
+                        <div class="h-fit flex flex-col bottom-0 pb-24">
                             <div class="flex justify-evenly h-14 border">
                                 <ClientOnly>
                                     <div
