@@ -186,11 +186,14 @@ watch(
                     /></ClientOnly>
                 </label>
                 <div class="text-gray-500 h-full flex flex-col flex-1">
-                    <div v-if="products.length" class="flex-1 h-full">
-                        <div class="h-[60%] overflow-y-auto">
+                    <div
+                        v-if="products.length"
+                        class="flex-1 h-full flex flex-col"
+                    >
+                        <div class="flex-1 overflow-y-auto">
                             <VCartItem v-for="item in products" :data="item" />
                         </div>
-                        <div class="flex-1 flex flex-col">
+                        <div class="h-fit flex flex-col bottom-0 pb-[10%]">
                             <div class="flex justify-evenly h-14 border">
                                 <ClientOnly>
                                     <div
