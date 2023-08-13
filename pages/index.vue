@@ -30,7 +30,7 @@ onMounted(() => {
                     href="/"
                     type="submit"
                     mode="default"
-                    class="!bg-white !rounded-full text-black !font-semibold !w-fit !py-3 px-10 z-10"
+                    class="!bg-white !rounded-full !text-black !font-semibold !w-fit !py-3 px-10 z-10"
                 >
                     Shop clothing
                 </VButton>

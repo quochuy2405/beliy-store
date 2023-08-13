@@ -102,7 +102,7 @@ const remove = () => {
             </div>
         </div>
 
-        <div @click="remove">
+        <div @click="remove" class="h-fit p-2">
             <ClientOnly>
                 <Icon
                     name="solar:trash-bin-2-broken"
