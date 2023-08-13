@@ -4,6 +4,8 @@ import { VCartItem } from '@/components/molecules'
 import { storeToRefs } from 'pinia'
 import shortid from 'shortid'
 import { VModal } from '.'
+
+import { ProductType } from '@/types/product'
 // variables
 const tabs = [
     {
@@ -99,12 +101,24 @@ const gotoCheckout = () => {
 onMounted(() => {
     const body = document.querySelector('body')
 
+    // products.value = cartProducts
     body.addEventListener('scroll', () => {
         setTimeout(() => {
             scrollPosition.value = body.scrollTop
         }, 200)
     })
+
+    const cartProducts = JSON.parse(window.localStorage.getItem('cartProducts'))
+    if (cartProducts._object.products)
+        products.value = cartProducts._object.products
 })
+watch(
+    () => JSON.stringify(products.value),
+    () => {
+        const pro: any = JSON.stringify(products, null, 2)
+        window.localStorage.setItem('cartProducts', pro)
+    },
+)
 </script>
 <template>
     <div class="h-16">
@@ -173,7 +187,7 @@ onMounted(() => {
                     /></ClientOnly>
                 </label>
                 <div class="text-gray-500 h-full flex flex-col flex-1">
-                    <div v-if="products.length" class="flex-1">
+                    <div v-if="products.length" class="flex-1 h-full">
                         <div class="h-[60%] overflow-y-auto">
                             <VCartItem v-for="item in products" :data="item" />
                         </div>
@@ -326,26 +340,34 @@ onMounted(() => {
             <div
                 class="w-5/6 m-auto h-12 bg-white rounded-full z-30 flex justify-evenly items-center"
             >
-                <NuxtLink href="/" class="flex flex-col items-center">
-                    <Icon name="solar:home-2-broken" class="w-5 h-5" />
-                    <p class="text-xs font-medium">Home</p>
-                </NuxtLink>
-                <NuxtLink href="/products" class="flex flex-col items-center">
-                    <Icon name="solar:shop-broken" class="w-5 h-5" />
-                    <p class="text-xs font-medium">Shop</p>
-                </NuxtLink>
-                <NuxtLink href="/formen" class="flex flex-col items-center">
-                    <Icon name="solar:men-broken" class="w-5 h-5" />
-                    <p class="text-xs font-medium">Men</p>
-                </NuxtLink>
-                <NuxtLink href="/forwoman" class="flex flex-col items-center">
-                    <Icon name="solar:women-broken" class="w-5 h-5" />
-                    <p class="text-xs font-medium">Woman</p>
-                </NuxtLink>
-                <NuxtLink href="/info" class="flex flex-col items-center">
-                    <Icon name="solar:info-square-broken" class="w-5 h-5" />
-                    <p class="text-xs font-medium">Info</p>
-                </NuxtLink>
+                <ClientOnly>
+                    <NuxtLink href="/" class="flex flex-col items-center">
+                        <Icon name="solar:home-2-broken" class="w-5 h-5" />
+                        <p class="text-xs font-medium">Home</p>
+                    </NuxtLink>
+                    <NuxtLink
+                        href="/products"
+                        class="flex flex-col items-center"
+                    >
+                        <Icon name="solar:shop-broken" class="w-5 h-5" />
+                        <p class="text-xs font-medium">Shop</p>
+                    </NuxtLink>
+                    <NuxtLink href="/formen" class="flex flex-col items-center">
+                        <Icon name="solar:men-broken" class="w-5 h-5" />
+                        <p class="text-xs font-medium">Men</p>
+                    </NuxtLink>
+                    <NuxtLink
+                        href="/forwoman"
+                        class="flex flex-col items-center"
+                    >
+                        <Icon name="solar:women-broken" class="w-5 h-5" />
+                        <p class="text-xs font-medium">Woman</p>
+                    </NuxtLink>
+                    <NuxtLink href="/info" class="flex flex-col items-center">
+                        <Icon name="solar:info-square-broken" class="w-5 h-5" />
+                        <p class="text-xs font-medium">Info</p>
+                    </NuxtLink>
+                </ClientOnly>
             </div>
             <div
                 class="h-5 w-5/6 m-auto bg-white rounded-tr-full rounded-tl-full mt-5"

@@ -1,22 +1,42 @@
 <script setup lang="ts">
-import { VButton, VTextField } from '@/components/atoms'
+import { VButton, VSelect, VTextField } from '@/components/atoms'
 import { VCartItem } from '@/components/molecules'
 import { rules } from '@/resolvers/checkout.rule'
 import { useCart } from '@/stores/nuxtStore'
+import { OptionType } from '@/types/common'
 import useVuelidate from '@vuelidate/core'
 import { storeToRefs } from 'pinia'
 import shortid from 'shortid'
 
 export interface OrderForm {
     note: string
+    ward: OptionType | null
+    district: OptionType | null
+    province: OptionType | null
+    subAddress: string
+    name: string
+    phone: string
 }
 // variables
 const checkoutId = useCookie('checkoutId')
 const { products } = storeToRefs(useCart())
 const valid = shortid.isValid(checkoutId.value)
-
+const formOpts = reactive({
+    wards: [],
+    districts: [],
+    provinces: [],
+})
 const formData = reactive<OrderForm>({
     note: '',
+    ward: null,
+    district: null,
+    province: null,
+    name: '',
+    phone: '',
+    subAddress: '',
+})
+const provinces = useFetch<Array<any>>('https://provinces.open-api.vn/api/', {
+    server: false,
 })
 
 const control = useVuelidate(rules(formData), formData)
@@ -27,6 +47,61 @@ const submitForm = () => {
         //    Some code
     }
 }
+
+watch(
+    () => provinces.data.value,
+    () => {
+        const proviceOpts = provinces.data.value.map((item) => {
+            return {
+                label: item.name,
+                value: item.code,
+            }
+        })
+        formOpts.provinces = proviceOpts
+    },
+)
+
+watch(
+    () => formData.province,
+    async () => {
+        const { data, error } = await useFetch<any>(
+            `https://provinces.open-api.vn/api/p/${formData.province.value}?depth=2`,
+            { server: false },
+        )
+
+        if (!error.value && data.value) {
+            const districtOpts = data.value.districts.map((item) => {
+                return {
+                    label: item.name,
+                    value: item.code,
+                }
+            })
+            formOpts.districts = districtOpts
+        }
+    },
+)
+
+watch(
+    () => formData.district,
+    async () => {
+        const { data, error } = await useFetch<any>(
+            `https://provinces.open-api.vn/api/d/${formData.district.value}?depth=2`,
+            { server: false },
+        )
+
+        if (!error.value && data.value) {
+            console.log(data.value.wards)
+            const wardOpts = data.value.wards.map((item) => {
+                return {
+                    label: item.name,
+                    value: item.code,
+                }
+            })
+            formOpts.wards = wardOpts
+        }
+    },
+)
+
 onMounted(() => {
     const body = document.querySelector('body')
     body.scrollTo({ top: 0, behavior: 'smooth' })
@@ -79,27 +154,47 @@ onMounted(() => {
                             ></textarea>
                         </div>
 
-                        <!-- <VTextField
-                        title="Email"
-                        name="email"
-                        v-model="formData.email"
-                        :control="control.email"
-                    />
+                        <VTextField
+                            title="Họ và tên"
+                            name="name"
+                            v-model="formData.name"
+                            :control="control.name"
+                            required
+                        />
 
-                    <VTextField
-                        title="Password"
-                        name="password"
-                        v-model="formData.password"
-                        :control="control.password"
-                    />
+                        <VTextField
+                            title="Số điện thoại"
+                            name="phone"
+                            v-model="formData.phone"
+                            :control="control.phone"
+                            required
+                        />
+                        <VSelect
+                            title="Tỉnh/Thành Phố"
+                            :options="formOpts.provinces"
+                            :value="formData.province"
+                            :change="(value) => (formData.province = value)"
+                        />
 
-                    <VTextField
-                        title="Confirm Password"
-                        name="confirmPassword"
-                        v-model="formData.confirmPassword"
-                        :control="control.confirmPassword"
-                    /> -->
+                        <VSelect
+                            title="Quận/Huyện"
+                            :options="formOpts.districts"
+                            :value="formData.district"
+                            :change="(value) => (formData.district = value)"
+                        />
 
+                        <VSelect
+                            title="Phường/Xã"
+                            :options="formOpts.wards"
+                            :value="formData.ward"
+                            :change="(value) => (formData.ward = value)"
+                        />
+                        <VTextField
+                            title="Số Nhà,Đường"
+                            name="name"
+                            v-model="formData.subAddress"
+                            :control="control.subAddress"
+                        />
                         <VButton
                             type="submit"
                             mode="default"
@@ -120,7 +215,7 @@ onMounted(() => {
             class="w-screen h-[90vh] flex flex-col items-center justify-center"
         >
             <div
-                class="w-fit h-fit flex flex-col justify-center gap-2 items-center pb-[50%]"
+                class="w-fit h-fit flex flex-col justify-center gap-2 items-center md:pb-[10%]"
             >
                 <img src="/img/hacker.png" class="w-20 h-20" />
                 <h2>☹️ Ôi dồi ôi. Có gì đó không đúng</h2>

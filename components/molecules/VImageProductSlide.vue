@@ -11,6 +11,7 @@ interface Props {
 }
 // variables
 const sliderPosition = ref(0)
+const zoomImage = ref(false)
 const props = withDefaults(defineProps<Props>(), {
     visible: 1,
 })
@@ -41,7 +42,8 @@ const moveSliderTo = async (index: number) => {
     clearInterval(timeOut)
     timeOut = setTimeout(() => {
         sliderPosition.value = -index * 100
-
+        if (visible.value === 1)
+            props.onClick(Math.abs(sliderPosition.value) / 100)
         onAutoPlay()
     }, 250)
 }
@@ -75,57 +77,101 @@ watch(currentIndex, () => {
 </script>
 
 <template>
-    <div
-        :class="{
-            'h-[63vh]': visible === 1,
-            'h-[160px]': visible !== 1,
-        }"
-        class="px-3 flex w-full flex-col gap-2 relative pb-4"
-    >
+    <div>
         <div
-            class="w-9 h-9 border border-gray-200 bg-white flex items-center justify-center rounded-full button-action absolute-hozi-center left-0 z-20"
-            @click="moveSliderRight"
+            v-if="zoomImage"
+            class="absolute fade-in z-[99] w-screen h-screen top-0 flex items-center justify-center left-0"
         >
-            <ClientOnly>
-                <Icon name="ooui:previous-ltr" class="w-3 h-3 text-gray-700" />
-            </ClientOnly>
-        </div>
-        <div
-            class="w-9 h-9 border border-gray-200 bg-white flex items-center justify-center rounded-full button-action absolute-hozi-center right-0 z-20"
-            @click="moveSliderLeft"
-        >
-            <ClientOnly>
-                <Icon name="ooui:previous-rtl" class="w-3 h-3 text-gray-700"
-            /></ClientOnly>
-        </div>
-
-        <div class="w-full h-full overflow-hidden">
-            <div
-                class="flex flex-nowrap w-fit h-full transition-all ease-[cubic-bezier(0.16, 1, 0.29, 0.99)] duration-1000"
-                :style="sliderStyle"
-            >
-                <div class="flex w-fit h-ful">
+            <span class="absolute top-3 right-5 z-[999]">
+                <ClientOnly>
                     <div
-                        class="flex h-full"
-                        :class="{
-                            'w-[100vw]': visible === 1,
-                            'w-[50vw] px-1': visible === 2,
-                            'w-[33vw] px-1': visible === 3,
-                            'w-[25vw] px-1': visible === 4,
-                        }"
-                        v-for="(image, index) in images"
-                        @click="() => visible !== 1 && onClick(index)"
+                        @click="() => (zoomImage = false)"
+                        class="w-9 h-9 bg-white flex shadow items-center justify-center rounded-full button-action"
                     >
-                        <img
-                            :src="image"
-                            :data="image"
-                            class="w-full h-full rounded-md object-cover object-top"
+                        <Icon
+                            name="material-symbols:zoom-out-map"
+                            class="text-gray-700 shadow-sm w-4 h-4"
+                        /></div></ClientOnly
+            ></span>
+            <img
+                :src="images[currentIndex]"
+                alt=""
+                class="w-full h-full object-cover"
+            />
+        </div>
+        <div
+            :class="{
+                'h-[63vh]': visible === 1,
+                'h-[160px]': visible !== 1,
+            }"
+            class="px-3 flex w-full flex-col gap-2 relative pb-4"
+        >
+            <div
+                class="w-9 h-9 border border-gray-200 bg-white flex items-center justify-center rounded-full button-action absolute-hozi-center left-0 z-20"
+                @click="moveSliderRight"
+            >
+                <ClientOnly>
+                    <Icon
+                        name="ooui:previous-ltr"
+                        class="w-3 h-3 text-gray-700"
+                    />
+                </ClientOnly>
+            </div>
+            <div
+                class="w-9 h-9 border border-gray-200 bg-white flex items-center justify-center rounded-full button-action absolute-hozi-center right-0 z-20"
+                @click="moveSliderLeft"
+            >
+                <ClientOnly>
+                    <Icon
+                        name="ooui:previous-rtl"
+                        class="w-3 h-3 text-gray-700"
+                /></ClientOnly>
+            </div>
+
+            <div class="w-full h-full overflow-hidden">
+                <div>
+                    <span
+                        v-if="visible === 1"
+                        class="absolute z-20 top-3 right-5"
+                    >
+                        <ClientOnly>
+                            <div
+                                @click="() => (zoomImage = true)"
+                                class="w-9 h-9 bg-white flex shadow items-center justify-center rounded-full button-action"
+                            >
+                                <Icon
+                                    name="material-symbols:zoom-out-map"
+                                    class="text-gray-700 shadow-sm w-4 h-4"
+                                /></div></ClientOnly
+                    ></span>
+                </div>
+                <div
+                    class="flex flex-nowrap w-fit h-full transition-all ease-[cubic-bezier(0.16, 1, 0.29, 0.99)] duration-1000"
+                    :style="sliderStyle"
+                >
+                    <div class="flex w-fit h-ful">
+                        <div
+                            class="flex h-full"
                             :class="{
-                                'fade-in': images,
-                                'border border-black transition-all ease-linear duration-500':
-                                    visible != 1 && currentIndex === index,
+                                'w-[100vw]': visible === 1,
+                                'w-[50vw] px-1': visible === 2,
+                                'w-[33vw] px-1': visible === 3,
+                                'w-[25vw] px-1': visible === 4,
                             }"
-                        />
+                            v-for="(image, index) in images"
+                            @click="() => visible !== 1 && onClick(index)"
+                        >
+                            <img
+                                :src="image"
+                                :data="image"
+                                class="w-full h-full rounded-md object-cover object-top"
+                                :class="{
+                                    'fade-in': images,
+                                    'border border-black transition-all ease-linear duration-500':
+                                        visible != 1 && currentIndex === index,
+                                }"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {})
-
 const { data } = toRefs(props)
 const { products } = storeToRefs(useCart())
 const router = useRouter()
@@ -31,7 +30,7 @@ const reduce = () => {
 
 const remove = () => {
     const productIdToRemove = data.value.id
-    products.value = products.value.filter(
+    products.value = (products.value as Array<ProductType>).filter(
         (item) => item.id !== productIdToRemove,
     )
 }
@@ -82,22 +81,26 @@ const remove = () => {
                 <div
                     class="flex items-center justify-between p-4 rounded-full w-32 h-8 bg-gray-100"
                 >
-                    <span @click="reduce"
-                        ><Icon
-                            name="clarity:minus-line"
-                            class="w-5 h-5 text-base text-black"
-                    /></span>
+                    <ClientOnly>
+                        <span @click="reduce"
+                            ><Icon
+                                name="clarity:minus-line"
+                                class="w-5 h-5 text-base text-black"
+                        /></span>
+                    </ClientOnly>
 
                     <p
                         class="flex-1 items-center justify-center flex text-base text-black"
                     >
                         {{ data.quantityOrder }}
                     </p>
-                    <span @click="increase"
-                        ><Icon
-                            name="clarity:plus-line"
-                            class="w-4 h-4 text-base text-black"
-                    /></span>
+                    <ClientOnly>
+                        <span @click="increase"
+                            ><Icon
+                                name="clarity:plus-line"
+                                class="w-4 h-4 text-base text-black"
+                        /></span>
+                    </ClientOnly>
                 </div>
             </div>
         </div>
