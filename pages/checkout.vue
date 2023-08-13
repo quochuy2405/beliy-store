@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { VButton, VSelect, VTextField } from '@/components/atoms'
 import { VCartItem } from '@/components/molecules'
+import { VModal } from '@/components/organisms'
 import { rules } from '@/resolvers/checkout.rule'
 import { useCart } from '@/stores/nuxtStore'
 import { OptionType } from '@/types/common'
@@ -19,6 +20,9 @@ export interface OrderForm {
 }
 // variables
 const checkoutId = useCookie('checkoutId')
+const modalOpen = useState('modalControl')
+const modelType = ref<'momo' | 'bank' | 'payment_on_delivery'>(null)
+const dataOrder = useCookie<{ discount: string; note: string }>('dataOrder')
 const { products } = storeToRefs(useCart())
 const valid = shortid.isValid(checkoutId.value)
 const formOpts = reactive({
@@ -27,7 +31,7 @@ const formOpts = reactive({
     provinces: [],
 })
 const formData = reactive<OrderForm>({
-    note: '',
+    note: dataOrder.value.note,
     ward: null,
     district: null,
     province: null,
@@ -44,7 +48,20 @@ const control = useVuelidate(rules(formData), formData)
 const submitForm = () => {
     control.value.$validate()
     if (!control.value.$error) {
-        //    Some code
+        switch (modelType.value) {
+            case 'momo': {
+                modalOpen.value = true
+                break
+            }
+            case 'bank': {
+                modalOpen.value = true
+                break
+            }
+
+            case 'payment_on_delivery': {
+                break
+            }
+        }
     }
 }
 
@@ -111,7 +128,10 @@ onMounted(() => {
 <template>
     <div>
         <div v-if="checkoutId && valid && products.length">
-            <form @submit.prevent="submitForm" class="w-full md:w-2/3 m-auto">
+            <form
+                @submit.prevent="submitForm"
+                class="w-full md:w-2/3 m-auto pb-32"
+            >
                 <div
                     class="p-8 flex items-center justify-center flex-col gap-2"
                 >
@@ -137,13 +157,14 @@ onMounted(() => {
                         </div>
 
                         <div>
-                            <p class="text-black text-base py-2">
+                            <p class="text-black text-base font-semibold py-2">
                                 Ghi chú đơn hàng
                             </p>
                             <textarea
                                 type="text"
                                 class="input-default rounded-lg"
                                 placeholder="Ghi chú của bạn"
+                                :value="formData.note"
                                 rows="3"
                                 @input="
                                     (event) =>
@@ -195,20 +216,117 @@ onMounted(() => {
                             v-model="formData.subAddress"
                             :control="control.subAddress"
                         />
+
+                        <div
+                            class="flex-1 p-5 bg-black shadow-[0_0_3px_0_#c0c0c0b8] rounded-lg"
+                        >
+                            <div
+                                class="flex justify-between text-sm text-white font-medium"
+                            >
+                                <h2 class="uppercase">Tạm tính</h2>
+                                <p>{{ Number(340000).toLocaleString() }} đ</p>
+                            </div>
+
+                            <div
+                                class="flex justify-between text-sm text-white font-medium"
+                            >
+                                <h2 class="uppercase">Phí ship</h2>
+                                <p>{{ Number(30000).toLocaleString() }} đ</p>
+                            </div>
+                            <div
+                                class="flex justify-between text-lg text-white font-medium"
+                            >
+                                <h2 class="uppercase">Tổng tiền</h2>
+                                <p class="text-green-500">
+                                    {{ Number(340000).toLocaleString() }} đ
+                                </p>
+                            </div>
+                        </div>
                         <VButton
                             type="submit"
                             mode="default"
-                            class="mt-4 !rounded-full !py-3"
+                            @click="modelType = 'payment_on_delivery'"
+                            class="mt-4 !rounded-full !py-4"
                             animation
                             wFull
                         >
-                            <p class="font-semibold uppercase text-xs">
-                                Gửi đơn hàng
+                            <p class="font-semibold uppercase text-sm">
+                                Thanh toán khi nhận hàng
                             </p>
+                        </VButton>
+                        <VButton
+                            type="submit"
+                            mode="default"
+                            @click="modelType = 'momo'"
+                            class="!mt-1 !rounded-full !py-4 !bg-[#a50064]"
+                            animation
+                            wFull
+                        >
+                            <div class="flex items-center justify-center gap-4">
+                                <p class="font-semibold uppercase text-sm">
+                                    Thanh toán bằng Momo
+                                </p>
+                                <span
+                                    class="bg-white w-fit h-fit p-[1px] rounded-sm"
+                                >
+                                    <img src="/img/momo.png" class="w-5 h-5" />
+                                </span>
+                            </div>
+                        </VButton>
+                        <VButton
+                            type="submit"
+                            mode="default"
+                            @click="modelType = 'bank'"
+                            class="!mt-1 !rounded-full !py-4 !bg-green-500"
+                            animation
+                            wFull
+                        >
+                            <div class="flex items-center justify-center gap-4">
+                                <p class="font-semibold uppercase text-sm">
+                                    Chuyển khoản ngân hàng
+                                </p>
+                                <ClientOnly>
+                                    <span class="w-fit h-fit rounded-sm">
+                                        <Icon
+                                            name="icon-park-solid:bank-card"
+                                            class="w-5 h-5 text-white"
+                                        /> </span
+                                ></ClientOnly>
+                            </div>
                         </VButton>
                     </div>
                 </div>
             </form>
+            <VModal>
+                <div v-if="modelType === 'momo'" class="py-5 w-full">
+                    <div>MOMO</div>
+                    <VButton
+                        type="submit"
+                        mode="default"
+                        class="mt-4 !rounded-full !py-4"
+                        animation
+                        wFull
+                    >
+                        <p class="font-semibold uppercase text-sm">
+                            Xác nhận đã chuyển
+                        </p>
+                    </VButton>
+                </div>
+                <div v-if="modelType === 'bank'" class="py-5 w-full">
+                    <div>PR CK</div>
+                    <VButton
+                        type="submit"
+                        mode="default"
+                        class="mt-4 !rounded-full !py-4"
+                        animation
+                        wFull
+                    >
+                        <p class="font-semibold uppercase text-sm">
+                            Xác nhận đã chuyển
+                        </p>
+                    </VButton>
+                </div>
+            </VModal>
         </div>
         <div
             v-if="!checkoutId || !valid || !products.length"

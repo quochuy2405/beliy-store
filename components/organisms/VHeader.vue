@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { useCart, useToast } from '@/stores/nuxtStore'
 import { VCartItem } from '@/components/molecules'
+import { useCart, useToast } from '@/stores/nuxtStore'
 import { storeToRefs } from 'pinia'
 import shortid from 'shortid'
 import { VModal } from '.'
 
-import { ProductType } from '@/types/product'
 // variables
 const tabs = [
     {

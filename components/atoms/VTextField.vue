@@ -36,7 +36,7 @@ const updateValue = (event: Event) => {
             <input
                 type="text"
                 :name="name"
-                class="input-default"
+                class="input-default !text-black"
                 :class="className"
                 @input="updateValue"
                 :value="value"
