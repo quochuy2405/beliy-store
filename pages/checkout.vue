@@ -27,6 +27,10 @@ const submitForm = () => {
         //    Some code
     }
 }
+onMounted(() => {
+    const body = document.querySelector('body')
+    body.scrollTo({ top: 0, behavior: 'smooth' })
+})
 </script>
 
 <template>
