@@ -52,6 +52,10 @@
         scroll-behavior: smooth;
         overflow: scroll;
         height: 100vh;
+        position: static;
+        bottom: 0;
+        top: 0;
+        width: 100vw;
     }
     .fade-top {
         animation-name: fade-top;
