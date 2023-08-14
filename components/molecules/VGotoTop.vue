@@ -22,7 +22,7 @@ onMounted(() => {
 </script>
 <template>
     <div
-        class="w-9 h-9 absolute bottom-28 shadow-md bg-white z-[29] flex items-center justify-center right-10 rounded-full overflow-hidden button-action transition-all ease-linear duration-300"
+        class="w-9 h-9 fixed bottom-28 shadow-md bg-white z-[29] flex items-center justify-center right-10 rounded-full overflow-hidden button-action transition-all ease-linear duration-300"
         @click="gotoTop"
         :class="{
             'scale-0 opacity-0': positon < 8,
