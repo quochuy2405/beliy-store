@@ -31,8 +31,8 @@
 @layer base {
     html {
         font-family: 'Raleway', sans-serif;
-
-        overflow: hidden;
+        height: 100vh;
+        overflow: auto;
     }
     .font-did {
         font-family: 'Didact Gothic', sans-serif;

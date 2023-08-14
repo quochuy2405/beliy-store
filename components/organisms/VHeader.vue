@@ -131,14 +131,14 @@ onMounted(() => {
 watch(
     () => JSON.stringify(products.value),
     () => {
-        const pro: any = JSON.stringify(products, null, 2)
-        window.localStorage.setItem('cartProducts', pro)
+        const _cartProducts: any = JSON.stringify(products, null, 2)
+        window.localStorage.setItem('cartProducts', _cartProducts)
     },
 )
 </script>
 <template>
     <div class="h-16">
-        <header class="shadow-sm z-[30] bg-white" :class="classTopHeader">
+        <header class="shadow-sm block z-[30] bg-white" :class="classTopHeader">
             <input id="hamburger" type="checkbox" class="hidden" checked />
             <div class="w-full h-9 bg-black px-6 hidden"></div>
             <div class="w-full h-16 flex items-center px-6 justify-between">
@@ -187,7 +187,7 @@ watch(
             </div>
             <aside
                 id="bar-mobile"
-                class="!z-50 h-screen w-screen absolute top-0 left-0 md:w-[50%] flex-shrink-0 overflow-hidden bg-white md:block lg:hidden shadow-lg pt-10"
+                class="!z-50 h-screen w-screen fixed top-0 left-0 md:w-[50%] flex-shrink-0 overflow-hidden bg-white md:block lg:hidden shadow-lg pt-10"
                 :class="{
                     '!hidden': router.currentRoute.value.name === 'checkout',
                 }"
@@ -359,7 +359,7 @@ watch(
                 </div>
             </aside>
         </header>
-        <div class="absolute bottom-0 w-full z-[29]">
+        <div class="fixed h-fit bottom-0 w-full z-[29]">
             <div
                 class="w-5/6 m-auto h-12 bg-white shadow-md rounded-full z-30 flex justify-evenly items-center"
             >
