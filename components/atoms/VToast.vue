@@ -22,8 +22,9 @@ watch(toast, () => {
         class="absolute flex items-center justify-center shadow-lg px-4 py-1 transition-all ease-linear rounded-full border border-gray-100 z-[99999]"
         v-if="toast.$state.content && toast.$state.isShow !== 'clear'"
         :class="{
-            'top-20': toast.$state.horizontal === 'top',
-            'bottom-28': toast.$state.horizontal === 'bottom',
+            'top-20 lg:bottom-28 lg:top-[unset]':
+                toast.$state.horizontal === 'top',
+            'bottom-28 ': toast.$state.horizontal === 'bottom',
             'left-30': toast.$state.vertical === 'left',
             'absolute-vertical-center ': toast.$state.vertical === 'center',
             'right-8': toast.$state.vertical === 'right',

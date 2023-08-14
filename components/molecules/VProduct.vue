@@ -66,7 +66,7 @@ const addToCart = () => {
         </div>
         <NuxtLink
             :href="`/products/${data?.id}`"
-            class="text-xs font-semibold uppercase h-8 line-clamp-2"
+            class="text-xs lg:text-sm font-semibold uppercase h-8 line-clamp-2"
             >{{ data?.name || '' }}</NuxtLink
         >
 
@@ -131,7 +131,7 @@ const addToCart = () => {
         </div>
         <NuxtLink
             :href="`/products/${data.id}`"
-            class="text-xs font-semibold uppercase h-8 line-clamp-2"
+            class="text-xs lg:text-sm font-semibold uppercase h-8 line-clamp-2"
             >{{ data?.name || '' }}</NuxtLink
         >
 

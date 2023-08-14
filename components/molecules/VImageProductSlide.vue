@@ -90,10 +90,10 @@ watch(currentIndex, () => {
 </script>
 
 <template>
-    <div>
+    <div class="lg:w-3/4 m-auto">
         <div
             v-if="zoomImage"
-            class="absolute fade-in z-[99] w-screen h-screen top-0 flex items-center justify-center left-0"
+            class="absolute fade-in z-[99] w-screen h-screen top-0 flex items-center justify-center left-0 lg:bg-[#ececec]"
         >
             <span class="absolute top-3 right-5 z-[999]">
                 <ClientOnly>
@@ -109,15 +109,16 @@ watch(currentIndex, () => {
             <img
                 :src="images[currentIndex]"
                 alt=""
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover lg:object-contain"
             />
         </div>
         <div
             :class="{
-                'h-[63vh] md:h-[100vh]': visible === 1,
-                'h-[160px] md:h-[300px]': visible !== 1,
+                'h-[63vh] md:h-[100vh] lg:h-[80vh] lg:bg-[#ffffffa8]':
+                    visible === 1,
+                'h-[160px] md:h-[300px] lg:h-[600px]': visible !== 1,
             }"
-            class="px-3 flex w-full flex-col gap-2 relative pb-4"
+            class="px-3 flex flex-col gap-2 relative pb-4"
         >
             <div
                 class="w-9 h-9 border border-gray-200 bg-white flex items-center justify-center rounded-full button-action absolute-hozi-center left-0 z-20"
@@ -141,7 +142,7 @@ watch(currentIndex, () => {
                 /></ClientOnly>
             </div>
 
-            <div class="w-full h-full overflow-hidden">
+            <div class="w-full h-full flex-1 overflow-hidden">
                 <div>
                     <span
                         v-if="visible === 1"
@@ -162,14 +163,18 @@ watch(currentIndex, () => {
                     class="flex flex-nowrap w-fit h-full transition-all ease-[cubic-bezier(0.16, 1, 0.29, 0.99)] duration-1000"
                     :style="sliderStyle"
                 >
-                    <div class="flex w-fit h-ful">
+                    <div class="flex w-fit h-full">
                         <div
                             class="flex h-full"
                             :class="{
-                                'w-[100vw]': visible === 1,
-                                'w-[50vw] px-1': visible === 2,
-                                'w-[33vw] px-1': visible === 3,
-                                'w-[25vw] px-1': visible === 4,
+                                'w-[100vw] lg:w-[calc((100vw/4)*3)]':
+                                    visible === 1,
+                                'w-[50vw] lg:w-[calc((50vw/4)*3)] px-1':
+                                    visible === 2,
+                                'w-[33vw] lg:w-[calc((33vw/4)*3)] px-1':
+                                    visible === 3,
+                                'w-[25vw]  lg:w-[calc((25vw/4)*3)] px-1':
+                                    visible === 4,
                             }"
                             ref="refWidthElement"
                             v-for="(image, index) in images"
@@ -183,6 +188,7 @@ watch(currentIndex, () => {
                                     'fade-in': images,
                                     'border border-black transition-all ease-linear duration-500':
                                         visible != 1 && currentIndex === index,
+                                    'lg:object-contain': visible === 1,
                                 }"
                             />
                         </div>

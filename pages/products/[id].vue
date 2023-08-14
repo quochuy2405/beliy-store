@@ -106,7 +106,7 @@ onMounted(() => {
                 :visible="4"
                 :onClick="onClick"
             />
-            <div class="p-4">
+            <div class="p-4 lg:w-3/4 lg:m-auto">
                 <h1 class="font-semibold text-xl">{{ productDetails.name }}</h1>
                 <div class="flex items-center space-x-1 py-2">
                     <svg
@@ -147,34 +147,40 @@ onMounted(() => {
                     >
                 </p>
 
-                <div
-                    class="flex items-center justify-between p-4 rounded-full w-full h-12 bg-gray-100 my-4"
-                >
-                    <span @click="reduce"
-                        ><Icon
-                            name="clarity:minus-line"
-                            class="w-5 h-5 text-base"
-                    /></span>
-
-                    <p
-                        class="flex-1 items-center justify-center flex text-base"
+                <div class="md:flex items-center justify-between">
+                    <div
+                        class="flex items-center justify-between p-4 rounded-full w-full h-14 bg-white shadow-[0_0_3px_#d0d0d0cc] my-4 md:w-[300px]"
                     >
-                        {{ countBuy }}
-                    </p>
-                    <span @click="increase"
-                        ><Icon
-                            name="clarity:plus-line"
-                            class="w-4 h-4 text-base"
-                    /></span>
+                        <span
+                            @click="reduce"
+                            class="bg-white px-2 rounded-full shadow-[0_0_3px_#d0d0d0cc] text-black"
+                            ><Icon
+                                name="clarity:minus-line"
+                                class="w-5 h-5 text-base"
+                        /></span>
+
+                        <p
+                            class="flex-1 items-center justify-center flex text-base md:text-lg"
+                        >
+                            {{ countBuy }}
+                        </p>
+                        <span
+                            @click="increase"
+                            class="bg-white px-3 rounded-full shadow-[0_0_3px_#d0d0d0cc]"
+                            ><Icon
+                                name="clarity:plus-line"
+                                class="w-4 h-4 text-base text-black"
+                        /></span>
+                    </div>
+                    <VButton
+                        @click="addToCart"
+                        mode="default"
+                        class="!bg-black !rounded-full !text-white !h-12 !font-semibold !w-fit !py-3 !px-14 z-10"
+                        animation
+                    >
+                        Thêm vào giỏ hàng
+                    </VButton>
                 </div>
-                <VButton
-                    @click="addToCart"
-                    mode="default"
-                    class="!bg-black !rounded-full !text-white !h-12 !font-semibold !w-fit !py-3 !px-14 z-10"
-                    animation
-                >
-                    Thêm vào giỏ hàng
-                </VButton>
                 <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
 
                 <ul>

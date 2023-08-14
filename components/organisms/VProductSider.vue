@@ -174,6 +174,8 @@ onMounted(() => {
                     <div v-if="!products" class="flex gap-4 w-full">
                         <VSkeleton />
                         <VSkeleton />
+                        <VSkeleton class="hidden lg:block" />
+                        <VSkeleton class="hidden lg:block" />
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ const { mode } = toRefs(props)
         role="status"
         class="p-4 overflow-hidden animate-pulse md:p-6"
         :class="{
-            'w-[48vw]': mode === 'small',
+            'w-[48vw] lg:w-[24vw]': mode === 'small',
             'w-full': mode === 'medium',
         }"
     >
