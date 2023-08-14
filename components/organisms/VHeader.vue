@@ -163,7 +163,13 @@ watch(
                         {{ tab.label }}
                     </NuxtLink>
                 </div>
-                <div>
+                <button
+                    :class="{
+                        'pointer-events-none':
+                            router.currentRoute.value.name === 'checkout',
+                    }"
+                    :disabled="router.currentRoute.value.name === 'checkout'"
+                >
                     <label
                         for="hamburger"
                         :class="{
@@ -183,7 +189,7 @@ watch(
                                 />
                             </ClientOnly></div
                     ></label>
-                </div>
+                </button>
             </div>
             <aside
                 id="bar-mobile"
