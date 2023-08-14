@@ -16,9 +16,11 @@ onMounted(() => {
 <template>
     <div>
         <VSlideShow />
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-10 lg:w-4/5 m-auto"
+        >
             <div
-                class="w-full h-[40vh] first:h-[64vh] last:h-[64vh] m-auto overflow-x-hidden flex relative mt-1 flex-col justify-end md:w-full md:!h-[40vh] md:last:col-span-2 lg:last:col-span-1"
+                class="w-full h-[40vh] lg:!h-[70vh] first:h-[64vh] last:h-[64vh] m-auto overflow-x-hidden flex relative mt-1 flex-col justify-end md:w-full md:!h-[40vh] md:last:col-span-2 lg:last:col-span-1"
                 v-for="_ in [1, 2, 3]"
             >
                 <img
@@ -86,7 +88,10 @@ onMounted(() => {
         <div
             class="flex h-56 lg:h-[70vh] overflow-hidden px-3 flex-col gap-1 mb-3"
         >
-            <img src="/img/JACKET3-1.png" />
+            <img
+                src="/img/JACKET3-1.png"
+                class="w-full h-full object-contain"
+            />
         </div>
     </div>
 </template>

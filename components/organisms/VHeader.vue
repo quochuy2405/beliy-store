@@ -161,13 +161,16 @@ watch(
             <div
                 class="w-full h-9 bg-black px-6 hidden lg:flex lg:items-center text-white font-did"
             >
-                <div class="flex gap-4 text-sm">
-                    <p>+84 963639201</p>
-                    <p>beliystore0604@gmail.com</p>
+                <div class="flex gap-4 text-sm flex-1">
+                    <a href="tel:+84963639201">+84 963639201</a>
+                    <a href="mailto:beliystore0604@gmail.com"
+                        >beliystore0604@gmail.com</a
+                    >
                 </div>
-                <p class="flex-1 text-center">
+                <p class="flex-[2] text-center">
                     Sign up for 10% off your first order
                 </p>
+                <div class="flex-1"></div>
             </div>
             <div
                 class="w-full h-16 flex items-center px-6 justify-between lg:px-24"
@@ -194,7 +197,7 @@ watch(
                         :to="tab.router"
                     >
                         <p
-                            class="font-medium text-base"
+                            class="font-medium text-sm"
                             :class="{
                                 'font-semibold':
                                     router.currentRoute.value.name == tab.name,
