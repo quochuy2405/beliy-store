@@ -132,11 +132,11 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
-        <div v-if="checkoutId && valid && products.length">
+    <div class="h-full w-full">
+        <div v-if="checkoutId && valid && products.length" class="h-full">
             <form
                 @submit.prevent="submitForm"
-                class="w-full md:w-2/3 m-auto pb-32"
+                class="w-full h-full md:w-2/3 m-auto pb-32"
             >
                 <div
                     class="p-8 flex items-center justify-center flex-col gap-2"

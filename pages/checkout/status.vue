@@ -27,7 +27,7 @@ const resetAllData = () => {
 }
 </script>
 <template>
-    <div class="bg-white h-full w-full flex items-center">
+    <div class="bg-white h-screen w-full flex items-center">
         <div class="p-6 md:mx-auto rounded-3xl">
             <div class="w-20 h-20 m-auto">
                 <svg viewBox="0 0 24 24">
