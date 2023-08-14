@@ -237,7 +237,7 @@ watch(
             </div>
             <aside
                 id="bar-mobile"
-                class="!z-50 h-screen w-screen fixed top-0 left-0 md:w-[70%] flex-shrink-0 overflow-hidden bg-white md:block lg:hidden shadow-lg pt-10"
+                class="!z-50 h-screen w-screen fixed top-0 left-0 md:w-[70%] flex-shrink-0 overflow-hidden bg-white md:block shadow-lg pt-10"
                 :class="{
                     '!hidden': router.currentRoute.value.name === 'checkout',
                 }"
