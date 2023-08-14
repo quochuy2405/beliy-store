@@ -102,15 +102,20 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div class="w-screen h-[80vh] overflow-x-hidden flex" id="slideshow">
-        <div class="w-fit flex" id="slideshow-lazy">
+    <div
+        class="w-screen h-[80vh] overflow-hidden flex lg:bg-[#ececec]"
+        id="slideshow"
+    >
+        <div class="w-full flex" id="slideshow-lazy">
             <div class="w-screen h-full relative">
                 <img
                     :src="currentSlider.url"
-                    class="w-full h-full absolute object-cover"
+                    class="w-full h-full absolute object-cover lg:object-contain lg:w-2/4 lg:right-0"
                     :class="sliderImage"
                 />
-                <div class="p-4 flex justify-center flex-col gap-2 h-full">
+                <div
+                    class="p-4 flex justify-center flex-col gap-2 h-full lg:p-[20%]"
+                >
                     <div class="text-4xl font-medium">
                         <h1 :class="sliderClass">
                             {{ currentSlider.title.t1 }}

@@ -12,12 +12,14 @@ defineOptions({
 interface Props {
     data: ProductType
     mode?: 'small' | 'medium'
+    wFull?: boolean
 }
 // variables
 const props = withDefaults(defineProps<Props>(), {
     mode: 'small',
+    wFull: false,
 })
-const { mode, data } = toRefs(props)
+const { mode, data, wFull } = toRefs(props)
 
 const { products } = storeToRefs(useCart())
 const { isShow, status, content } = storeToRefs(useToast())
@@ -45,18 +47,21 @@ const addToCart = () => {
 <template>
     <div
         v-if="mode === 'small' && data?.name"
-        class="w-[50vw] px-3 flex flex-col gap-2 relative pb-4"
+        class="w-[50vw] md:w-[33.333333333vw] lg:w-[25vw] px-3 flex flex-col gap-2 relative pb-4"
+        :class="{
+            '!w-full': wFull,
+        }"
     >
         <div
-            class="group w-full h-60 rounded-sm overflow-hidden relative cursor-pointer"
+            class="group w-full md:h-[500px] h-60 rounded-sm overflow-hidden relative cursor-pointer"
         >
             <img
                 :src="data?.imagesURL[0]"
-                class="w-full z-[3] h-72 object-cover absolute group-hover:z-[4] group-hover:fade-out duration-1000"
+                class="w-full z-[3] h-full object-cover absolute group-hover:z-[4] group-hover:fade-out duration-1000"
             />
             <img
                 :src="data?.imagesURL[2]"
-                class="w-full h-72 z-[2] object-cover absolute group-hover:z-[5] group-hover:fade-in"
+                class="w-full h-full z-[2] object-cover absolute group-hover:z-[5] group-hover:fade-in"
             />
         </div>
         <NuxtLink
@@ -91,7 +96,7 @@ const addToCart = () => {
                 đ</span
             >
         </p>
-        <div class="absolute bottom-36 right-6 flex flex-col gap-2 z-10">
+        <div class="absolute bottom-40 right-6 flex flex-col gap-2 z-10">
             <ClientOnly
                 ><NuxtLink
                     :href="`/products/${data.id}`"
@@ -118,10 +123,10 @@ const addToCart = () => {
         v-if="mode === 'medium' && data?.name"
         class="w-full px-3 flex flex-col gap-2 relative pb-5"
     >
-        <div class="w-full h-[400px] rounded-sm overflow-hidden">
+        <div class="w-full h-[400px] lg:h-[700px] rounded-sm overflow-hidden">
             <img
                 :src="data?.imagesURL[0] || ''"
-                class="w-full h-[400px] z-0 object-cover"
+                class="w-full h-full z-0 object-cover"
             />
         </div>
         <NuxtLink

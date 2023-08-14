@@ -141,7 +141,7 @@ onMounted(() => {
                 </div>
             </div>
         </div>
-        <div class="flex justify-end gap-5 p-4">
+        <div class="flex justify-end gap-5 p-4 lg:w-5/6 m-auto">
             <ClientOnly
                 ><div
                     class="w-9 h-9 bg-white shadow flex items-center justify-center rounded-full button-action"
@@ -163,10 +163,11 @@ onMounted(() => {
             </ClientOnly>
         </div>
         <div
-            class="px-3 grid"
+            class="px-3 lg:w-5/6 m-auto"
             :class="{
-                'grid-cols-2': styleView == 'small',
-                'grid-cols-1': styleView == 'medium',
+                'grid-cols-2 grid lg:grid-cols-3 xl:grid-cols-4':
+                    styleView == 'small',
+                'grid-cols-1 grid lg:grid-cols-2': styleView == 'medium',
             }"
         >
             <VProduct
@@ -174,6 +175,7 @@ onMounted(() => {
                 :data="product"
                 :mode="styleView"
                 :class="{ 'fade-in': products }"
+                wFull
             />
 
             <VSkeleton :mode="styleView" v-if="!products" />

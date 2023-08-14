@@ -11,6 +11,7 @@ interface Props {
 }
 // variables
 const sliderPosition = ref(0)
+const refWidthElement = ref<HTMLDivElement>(null)
 const zoomImage = ref(false)
 const props = withDefaults(defineProps<Props>(), {
     visible: 1,
@@ -19,20 +20,24 @@ const { images, visible, onClick, currentIndex } = toRefs(props)
 let timeInterval: NodeJS.Timeout
 let timeOut: NodeJS.Timeout
 const sliderStyle = computed(() => ({
-    transform: `translateX(calc(${sliderPosition.value}vw/${visible.value})`,
+    transform: `translateX(${sliderPosition.value}px)`,
 }))
 // functions
 const moveSliderLeft = async () => {
     clearInterval(timeInterval)
     clearInterval(timeOut)
+    let width = 0
+    if (refWidthElement.value) {
+        width = refWidthElement.value[0].clientWidth
+    }
     timeOut = setTimeout(() => {
-        if (-sliderPosition.value / 100 >= images.value.length - 1) {
+        if (-sliderPosition.value / width >= images.value.length - 1) {
             sliderPosition.value = 0
             return
         }
-        sliderPosition.value -= 100
+        sliderPosition.value -= width
         if (visible.value === 1)
-            props.onClick(Math.abs(sliderPosition.value) / 100)
+            props.onClick(Math.abs(sliderPosition.value) / width)
         onAutoPlay()
     }, 250)
 }
@@ -40,10 +45,14 @@ const moveSliderLeft = async () => {
 const moveSliderTo = async (index: number) => {
     clearInterval(timeInterval)
     clearInterval(timeOut)
+    let width = 0
+    if (refWidthElement.value) {
+        width = refWidthElement.value[0].clientWidth
+    }
     timeOut = setTimeout(() => {
-        sliderPosition.value = -index * 100
+        sliderPosition.value = -index * width
         if (visible.value === 1)
-            props.onClick(Math.abs(sliderPosition.value) / 100)
+            props.onClick(Math.abs(sliderPosition.value) / width)
         onAutoPlay()
     }, 250)
 }
@@ -51,14 +60,18 @@ const moveSliderTo = async (index: number) => {
 const moveSliderRight = async () => {
     clearInterval(timeInterval)
     clearInterval(timeOut)
+    let width = 0
+    if (refWidthElement.value) {
+        width = refWidthElement.value[0].clientWidth
+    }
     timeOut = setTimeout(() => {
         if (sliderPosition.value >= 0) {
-            sliderPosition.value = -(images.value.length - 1) * 100
+            sliderPosition.value = -(images.value.length - 1) * width
             return
         }
-        sliderPosition.value += 100
+        sliderPosition.value += width
         if (visible.value === 1)
-            props.onClick(Math.abs(sliderPosition.value) / 100)
+            props.onClick(Math.abs(sliderPosition.value) / width)
         onAutoPlay()
     }, 250)
 }
@@ -101,8 +114,8 @@ watch(currentIndex, () => {
         </div>
         <div
             :class="{
-                'h-[63vh]': visible === 1,
-                'h-[160px]': visible !== 1,
+                'h-[63vh] md:h-[100vh]': visible === 1,
+                'h-[160px] md:h-[300px]': visible !== 1,
             }"
             class="px-3 flex w-full flex-col gap-2 relative pb-4"
         >
@@ -158,6 +171,7 @@ watch(currentIndex, () => {
                                 'w-[33vw] px-1': visible === 3,
                                 'w-[25vw] px-1': visible === 4,
                             }"
+                            ref="refWidthElement"
                             v-for="(image, index) in images"
                             @click="() => visible !== 1 && onClick(index)"
                         >

@@ -48,7 +48,7 @@ onMounted(() => {
             <div
                 className="flex flex-col lg:flex-row justify-between gap-8 mt-3"
             >
-                <div className="w-full lg:w-5/12 flex flex-col justify-center">
+                <div className="w-full lg:w-7/12 flex flex-col justify-center">
                     <p
                         className="font-normal text-sm leading-6 text-white bg-black shadow-md p-4 rounded-md"
                     >
@@ -112,9 +112,7 @@ onMounted(() => {
                     </p>
                 </div>
                 <div className="w-full lg:w-8/12 lg:pt-8">
-                    <div
-                        className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md"
-                    >
+                    <div className="flex gap-2 shadow-lg p-5 rounded-md">
                         <div
                             className="p-4 pb-6 flex justify-center flex-col items-center"
                         >

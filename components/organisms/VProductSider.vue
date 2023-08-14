@@ -13,8 +13,9 @@ interface Props {
 const { id } = withDefaults(defineProps<Props>(), {})
 const products = ref(null)
 const sliderPosition = ref(0)
+const refWidthElement = ref<HTMLDivElement>(null)
 const sliderStyle = computed(() => ({
-    transform: `translateX(calc(${sliderPosition.value}vw/2)`,
+    transform: `translateX(${sliderPosition.value}px)`,
 }))
 let timeInterval: NodeJS.Timeout
 let timeOut: NodeJS.Timeout
@@ -39,12 +40,17 @@ const fetch = async () => {
 const moveSliderLeft = async () => {
     clearInterval(timeInterval)
     clearInterval(timeOut)
+    let width = 0
+    if (refWidthElement.value) {
+        width = refWidthElement.value[0].clientWidth
+    }
     timeOut = setTimeout(() => {
-        if (-sliderPosition.value / 100 >= itemCount - 1) {
+        if (-sliderPosition.value / width >= itemCount - 1) {
             sliderPosition.value = 0
             return
         }
-        sliderPosition.value -= 100
+        sliderPosition.value -= width
+
         onAutoPlay()
     }, 250)
 }
@@ -52,12 +58,16 @@ const moveSliderLeft = async () => {
 const moveSliderRight = async () => {
     clearInterval(timeInterval)
     clearInterval(timeOut)
+    let width = 0
+    if (refWidthElement.value) {
+        width = refWidthElement.value[0].clientWidth
+    }
     timeOut = setTimeout(() => {
         if (sliderPosition.value >= 0) {
             sliderPosition.value = -(itemCount - 1) * 100
             return
         }
-        sliderPosition.value += 100
+        sliderPosition.value += width
         onAutoPlay()
     }, 250)
 }
@@ -146,15 +156,20 @@ onMounted(() => {
         </div>
         <div class="w-full overflow-hidden" :id="`${id}-lazy`">
             <div
-                class="flex flex-nowrap w-fit transition-all ease-[cubic-bezier(0.16, 1, 0.29, 0.99)] duration-1000"
+                class="flex flex-nowrap w-fit transition-all ease-[cubic-bezier(0.16, 1, 0.29, 0.99)] duration-1000 snap-mandatory"
                 :style="sliderStyle"
             >
                 <div class="w-fit flex">
-                    <VProduct
+                    <div
+                        ref="refWidthElement"
+                        class="w-fit h-fit"
                         v-for="product in products"
-                        :data="product"
-                        :class="{ 'fade-in': products }"
-                    />
+                    >
+                        <VProduct
+                            :data="product"
+                            :class="{ 'fade-in': products }"
+                        />
+                    </div>
 
                     <div v-if="!products" class="flex gap-4 w-full">
                         <VSkeleton />

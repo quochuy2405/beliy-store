@@ -32,7 +32,6 @@ const onSliderScroll = (e) => {
         const sliderItem = document.querySelector('.slider-item')
         const sliderScrollLeft = e.target.scrollLeft
         const index = Math.round(sliderScrollLeft / sliderItem.clientWidth)
-
         e.target.scrollTo({
             left: index * sliderItem.clientWidth,
             behavior: 'smooth',
@@ -101,7 +100,7 @@ onMounted(() => {
 <template>
     <div>
         <div
-            class="flex w-full h-48 overflow-hidden px-3 flex-col gap-1 mb-3 relative"
+            class="flex w-full h-48 lg:h-[40vh] overflow-hidden px-3 flex-col gap-1 mb-3 relative"
         >
             <img src="/img/JACKET3-1.png" class="filter blur-[1px]" />
             <div
@@ -111,18 +110,21 @@ onMounted(() => {
                 <p class="text-sm"><span>Home</span>/ <span>Product</span></p>
             </div>
         </div>
-        <div class="w-screen overflow-y-scroll" @scroll="onSliderScroll">
+        <div
+            class="w-screen overflow-y-scroll lg:w-fit m-auto"
+            @scroll="onSliderScroll"
+        >
             <div
                 class="flex flex-nowrap w-fit transition-all ease-[cubic-bezier(0.16, 1, 0.29, 0.99)] duration-1000"
             >
                 <div
-                    class="w-[50vw] px-3 flex flex-col gap-2 relative slider-item"
+                    class="w-[50vw] lg:w-[19vw] px-3 flex flex-col gap-2 relative slider-item"
                     v-for="category in categories"
                     :data-value="category.id"
                     :id="`slider-item-${category.id}`"
                 >
                     <div
-                        class="w-full h-60 rounded-sm overflow-hidden relative"
+                        class="w-full h-60 md:h-72 lg:h-[500px] rounded-sm overflow-hidden relative"
                     >
                         <div
                             class="absolute bottom-4 flex justify-center items-center w-full"
@@ -135,13 +137,13 @@ onMounted(() => {
                         </div>
                         <img
                             src="/img/JACKET3-1.png"
-                            class="w-full h-72 z-0 object-cover"
+                            class="w-full h-full z-0 object-cover"
                         />
                     </div>
                 </div>
             </div>
         </div>
-        <div class="flex justify-end gap-5 p-4">
+        <div class="flex justify-end gap-5 p-4 lg:w-5/6 m-auto">
             <ClientOnly
                 ><div
                     class="w-9 h-9 bg-white shadow flex items-center justify-center rounded-full button-action"
@@ -163,10 +165,11 @@ onMounted(() => {
             </ClientOnly>
         </div>
         <div
-            class="px-3 grid"
+            class="px-3 lg:w-5/6 m-auto"
             :class="{
-                'grid-cols-2': styleView == 'small',
-                'grid-cols-1': styleView == 'medium',
+                'grid-cols-2 grid lg:grid-cols-3 xl:grid-cols-4':
+                    styleView == 'small',
+                'grid-cols-1 grid lg:grid-cols-2': styleView == 'medium',
             }"
         >
             <VProduct
@@ -174,6 +177,7 @@ onMounted(() => {
                 :data="product"
                 :mode="styleView"
                 :class="{ 'fade-in': products }"
+                wFull
             />
 
             <VSkeleton :mode="styleView" v-if="!products" />

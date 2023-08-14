@@ -8,12 +8,29 @@ import { VModal } from '.'
 // variables
 const tabs = [
     {
-        label: 'Home',
+        label: 'Trang chủ',
         router: '/',
+        name: 'index',
     },
     {
-        label: 'Home',
-        router: '/',
+        label: 'Sản phẩm',
+        router: '/products',
+        name: 'products',
+    },
+    {
+        label: 'Dành cho nữ',
+        router: '/forwoman',
+        name: 'forwoman',
+    },
+    {
+        label: 'Dành cho nam',
+        router: '/formen',
+        name: 'formen',
+    },
+    {
+        label: 'Giới thiệu',
+        router: '/info',
+        name: 'info',
     },
 ]
 
@@ -37,6 +54,7 @@ const { products } = storeToRefs(useCart())
 const { isShow, status, content } = storeToRefs(useToast())
 const classTopHeader = computed(() => ({
     'fade-bottom fixed w-full top-0': !!scrollPosition.value,
+    'block relative': !scrollPosition.value,
 }))
 // functions
 
@@ -78,16 +96,16 @@ const saveForm = (type: 'note' | 'discount' | null) => {
             if (!dataForm.value.discount) {
                 handleShowToast({ contentVal: 'Bạn cần nhập mã' })
             } else {
-                if (true) {
-                    handleShowToast({
-                        contentVal: 'Mã không hợp lệ!',
-                        type: 'error',
-                    })
-                    dataForm.value.discount = ''
-                } else {
-                    modelType.value = null
-                    modalOpen.value = false
-                }
+                // if (true) {
+                handleShowToast({
+                    contentVal: 'Mã không hợp lệ!',
+                    type: 'error',
+                })
+                dataForm.value.discount = ''
+                // } else {
+                //     modelType.value = null
+                //     modalOpen.value = false
+                // }
             }
 
             break
@@ -138,11 +156,27 @@ watch(
 </script>
 <template>
     <div class="h-16">
-        <header class="shadow-sm block z-[30] bg-white" :class="classTopHeader">
+        <header class="shadow-sm z-[30] bg-white" :class="classTopHeader">
             <input id="hamburger" type="checkbox" class="hidden" checked />
-            <div class="w-full h-9 bg-black px-6 hidden"></div>
-            <div class="w-full h-16 flex items-center px-6 justify-between">
-                <NuxtLink href="https://www.facebook.com/beliystores">
+            <div
+                class="w-full h-9 bg-black px-6 hidden lg:flex lg:items-center text-white font-did"
+            >
+                <div class="flex gap-4 text-sm">
+                    <p>+84 963639201</p>
+                    <p>beliystore0604@gmail.com</p>
+                </div>
+                <p class="flex-1 text-center">
+                    Sign up for 10% off your first order
+                </p>
+            </div>
+            <div
+                class="w-full h-16 flex items-center px-6 justify-between lg:px-24"
+            >
+                <NuxtLink
+                    href="https://www.facebook.com/beliystores"
+                    class="lg:hidden"
+                    target="_blank"
+                >
                     <ClientOnly>
                         <Icon
                             name="logos:facebook"
@@ -153,14 +187,21 @@ watch(
                 <NuxtLink href="/" class="w-16 h-10">
                     <img src="@/assets/svg/logo.svg" />
                 </NuxtLink>
-                <div class="hidden">
+                <div class="hidden lg:flex lg:gap-8">
                     <NuxtLink
                         v-for="tab in tabs"
                         :key="tab.router + tab.label"
                         :to="tab.router"
-                        target="_blank"
                     >
-                        {{ tab.label }}
+                        <p
+                            class="font-medium text-base"
+                            :class="{
+                                'font-semibold':
+                                    router.currentRoute.value.name == tab.name,
+                            }"
+                        >
+                            {{ tab.label }}
+                        </p>
                     </NuxtLink>
                 </div>
                 <button
@@ -193,7 +234,7 @@ watch(
             </div>
             <aside
                 id="bar-mobile"
-                class="!z-50 h-screen w-screen fixed top-0 left-0 md:w-[50%] flex-shrink-0 overflow-hidden bg-white md:block lg:hidden shadow-lg pt-10"
+                class="!z-50 h-screen w-screen fixed top-0 left-0 md:w-[70%] flex-shrink-0 overflow-hidden bg-white md:block lg:hidden shadow-lg pt-10"
                 :class="{
                     '!hidden': router.currentRoute.value.name === 'checkout',
                 }"
@@ -380,7 +421,7 @@ watch(
                 </div>
             </aside>
         </header>
-        <div class="fixed h-fit bottom-0 w-full z-[29]">
+        <div class="fixed h-fit bottom-0 w-full z-[29] lg:hidden">
             <div
                 class="w-5/6 m-auto h-12 bg-white shadow-md rounded-full z-30 flex justify-evenly items-center"
             >
@@ -394,22 +435,56 @@ watch(
                         class="flex flex-col items-center"
                     >
                         <Icon name="solar:shop-broken" class="w-5 h-5" />
-                        <p class="text-xs font-medium">Shop</p>
+                        <p
+                            class="text-xs font-medium"
+                            :class="{
+                                'font-semibold':
+                                    router.currentRoute.value.name ==
+                                    'products',
+                            }"
+                        >
+                            Shop
+                        </p>
                     </NuxtLink>
                     <NuxtLink href="/formen" class="flex flex-col items-center">
                         <Icon name="solar:men-broken" class="w-5 h-5" />
-                        <p class="text-xs font-medium">Men</p>
+                        <p
+                            class="text-xs font-medium"
+                            :class="{
+                                'font-semibold':
+                                    router.currentRoute.value.name == 'formen',
+                            }"
+                        >
+                            Men
+                        </p>
                     </NuxtLink>
                     <NuxtLink
                         href="/forwoman"
                         class="flex flex-col items-center"
                     >
                         <Icon name="solar:women-broken" class="w-5 h-5" />
-                        <p class="text-xs font-medium">Woman</p>
+                        <p
+                            class="text-xs font-medium"
+                            :class="{
+                                'font-semibold':
+                                    router.currentRoute.value.name ==
+                                    'forwoman',
+                            }"
+                        >
+                            Woman
+                        </p>
                     </NuxtLink>
                     <NuxtLink href="/info" class="flex flex-col items-center">
                         <Icon name="solar:info-square-broken" class="w-5 h-5" />
-                        <p class="text-xs font-medium">Info</p>
+                        <p
+                            class="text-xs font-medium"
+                            :class="{
+                                'font-semibold':
+                                    router.currentRoute.value.name == 'info',
+                            }"
+                        >
+                            Info
+                        </p>
                     </NuxtLink>
                 </ClientOnly>
             </div>

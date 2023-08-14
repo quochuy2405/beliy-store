@@ -10,7 +10,9 @@ const maintenance = false
             <VToast />
             <VHeader />
             <VGotoTop />
+
             <slot></slot>
+
             <VFooter />
         </div>
         <div
