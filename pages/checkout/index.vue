@@ -22,7 +22,9 @@ export interface OrderForm {
 const checkoutId = useCookie('checkoutId')
 const modalOpen = useState('modalControl')
 const modelType = ref<'momo' | 'bank' | 'payment_on_delivery'>(null)
-const dataOrder = useCookie<{ discount: string; note: string }>('dataOrder')
+const dataOrder = useCookie<{ discount: string; note: string }>('dataOrder', {
+    watch: true,
+})
 const { products } = storeToRefs(useCart())
 const valid = shortid.isValid(checkoutId.value)
 const formOpts = reactive({
@@ -31,7 +33,7 @@ const formOpts = reactive({
     provinces: [],
 })
 const formData = reactive<OrderForm>({
-    note: dataOrder.value ? dataOrder.value?.note : '',
+    note: '',
     ward: null,
     district: null,
     province: null,
@@ -81,6 +83,8 @@ watch(
 watch(
     () => formData.province,
     async () => {
+        formData.ward = null
+        formData.district = null
         const { data, error } = await useFetch<any>(
             `https://provinces.open-api.vn/api/p/${formData.province.value}?depth=2`,
             { server: false },
@@ -101,6 +105,7 @@ watch(
 watch(
     () => formData.district,
     async () => {
+        formData.ward = null
         const { data, error } = await useFetch<any>(
             `https://provinces.open-api.vn/api/d/${formData.district.value}?depth=2`,
             { server: false },
@@ -122,6 +127,7 @@ watch(
 onMounted(() => {
     const body = document.querySelector('body')
     body.scrollTo({ top: 0, behavior: 'smooth' })
+    formData.note = dataOrder.value.note
 })
 </script>
 
@@ -196,21 +202,29 @@ onMounted(() => {
                             title="Tỉnh/Thành Phố"
                             :options="formOpts.provinces"
                             :value="formData.province"
+                            :control="control.province"
                             :change="(value) => (formData.province = value)"
+                            required
                         />
 
                         <VSelect
                             title="Quận/Huyện"
                             :options="formOpts.districts"
                             :value="formData.district"
+                            :control="control.district"
                             :change="(value) => (formData.district = value)"
+                            :disabled="!formData.province"
+                            required
                         />
 
                         <VSelect
                             title="Phường/Xã"
                             :options="formOpts.wards"
                             :value="formData.ward"
+                            :control="control.ward"
+                            :disabled="!formData.district"
                             :change="(value) => (formData.ward = value)"
+                            required
                         />
                         <VTextField
                             title="Số Nhà,Đường"
@@ -218,10 +232,11 @@ onMounted(() => {
                             :value="formData.subAddress"
                             v-model="formData.subAddress"
                             :control="control.subAddress"
+                            required
                         />
 
                         <div
-                            class="flex-1 p-5 bg-black shadow-[0_0_3px_0_#c0c0c0b8] rounded-lg"
+                            class="flex-1 mt-4 p-5 bg-black shadow-[0_0_3px_0_#c0c0c0b8] rounded-lg"
                         >
                             <div
                                 class="flex justify-between text-sm text-white font-medium"
@@ -248,6 +263,7 @@ onMounted(() => {
                         <VButton
                             type="submit"
                             mode="default"
+                            href="/checkout/status"
                             @click="modelType = 'payment_on_delivery'"
                             class="mt-4 !rounded-full !py-4"
                             animation
@@ -301,9 +317,16 @@ onMounted(() => {
                 </div>
             </form>
             <VModal>
-                <div v-if="modelType === 'momo'" class="py-5 w-full">
-                    <div>MOMO</div>
+                <div v-if="modelType === 'momo'" class="py-5 w-full pb-10">
+                    <div class="w-4/5 h-fit m-auto">
+                        <img
+                            src="/img/momo-qr.png"
+                            class="rounded-lg object-cover"
+                        />
+                    </div>
+
                     <VButton
+                        href="/checkout/status"
                         type="submit"
                         mode="default"
                         class="mt-4 !rounded-full !py-4"
@@ -315,9 +338,15 @@ onMounted(() => {
                         </p>
                     </VButton>
                 </div>
-                <div v-if="modelType === 'bank'" class="py-5 w-full">
-                    <div>PR CK</div>
+                <div v-if="modelType === 'bank'" class="py-5 w-full pb-10">
+                    <div class="w-4/5 h-fit m-auto">
+                        <img
+                            src="/img/banking-qr.png"
+                            class="rounded-lg object-cover"
+                        />
+                    </div>
                     <VButton
+                        href="/checkout/status"
                         type="submit"
                         mode="default"
                         class="mt-4 !rounded-full !py-4"

@@ -30,7 +30,7 @@ onMounted(() => {
         }"
     >
         <span
-            class="mix-blend-difference bg-black text-white absolute-center z-[20]"
+            class="mix-blend-difference bg-black text-white shadow-md absolute-center z-[20]"
         >
             <ClientOnly
                 ><Icon

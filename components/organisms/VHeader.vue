@@ -16,15 +16,22 @@ const tabs = [
         router: '/',
     },
 ]
-const dataForm = ref({
-    discount: '',
-    note: '',
-})
+
 const scrollPosition = ref(0)
 const modelType = ref<'note' | 'discount' | null>(null)
 const router = useRouter()
 const checkoutId = useCookie('checkoutId')
-const dataOrder = useCookie<{ discount: string; note: string }>('dataOrder')
+const dataOrder = useCookie<{ discount: string; note: string }>('dataOrder', {
+    default: () => ({
+        discount: '',
+        note: '',
+    }),
+    watch: true,
+})
+const dataForm = ref({
+    discount: '',
+    note: '',
+})
 const modalOpen = useState('modalControl')
 const { products } = storeToRefs(useCart())
 const { isShow, status, content } = storeToRefs(useToast())
@@ -51,14 +58,19 @@ const gotoProductPage = (path: string) => {
 
 const saveForm = (type: 'note' | 'discount' | null) => {
     if (!type) return
+
+    dataOrder.value = { ...dataForm.value }
+
     switch (type) {
         case 'note': {
             if (!dataForm.value.note) {
                 handleShowToast({ contentVal: 'Hãy nhập gì đó!' })
+                dataOrder.value.note = ''
             } else {
                 modelType.value = null
                 modalOpen.value = false
             }
+
             break
         }
 
@@ -83,7 +95,6 @@ const saveForm = (type: 'note' | 'discount' | null) => {
         default:
             break
     }
-    dataOrder.value = dataForm.value
 }
 
 const handleModal = (type: 'note' | 'discount' | null) => {
@@ -107,9 +118,15 @@ onMounted(() => {
         }, 200)
     })
 
-    const cartProducts = JSON.parse(window.localStorage.getItem('cartProducts'))
-    if (cartProducts._object.products)
+    const cartProducts =
+        !!window.localStorage.getItem('cartProducts') &&
+        window.localStorage.getItem('cartProducts') !== 'null'
+            ? JSON.parse(window.localStorage.getItem('cartProducts'))
+            : null
+
+    if (!!cartProducts) {
         products.value = cartProducts._object.products
+    }
 })
 watch(
     () => JSON.stringify(products.value),
@@ -267,6 +284,7 @@ watch(
                                     class="input-default rounded-lg"
                                     placeholder="Ghi chú của bạn"
                                     rows="4"
+                                    :value="(dataForm && dataForm.note) || ''"
                                     @input="
                                         (event) =>
                                             (dataForm.note = (
@@ -290,6 +308,9 @@ watch(
                                     type="text"
                                     class="input-default rounded-full"
                                     placeholder="Mã giảm giá"
+                                    :value="
+                                        (dataForm && dataForm.discount) || ''
+                                    "
                                     @input="
                                         (event) =>
                                             (dataForm.note = (
@@ -340,7 +361,7 @@ watch(
         </header>
         <div class="absolute bottom-0 w-full z-[29]">
             <div
-                class="w-5/6 m-auto h-12 bg-white rounded-full z-30 flex justify-evenly items-center"
+                class="w-5/6 m-auto h-12 bg-white shadow-md rounded-full z-30 flex justify-evenly items-center"
             >
                 <ClientOnly>
                     <NuxtLink href="/" class="flex flex-col items-center">

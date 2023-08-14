@@ -5,10 +5,17 @@ interface Props {
     options: Array<OptionType>
     value: OptionType | null
     title: string
+    control?: any
     change: (value: OptionType) => void
+    required?: boolean
+    disabled?: boolean
 }
-const props = withDefaults(defineProps<Props>(), {})
-const { title } = toRefs(props)
+const props = withDefaults(defineProps<Props>(), {
+    required: false,
+    disabled: false,
+})
+const { title, control, required, disabled } = toRefs(props)
+
 const isOpen = ref(false)
 const selectBoxRef = ref(null)
 
@@ -37,7 +44,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div class="mb-4">
+    <div class="mb-4 relative">
         <label id="listbox-label" class="text-sm leading-7">
             {{ title }}
         </label>
@@ -50,7 +57,11 @@ onUnmounted(() => {
                     aria-haspopup="listbox"
                     aria-expanded="true"
                     aria-labelledby="listbox-label"
-                    class="cursor-pointer relative w-full rounded-full border border-gray-700 bg-white pl-3 pr-10 py-2.5 text-left focus:outline-none focus:shadow-outline-blue focus:border-green-400 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+                    class="cursor-pointer relative w-full rounded-full border border-gray-700 bg-white pl-3 pr-10 py-2.5 text-left focus:outline-none focus:shadow-outline-blue focus:border-green-400 transition ease-in-out duration-150 sm:text-sm sm:leading-5 disabled:opacity-30"
+                    :disabled="disabled"
+                    :class="{
+                        'border-red-500': !!required && control?.$errors[0],
+                    }"
                 >
                     <div
                         class="flex items-center text-base space-x-3"
@@ -139,5 +150,10 @@ onUnmounted(() => {
                 </ul>
             </div>
         </div>
+        <span
+            class="absolute -bottom-1 text-xs text-red-500 translate-y-[100%]"
+            v-if="!!required && control?.$errors[0]"
+            >{{ control.$errors[0].$message }}</span
+        >
     </div>
 </template>
