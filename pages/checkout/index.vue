@@ -2,9 +2,12 @@
 import { VButton, VSelect, VTextField } from '@/components/atoms'
 import { VCartItem } from '@/components/molecules'
 import { VModal } from '@/components/organisms'
+import { create, read, update } from '@/composables/firebase/base'
+import { db } from '@/composables/firebase/config'
 import { rules } from '@/resolvers/checkout.rule'
-import { useCart } from '@/stores/nuxtStore'
+import { useCart, useToast } from '@/stores/nuxtStore'
 import { OptionType } from '@/types/common'
+import { collection } from '@firebase/firestore'
 import useVuelidate from '@vuelidate/core'
 import { storeToRefs } from 'pinia'
 import shortid from 'shortid'
@@ -20,6 +23,7 @@ export interface OrderForm {
 }
 // variables
 const router = useRouter()
+const progress = ref(false)
 const checkoutId = useCookie('checkoutId')
 const modalOpen = useState('modalControl')
 const modelType = ref<'momo' | 'bank' | 'payment_on_delivery'>(null)
@@ -47,9 +51,71 @@ const provinces = useFetch<Array<any>>('https://provinces.open-api.vn/api/', {
 })
 
 const control = useVuelidate(rules(formData), formData)
+const { isShow, status, content } = storeToRefs(useToast())
+// functions
 
-const submitForm = () => {
+const handleShowToast = (
+    contentVal: string,
+    statusVal: 'info' | 'success' | 'error' | 'warning',
+) => {
+    isShow.value = true
+    status.value = statusVal
+    content.value = contentVal
+}
+
+const submitOrders = async (method: string) => {
+    progress.value = true
+    const ordersRef = collection(db, 'orders')
+    const orders = products.value.map(
+        ({ id, quantityOrder, name, sizes, price }) => ({
+            id,
+            quantityOrder,
+            name,
+            sizes,
+            price,
+        }),
+    )
+    const order = {
+        checkoutId: checkoutId.value,
+        orders: orders,
+        ...formData,
+        award: formData.ward.label,
+        province: formData.province.label,
+        district: formData.district.label,
+        paymentMethods: method,
+        status: 0,
+        isCharge: false,
+    }
+
+    await create(ordersRef, order).then(async () => {
+        await orders.forEach(async (item) => {
+            const productRef = collection(db, 'products')
+            const productDoc = await read('products', item.id)
+            if (productDoc) {
+                const productData = productDoc
+                const updatedQuantity =
+                    productData.quantity - item.quantityOrder
+                if (updatedQuantity >= 0) {
+                    await update(productRef, item.id, {
+                        quantity: updatedQuantity,
+                    })
+                } else {
+                    await handleShowToast(
+                        `Sản phẩm ${item.name} đã hết`,
+                        'warning',
+                    )
+                }
+            }
+            //code reduce quantity product using firebase
+        })
+    })
+
+    await router.push({ path: '/checkout/status' })
+    progress.value = false
+}
+const submitForm = async () => {
     control.value.$validate()
+
     if (!control.value.$error) {
         switch (modelType.value) {
             case 'momo': {
@@ -62,7 +128,8 @@ const submitForm = () => {
             }
 
             case 'payment_on_delivery': {
-                router.push({ path: '/checkout/status' })
+                progress.value = true
+                submitOrders('payment_on_delivery')
                 break
             }
         }
@@ -114,7 +181,6 @@ watch(
         )
 
         if (!error.value && data.value) {
-            console.log(data.value.wards)
             const wardOpts = data.value.wards.map((item) => {
                 return {
                     label: item.name,
@@ -129,7 +195,7 @@ watch(
 onMounted(() => {
     const body = document.querySelector('body')
     body.scrollTo({ top: 0, behavior: 'smooth' })
-    formData.note = dataOrder.value.note
+    if (dataOrder.value) formData.note = dataOrder.value.note
 })
 </script>
 
@@ -244,7 +310,21 @@ onMounted(() => {
                                 class="flex justify-between text-sm text-white font-medium"
                             >
                                 <h2 class="uppercase">Tạm tính</h2>
-                                <p>{{ Number(340000).toLocaleString() }} đ</p>
+                                <p>
+                                    {{
+                                        Number(
+                                            products.reduce((total, item) => {
+                                                return (
+                                                    total +
+                                                    item.price *
+                                                        1000 *
+                                                        item.quantityOrder
+                                                )
+                                            }, 0),
+                                        ).toLocaleString()
+                                    }}
+                                    đ
+                                </p>
                             </div>
 
                             <div
@@ -258,7 +338,19 @@ onMounted(() => {
                             >
                                 <h2 class="uppercase">Tổng tiền</h2>
                                 <p class="text-green-500">
-                                    {{ Number(340000).toLocaleString() }} đ
+                                    {{
+                                        Number(
+                                            products.reduce((total, item) => {
+                                                return (
+                                                    total +
+                                                    item.price *
+                                                        1000 *
+                                                        item.quantityOrder
+                                                )
+                                            }, 0) + 30000,
+                                        ).toLocaleString()
+                                    }}
+                                    đ
                                 </p>
                             </div>
                         </div>
@@ -266,11 +358,21 @@ onMounted(() => {
                             type="submit"
                             mode="default"
                             @click="modelType = 'payment_on_delivery'"
+                            :disabled="progress"
                             class="mt-4 !rounded-full !py-4"
                             animation
                             wFull
                         >
-                            <p class="font-semibold uppercase text-sm">
+                            <span v-if="progress">
+                                <Icon
+                                    name="eos-icons:loading"
+                                    class="w-5 h-5"
+                                />
+                            </span>
+                            <p
+                                v-if="!progress"
+                                class="font-semibold uppercase text-sm"
+                            >
                                 Thanh toán khi nhận hàng
                             </p>
                         </VButton>
@@ -278,6 +380,7 @@ onMounted(() => {
                             type="submit"
                             mode="default"
                             @click="modelType = 'momo'"
+                            :disabled="progress"
                             class="!mt-1 !rounded-full !py-4 !bg-[#a50064]"
                             animation
                             wFull
@@ -297,6 +400,7 @@ onMounted(() => {
                             type="submit"
                             mode="default"
                             @click="modelType = 'bank'"
+                            :disabled="progress"
                             class="!mt-1 !rounded-full !py-4 !bg-green-500"
                             animation
                             wFull
@@ -330,11 +434,19 @@ onMounted(() => {
                         href="/checkout/status"
                         type="submit"
                         mode="default"
+                        @click="submitOrders('momo')"
                         class="mt-4 !rounded-full !py-4"
+                        :disabled="progress"
                         animation
                         wFull
                     >
-                        <p class="font-semibold uppercase text-sm">
+                        <span v-if="progress">
+                            <Icon name="eos-icons:loading" class="w-5 h-5" />
+                        </span>
+                        <p
+                            v-if="!progress"
+                            class="font-semibold uppercase text-sm"
+                        >
                             Xác nhận đã chuyển
                         </p>
                     </VButton>
@@ -350,11 +462,19 @@ onMounted(() => {
                         href="/checkout/status"
                         type="submit"
                         mode="default"
+                        @click="submitOrders('banking')"
+                        :disabled="progress"
                         class="mt-4 !rounded-full !py-4"
                         animation
                         wFull
                     >
-                        <p class="font-semibold uppercase text-sm">
+                        <span v-if="progress">
+                            <Icon name="eos-icons:loading" class="w-5 h-5" />
+                        </span>
+                        <p
+                            v-if="!progress"
+                            class="font-semibold uppercase text-sm"
+                        >
                             Xác nhận đã chuyển
                         </p>
                     </VButton>

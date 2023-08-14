@@ -249,7 +249,22 @@ watch(
                                 >
                                     <h2 class="uppercase">Tạm tính</h2>
                                     <p class="text-green-500">
-                                        {{ Number(340000).toLocaleString() }} đ
+                                        {{
+                                            Number(
+                                                products.reduce(
+                                                    (total, item) => {
+                                                        return (
+                                                            total +
+                                                            item.price *
+                                                                1000 *
+                                                                item.quantityOrder
+                                                        )
+                                                    },
+                                                    0,
+                                                ),
+                                            ).toLocaleString()
+                                        }}
+                                        đ
                                     </p>
                                 </div>
                                 <div class="flex flex-col mt-5 gap-2">

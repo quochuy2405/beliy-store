@@ -25,19 +25,23 @@ onMounted(() => {
                 <p class="text-sm mb-2">Connect with Beliy</p>
                 <div class="flex gap-4">
                     <ClientOnly>
-                        <Icon
-                            name="logos:facebook"
-                            class="h-6 w-6 font-semibold"
-                        />
-                        <Icon
-                            name="logos:tiktok-icon"
-                            class="h-6 w-6 font-semibold"
-                        />
-
-                        <Icon
-                            name="skill-icons:instagram"
-                            class="h-6 w-6 font-semibold"
-                        />
+                        <NuxtLink href="https://www.facebook.com/beliystores">
+                            <Icon
+                                name="logos:facebook"
+                                class="h-6 w-6 font-semibold"
+                        /></NuxtLink>
+                        <NuxtLink href="https://www.tiktok.com/@beliystore">
+                            <Icon
+                                name="logos:tiktok-icon"
+                                class="h-6 w-6 font-semibold"
+                            />
+                        </NuxtLink>
+                        <NuxtLink href="https://www.instagram.com/beliystore">
+                            <Icon
+                                name="skill-icons:instagram"
+                                class="h-6 w-6 font-semibold"
+                            />
+                        </NuxtLink>
                     </ClientOnly>
                 </div>
             </div>
