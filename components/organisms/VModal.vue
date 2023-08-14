@@ -23,7 +23,7 @@ watch(isOpen, () => {
 })
 </script>
 <template>
-    <div>
+    <div v-if="isOpen">
         <span
             @click="onClose"
             class="bg-gray-50 absolute top-0 z-20 h-screen w-screen transition-all ease-in-out duration-200"

@@ -316,7 +316,7 @@ onMounted(() => {
                     </div>
                 </div>
             </form>
-            <VModal>
+            <VModal v-if="!!modelType">
                 <div v-if="modelType === 'momo'" class="py-5 w-full pb-10">
                     <div class="w-4/5 h-fit m-auto">
                         <img
