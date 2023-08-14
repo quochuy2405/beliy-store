@@ -19,6 +19,7 @@ export interface OrderForm {
     phone: string
 }
 // variables
+const router = useRouter()
 const checkoutId = useCookie('checkoutId')
 const modalOpen = useState('modalControl')
 const modelType = ref<'momo' | 'bank' | 'payment_on_delivery'>(null)
@@ -61,6 +62,7 @@ const submitForm = () => {
             }
 
             case 'payment_on_delivery': {
+                router.push({ path: '/checkout/status' })
                 break
             }
         }
@@ -263,7 +265,6 @@ onMounted(() => {
                         <VButton
                             type="submit"
                             mode="default"
-                            href="/checkout/status"
                             @click="modelType = 'payment_on_delivery'"
                             class="mt-4 !rounded-full !py-4"
                             animation
