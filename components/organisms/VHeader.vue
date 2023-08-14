@@ -235,9 +235,17 @@ watch(
                     ></label>
                 </button>
             </div>
+            <label
+                for="hamburger"
+                id="bar-overlay"
+                class="bg-gray-100 opacity-30 fixed top-0 h-screen w-screen bottom-0"
+            >
+                ></label
+            >
+
             <aside
                 id="bar-mobile"
-                class="!z-50 h-screen w-screen fixed top-0 left-0 md:w-[70%] flex-shrink-0 overflow-hidden bg-white md:block shadow-lg pt-10"
+                class="!z-50 h-screen w-screen fixed top-0 left-0 md:w-[70%] lg:w-[40%] flex-shrink-0 overflow-hidden bg-white md:block shadow-lg pt-10"
                 :class="{
                     '!hidden': router.currentRoute.value.name === 'checkout',
                 }"
@@ -252,7 +260,9 @@ watch(
                             class="w-6 h-6"
                     /></ClientOnly>
                 </label>
-                <div class="text-gray-500 h-full flex flex-col flex-1">
+                <div
+                    class="text-gray-500 h-full flex flex-col flex-1 w-full relative"
+                >
                     <div
                         v-if="products.length"
                         class="flex-1 h-full flex flex-col"

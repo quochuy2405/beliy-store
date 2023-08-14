@@ -132,12 +132,14 @@
         animation-iteration-count: infinite;
         opacity: 0;
     }
-    #hamburger:checked ~ #bar-mobile {
+    #hamburger:checked ~ #bar-mobile,
+    #hamburger:checked ~ #bar-overlay {
         transform: translateX(-100%);
         transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
     }
 
-    #hamburger:not(:checked) ~ #bar-mobile {
+    #hamburger:not(:checked) ~ #bar-mobile,
+    #hamburger:not(:checked) ~ #bar-overlay {
         transform: translateX(0);
         transition: all cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s;
     }

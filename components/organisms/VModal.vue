@@ -23,17 +23,17 @@ watch(isOpen, () => {
 })
 </script>
 <template>
-    <div v-if="isOpen">
+    <div v-if="isOpen" class="w-full">
         <span
             @click="onClose"
-            class="bg-gray-50 absolute top-0 z-20 h-screen w-screen transition-all ease-in-out duration-200"
+            class="bg-gray-50 absolute top-0 z-20 h-screen w-full transition-all ease-in-out duration-200"
             :class="{
                 'translate-y-0 opacity-50': isTransitionOpen,
                 'translate-y-full opacity-0': !isTransitionOpen,
             }"
         ></span>
         <div
-            class="min-h-[60vh] w-screen fixed bottom-0 z-50 rounded-ss-xl rounded-se-xl p-4 bg-white shadow-lg border transition-transform ease-in-out duration-200"
+            class="min-h-[60vh] w-full fixed bottom-0 z-50 rounded-ss-xl rounded-se-xl p-4 bg-white shadow-lg border transition-transform ease-in-out duration-200"
             :class="{
                 'translate-y-0': isTransitionOpen,
                 'translate-y-full': !isTransitionOpen,

@@ -200,7 +200,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="h-full w-full">
+    <div class="h-full w-full pt-8">
         <div v-if="checkoutId && valid && products.length" class="h-full">
             <form
                 @submit.prevent="submitForm"
@@ -218,206 +218,228 @@ onMounted(() => {
                         <p>Xác nhận đơn hàng</p>
                     </div>
                 </div>
-                <div class="px-4">
-                    <div class="text-gray-500 h-full flex flex-col flex-1">
-                        <p class="text-black text-base">Sản phẩm đã chọn</p>
-                        <div class="flex-1">
-                            <div class="h-[60%] overflow-y-auto">
-                                <VCartItem
-                                    v-for="item in products"
-                                    :data="item"
-                                />
+                <div class="px-4 flex flex-col">
+                    <div
+                        class="text-gray-500 h-full flex flex-col flex-1 lg:flex-row lg:gap-8"
+                    >
+                        <div class="flex-1 lg:p-5">
+                            <p class="text-black text-base">Sản phẩm đã chọn</p>
+                            <div class="flex-1">
+                                <div class="h-[60%] overflow-y-auto">
+                                    <VCartItem
+                                        v-for="item in products"
+                                        :data="item"
+                                    />
+                                </div>
                             </div>
-                        </div>
-
-                        <div>
-                            <p class="text-black text-base font-semibold py-2">
-                                Ghi chú đơn hàng
-                            </p>
-                            <textarea
-                                type="text"
-                                class="input-default rounded-lg"
-                                placeholder="Ghi chú của bạn"
-                                :value="formData.note"
-                                rows="3"
-                                @input="
-                                    (event) =>
-                                        (formData.note = (
-                                            event.target as HTMLTextAreaElement
-                                        ).value)
-                                "
-                            ></textarea>
-                        </div>
-
-                        <VTextField
-                            title="Họ và tên"
-                            name="name"
-                            v-model="formData.name"
-                            :value="formData.name"
-                            :control="control.name"
-                            required
-                        />
-
-                        <VTextField
-                            title="Số điện thoại"
-                            name="phone"
-                            v-model="formData.phone"
-                            :value="formData.phone"
-                            :control="control.phone"
-                            required
-                        />
-                        <VSelect
-                            title="Tỉnh/Thành Phố"
-                            :options="formOpts.provinces"
-                            :value="formData.province"
-                            :control="control.province"
-                            :change="(value) => (formData.province = value)"
-                            required
-                        />
-
-                        <VSelect
-                            title="Quận/Huyện"
-                            :options="formOpts.districts"
-                            :value="formData.district"
-                            :control="control.district"
-                            :change="(value) => (formData.district = value)"
-                            :disabled="!formData.province"
-                            required
-                        />
-
-                        <VSelect
-                            title="Phường/Xã"
-                            :options="formOpts.wards"
-                            :value="formData.ward"
-                            :control="control.ward"
-                            :disabled="!formData.district"
-                            :change="(value) => (formData.ward = value)"
-                            required
-                        />
-                        <VTextField
-                            title="Số Nhà,Đường"
-                            name="name"
-                            :value="formData.subAddress"
-                            v-model="formData.subAddress"
-                            :control="control.subAddress"
-                            required
-                        />
-
-                        <div
-                            class="flex-1 mt-4 p-5 bg-black shadow-[0_0_3px_0_#c0c0c0b8] rounded-lg"
-                        >
-                            <div
-                                class="flex justify-between text-sm text-white font-medium"
-                            >
-                                <h2 class="uppercase">Tạm tính</h2>
-                                <p>
-                                    {{
-                                        Number(
-                                            products.reduce((total, item) => {
-                                                return (
-                                                    total +
-                                                    item.price *
-                                                        1000 *
-                                                        item.quantityOrder
-                                                )
-                                            }, 0),
-                                        ).toLocaleString()
-                                    }}
-                                    đ
-                                </p>
-                            </div>
-
-                            <div
-                                class="flex justify-between text-sm text-white font-medium"
-                            >
-                                <h2 class="uppercase">Phí ship</h2>
-                                <p>{{ Number(30000).toLocaleString() }} đ</p>
-                            </div>
-                            <div
-                                class="flex justify-between text-lg text-white font-medium"
-                            >
-                                <h2 class="uppercase">Tổng tiền</h2>
-                                <p class="text-green-500">
-                                    {{
-                                        Number(
-                                            products.reduce((total, item) => {
-                                                return (
-                                                    total +
-                                                    item.price *
-                                                        1000 *
-                                                        item.quantityOrder
-                                                )
-                                            }, 0) + 30000,
-                                        ).toLocaleString()
-                                    }}
-                                    đ
-                                </p>
-                            </div>
-                        </div>
-                        <VButton
-                            type="submit"
-                            mode="default"
-                            @click="modelType = 'payment_on_delivery'"
-                            :disabled="progress"
-                            class="mt-4 !rounded-full !py-4"
-                            animation
-                            wFull
-                        >
-                            <span v-if="progress">
-                                <Icon
-                                    name="eos-icons:loading"
-                                    class="w-5 h-5"
-                                />
-                            </span>
-                            <p
-                                v-if="!progress"
-                                class="font-semibold uppercase text-sm"
-                            >
-                                Thanh toán khi nhận hàng
-                            </p>
-                        </VButton>
-                        <VButton
-                            type="submit"
-                            mode="default"
-                            @click="modelType = 'momo'"
-                            :disabled="progress"
-                            class="!mt-1 !rounded-full !py-4 !bg-[#a50064]"
-                            animation
-                            wFull
-                        >
-                            <div class="flex items-center justify-center gap-4">
-                                <p class="font-semibold uppercase text-sm">
-                                    Thanh toán bằng Momo
-                                </p>
-                                <span
-                                    class="bg-white w-fit h-fit p-[1px] rounded-sm"
+                            <div>
+                                <p
+                                    class="text-black text-base font-semibold py-2"
                                 >
-                                    <img src="/img/momo.png" class="w-5 h-5" />
-                                </span>
-                            </div>
-                        </VButton>
-                        <VButton
-                            type="submit"
-                            mode="default"
-                            @click="modelType = 'bank'"
-                            :disabled="progress"
-                            class="!mt-1 !rounded-full !py-4 !bg-green-500"
-                            animation
-                            wFull
-                        >
-                            <div class="flex items-center justify-center gap-4">
-                                <p class="font-semibold uppercase text-sm">
-                                    Chuyển khoản ngân hàng
+                                    Ghi chú đơn hàng
                                 </p>
-                                <ClientOnly>
-                                    <span class="w-fit h-fit rounded-sm">
-                                        <Icon
-                                            name="icon-park-solid:bank-card"
-                                            class="w-5 h-5 text-white"
-                                        /> </span
-                                ></ClientOnly>
+                                <textarea
+                                    type="text"
+                                    class="input-default rounded-lg"
+                                    placeholder="Ghi chú của bạn"
+                                    :value="formData.note"
+                                    rows="3"
+                                    @input="
+                                        (event) =>
+                                            (formData.note = (
+                                                event.target as HTMLTextAreaElement
+                                            ).value)
+                                    "
+                                ></textarea>
                             </div>
-                        </VButton>
+                        </div>
+
+                        <div class="flex-1 lg:p-5 lg:border lg:rounded-lg">
+                            <VTextField
+                                title="Họ và tên"
+                                name="name"
+                                v-model="formData.name"
+                                :value="formData.name"
+                                :control="control.name"
+                                required
+                            />
+
+                            <VTextField
+                                title="Số điện thoại"
+                                name="phone"
+                                v-model="formData.phone"
+                                :value="formData.phone"
+                                :control="control.phone"
+                                required
+                            />
+                            <VSelect
+                                title="Tỉnh/Thành Phố"
+                                :options="formOpts.provinces"
+                                :value="formData.province"
+                                :control="control.province"
+                                :change="(value) => (formData.province = value)"
+                                required
+                            />
+
+                            <VSelect
+                                title="Quận/Huyện"
+                                :options="formOpts.districts"
+                                :value="formData.district"
+                                :control="control.district"
+                                :change="(value) => (formData.district = value)"
+                                :disabled="!formData.province"
+                                required
+                            />
+
+                            <VSelect
+                                title="Phường/Xã"
+                                :options="formOpts.wards"
+                                :value="formData.ward"
+                                :control="control.ward"
+                                :disabled="!formData.district"
+                                :change="(value) => (formData.ward = value)"
+                                required
+                            />
+                            <VTextField
+                                title="Số Nhà,Đường"
+                                name="name"
+                                :value="formData.subAddress"
+                                v-model="formData.subAddress"
+                                :control="control.subAddress"
+                                required
+                            />
+
+                            <div
+                                class="flex-1 mt-4 p-5 bg-black shadow-[0_0_3px_0_#c0c0c0b8] rounded-lg"
+                            >
+                                <div
+                                    class="flex justify-between text-sm text-white font-medium"
+                                >
+                                    <h2 class="uppercase">Tạm tính</h2>
+                                    <p>
+                                        {{
+                                            Number(
+                                                products.reduce(
+                                                    (total, item) => {
+                                                        return (
+                                                            total +
+                                                            item.price *
+                                                                1000 *
+                                                                item.quantityOrder
+                                                        )
+                                                    },
+                                                    0,
+                                                ),
+                                            ).toLocaleString()
+                                        }}
+                                        đ
+                                    </p>
+                                </div>
+
+                                <div
+                                    class="flex justify-between text-sm text-white font-medium"
+                                >
+                                    <h2 class="uppercase">Phí ship</h2>
+                                    <p>
+                                        {{ Number(30000).toLocaleString() }} đ
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex justify-between text-lg text-white font-medium"
+                                >
+                                    <h2 class="uppercase">Tổng tiền</h2>
+                                    <p class="text-green-500">
+                                        {{
+                                            Number(
+                                                products.reduce(
+                                                    (total, item) => {
+                                                        return (
+                                                            total +
+                                                            item.price *
+                                                                1000 *
+                                                                item.quantityOrder
+                                                        )
+                                                    },
+                                                    0,
+                                                ) + 30000,
+                                            ).toLocaleString()
+                                        }}
+                                        đ
+                                    </p>
+                                </div>
+                            </div>
+                            <VButton
+                                type="submit"
+                                mode="default"
+                                @click="modelType = 'payment_on_delivery'"
+                                :disabled="progress"
+                                class="mt-4 !rounded-full !py-4"
+                                animation
+                                wFull
+                            >
+                                <span v-if="progress">
+                                    <Icon
+                                        name="eos-icons:loading"
+                                        class="w-5 h-5"
+                                    />
+                                </span>
+                                <p
+                                    v-if="!progress"
+                                    class="font-semibold uppercase text-sm"
+                                >
+                                    Thanh toán khi nhận hàng
+                                </p>
+                            </VButton>
+                            <VButton
+                                type="submit"
+                                mode="default"
+                                @click="modelType = 'momo'"
+                                :disabled="progress"
+                                class="!mt-1 !rounded-full !py-4 !bg-[#a50064]"
+                                animation
+                                wFull
+                            >
+                                <div
+                                    class="flex items-center justify-center gap-4"
+                                >
+                                    <p class="font-semibold uppercase text-sm">
+                                        Thanh toán bằng Momo
+                                    </p>
+                                    <span
+                                        class="bg-white w-fit h-fit p-[1px] rounded-sm"
+                                    >
+                                        <img
+                                            src="/img/momo.png"
+                                            class="w-5 h-5"
+                                        />
+                                    </span>
+                                </div>
+                            </VButton>
+                            <VButton
+                                type="submit"
+                                mode="default"
+                                @click="modelType = 'bank'"
+                                :disabled="progress"
+                                class="!mt-1 !rounded-full !py-4 !bg-green-500"
+                                animation
+                                wFull
+                            >
+                                <div
+                                    class="flex items-center justify-center gap-4"
+                                >
+                                    <p class="font-semibold uppercase text-sm">
+                                        Chuyển khoản ngân hàng
+                                    </p>
+                                    <ClientOnly>
+                                        <span class="w-fit h-fit rounded-sm">
+                                            <Icon
+                                                name="icon-park-solid:bank-card"
+                                                class="w-5 h-5 text-white"
+                                            /> </span
+                                    ></ClientOnly>
+                                </div>
+                            </VButton>
+                        </div>
                     </div>
                 </div>
             </form>
