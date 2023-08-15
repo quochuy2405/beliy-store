@@ -26,7 +26,7 @@ watch(isOpen, () => {
     <div v-if="isOpen" class="w-full">
         <span
             @click="onClose"
-            class="bg-gray-50 absolute top-0 z-20 h-screen w-full transition-all ease-in-out duration-200"
+            class="bg-gray-50 absolute top-0 z-20 h-screen w-full transition-all ease-in-out duration-200 cursor-pointer"
             :class="{
                 'translate-y-0 opacity-50': isTransitionOpen,
                 'translate-y-full opacity-0': !isTransitionOpen,
@@ -39,7 +39,10 @@ watch(isOpen, () => {
                 'translate-y-full': !isTransitionOpen,
             }"
         >
-            <div @click="onClose" class="flex justify-end">
+            <div
+                @click="onClose"
+                class="flex justify-end cursor-pointer hover:text-red-400"
+            >
                 <ClientOnly
                     ><Icon
                         name="material-symbols:close-rounded"

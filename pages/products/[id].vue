@@ -153,7 +153,7 @@ onMounted(() => {
                     >
                         <span
                             @click="reduce"
-                            class="bg-white px-2 rounded-full shadow-[0_0_3px_#d0d0d0cc] text-black"
+                            class="bg-white px-2 rounded-full shadow-[0_0_3px_#d0d0d0cc] text-black cursor-pointer"
                             ><Icon
                                 name="clarity:minus-line"
                                 class="w-5 h-5 text-base"
@@ -166,7 +166,7 @@ onMounted(() => {
                         </p>
                         <span
                             @click="increase"
-                            class="bg-white px-3 rounded-full shadow-[0_0_3px_#d0d0d0cc]"
+                            class="bg-white px-3 rounded-full shadow-[0_0_3px_#d0d0d0cc] cursor-pointer"
                             ><Icon
                                 name="clarity:plus-line"
                                 class="w-4 h-4 text-base text-black"

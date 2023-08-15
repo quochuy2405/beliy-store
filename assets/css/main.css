@@ -22,7 +22,7 @@
         @apply active:scale-75 transition-transform duration-700 ease-linear cursor-pointer;
     }
     .button-default {
-        @apply py-3 m-auto rounded-full w-full text-center px-10 text-sm uppercase font-medium text-white focus:outline-none bg-black focus:z-10 focus:ring-2 focus:ring-gray-200 button-action relative overflow-hidden;
+        @apply py-3 m-auto rounded-full w-full text-center px-10 text-sm uppercase font-medium text-white focus:outline-none bg-black focus:z-10 focus:ring-2 focus:ring-gray-200 button-action relative overflow-hidden cursor-pointer;
     }
     .link {
         @apply underline font-medium text-base text-black;

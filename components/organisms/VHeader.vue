@@ -229,7 +229,7 @@ watch(
                             <ClientOnly>
                                 <Icon
                                     name="iconoir:simple-cart"
-                                    class="h-6 w-6"
+                                    class="h-6 w-6 cursor-pointer"
                                 />
                             </ClientOnly></div
                     ></label>
@@ -238,7 +238,7 @@ watch(
             <label
                 for="hamburger"
                 id="bar-overlay"
-                class="bg-gray-100 opacity-30 fixed top-0 h-screen w-screen bottom-0"
+                class="bg-gray-100 opacity-30 fixed top-0 h-screen w-screen bottom-0 cursor-pointer"
             >
                 ></label
             >
@@ -253,7 +253,10 @@ watch(
                 <h1 class="font-medium text-lg uppercase px-4 text-black">
                     Giỏ hàng của bạn
                 </h1>
-                <label for="hamburger" class="absolute top-3 right-3">
+                <label
+                    for="hamburger"
+                    class="absolute top-3 right-3 cursor-pointer hover:text-red-400"
+                >
                     <ClientOnly
                         ><Icon
                             name="material-symbols:close-rounded"
@@ -274,25 +277,25 @@ watch(
                             <div class="flex justify-evenly h-14 border">
                                 <ClientOnly>
                                     <div
-                                        class="flex flex-col items-center justify-center"
+                                        class="flex flex-col items-center justify-center cursor-pointer"
                                         @click="handleModal('note')"
                                     >
                                         <p class="text-xs">Ghi chú</p>
                                         <Icon
                                             name="solar:notes-broken"
-                                            class="w-6 h-6 text-black"
+                                            class="w-6 h-6 text-black hover:text-gray-500"
                                         />
                                     </div>
                                 </ClientOnly>
                                 <ClientOnly>
                                     <div
-                                        class="flex flex-col items-center justify-center"
+                                        class="flex flex-col items-center justify-center cursor-pointer"
                                         @click="handleModal('discount')"
                                     >
                                         <p class="text-xs">Mã giảm giá</p>
                                         <Icon
                                             name="iconamoon:discount-light"
-                                            class="w-6 h-6 text-black"
+                                            class="w-6 h-6 text-black hover:text-gray-500"
                                         />
                                     </div>
                                 </ClientOnly>
@@ -424,7 +427,7 @@ watch(
                         <label for="hamburger">
                             <div
                                 @click="gotoProductPage('/products')"
-                                class="button-default mt-5"
+                                class="button-default mt-5 cursor-pointer"
                             >
                                 <span class="button-wait-tap"></span>
                                 <p>Đi đến cửa hàng</p>

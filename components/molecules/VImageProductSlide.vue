@@ -102,7 +102,7 @@ watch(currentIndex, () => {
                         class="w-9 h-9 bg-white flex shadow items-center justify-center rounded-full button-action"
                     >
                         <Icon
-                            name="material-symbols:zoom-out-map"
+                            name="ic:baseline-zoom-in-map"
                             class="text-gray-700 shadow-sm w-4 h-4"
                         /></div></ClientOnly
             ></span>

@@ -89,7 +89,7 @@ onMounted(() => {
             >
                 <div className="w-full lg:w-5/12 flex flex-col justify-center">
                     <h1
-                        className="text-3xl lg:text-4xl text-center font-bold leading-6 text-gray-800 pb-4"
+                        className="text-3xl lg:text-4xl text-center font-bold leading-6 text-black pb-4"
                     >
                         Câu chuyện đặc biệt
                     </h1>
@@ -112,18 +112,23 @@ onMounted(() => {
                     </p>
                 </div>
                 <div className="w-full lg:w-8/12 lg:pt-8">
-                    <div className="flex gap-2 shadow-lg p-5 rounded-md">
+                    <div
+                        className="flex justify-center lg:justify-start gap-2 shadow-lg p-5 rounded-md"
+                    >
                         <div
                             className="p-4 pb-6 flex justify-center flex-col items-center"
                         >
                             <div
-                                className="rounded-lg h-36 w-36 overflow-hidden"
+                                className="rounded-lg h-56 w-36 overflow-hidden"
                             >
-                                <img src="/img/hb.png" />
+                                <img
+                                    src="/img/hb.png"
+                                    class="h-full w-full object-cover"
+                                />
                             </div>
 
                             <h1
-                                className="font-medium text-sm leading-5 text-gray-800 mt-4"
+                                className="font-semibold text-sm leading-5 text-gray-800 mt-4"
                             >
                                 Quốc Huy (founder)
                             </h1>
@@ -132,15 +137,15 @@ onMounted(() => {
                             className="p-4 pb-6 flex justify-center flex-col items-center"
                         >
                             <div
-                                className=" rounded-lg h-36 w-36 overflow-hidden"
+                                className=" rounded-lg h-56 w-36 overflow-hidden"
                             >
                                 <img
                                     src="/img/dl.png"
-                                    className="object-center"
+                                    class="h-full w-full object-cover"
                                 />
                             </div>
                             <h1
-                                className="font-medium text-sm leading-5 text-gray-800 mt-4"
+                                className="font-semibold text-sm leading-5 text-gray-800 mt-4"
                             >
                                 Diệu Linh (co-founder)
                             </h1>

@@ -45,8 +45,11 @@ const remove = () => {
         <div class="flex gap-1 justify-between flex-1 flex-col">
             <label
                 for="hamburger"
+                class="cursor-pointer"
                 @click="gotoProductPage(`/products/${data.id}`)"
-                ><h1 class="text-sm font-medium text-black h-fit">
+                ><h1
+                    class="text-sm font-medium text-black h-fit hover:text-green-400"
+                >
                     {{ data.name }}
                 </h1></label
             >
@@ -85,7 +88,7 @@ const remove = () => {
                         <span @click="reduce"
                             ><Icon
                                 name="clarity:minus-line"
-                                class="w-5 h-5 text-base text-black"
+                                class="w-5 h-5 text-base text-black cursor-pointer"
                         /></span>
                     </ClientOnly>
 
@@ -98,14 +101,14 @@ const remove = () => {
                         <span @click="increase"
                             ><Icon
                                 name="clarity:plus-line"
-                                class="w-4 h-4 text-base text-black"
+                                class="w-4 h-4 text-base text-black cursor-pointer"
                         /></span>
                     </ClientOnly>
                 </div>
             </div>
         </div>
 
-        <div @click="remove" class="h-fit p-2">
+        <div @click="remove" class="h-fit p-2 cursor-pointer">
             <ClientOnly>
                 <Icon
                     name="solar:trash-bin-2-broken"
