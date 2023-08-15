@@ -5,7 +5,9 @@ definePageMeta({
     },
     layout: 'default',
 })
-
+useHead({
+    title: 'Chúng tôi là ai 👋🏻',
+})
 onMounted(() => {
     const body = document.querySelector('body')
     body.scrollTo({ top: 0, behavior: 'smooth' })

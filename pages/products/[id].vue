@@ -7,12 +7,13 @@ import { useCart, useToast } from '@/stores/nuxtStore'
 import { getDownloadURL, ref as storageRef } from 'firebase/storage'
 import { storeToRefs } from 'pinia'
 // variables
+const productDetails = ref(null)
 const route = useRoute()
 const imageActive = ref(0)
 const countBuy = ref(1)
-const productDetails = ref(null)
 const { products } = storeToRefs(useCart())
 const { isShow, status, content, horizontal } = storeToRefs(useToast())
+
 // functions
 const onClick = (index: number) => {
     imageActive.value = index
@@ -88,6 +89,10 @@ onMounted(() => {
 <template>
     <div>
         <div v-if="productDetails">
+            <Head>
+                <Title>{{ productDetails.name }}</Title></Head
+            >
+
             <p class="text-xs p-4 font-normal">
                 <NuxtLink href="/">Home</NuxtLink> /
                 <NuxtLink href="/products">Product</NuxtLink> /

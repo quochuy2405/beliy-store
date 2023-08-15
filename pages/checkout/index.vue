@@ -21,6 +21,10 @@ export interface OrderForm {
     name: string
     phone: string
 }
+
+useHead({
+    title: 'Giỏ hàng 😍',
+})
 // variables
 const router = useRouter()
 const progress = ref(false)

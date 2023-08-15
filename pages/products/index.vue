@@ -12,7 +12,9 @@ definePageMeta({
         name: 'layout',
     },
 })
-
+useHead({
+    title: 'Sản phẩm của Beliy 🧑‍💻',
+})
 // variables
 const categories = [
     { id: 1, name: 'Shirts', value: '', thumnail: '' },

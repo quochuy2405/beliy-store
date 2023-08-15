@@ -12,6 +12,9 @@ definePageMeta({
         name: 'layout',
     },
 })
+useHead({
+    title: 'Dành cho nữ thui 🦹‍♀️',
+})
 
 // variables
 const categories = [

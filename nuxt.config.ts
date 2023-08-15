@@ -22,12 +22,12 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
-            title: 'Beliy Stresswear',
+            title: 'Beliy Stresswear 👋🏻',
             meta: [
                 {
                     name: 'keywords',
                     content:
-                        'Thời trang hàng đầu,Thời trang đẳng cấp,Thời trang phong cách,Áo quần nam nữ,Bộ sưu tập mới,Phong cách độc đáo, localbrand,Localbrand,Beliy,Stress,StressWear, stresswear, beliyclothing, beliy stresswear,beliystresswear, beliy localbrand, beliy style ',
+                        'Thời trang hàng đầu,Thời trang đẳng cấp,Thời trang phong cách,Áo quần nam nữ,Bộ sưu tập mới,Phong cách độc đáo, localbrand,Localbrand,Beliy,Stress,StressWear, stresswear, beliyclothing, beliy stresswear,beliystresswear, beliy localbrand, beliy style,localbrand nam, localbrand nam đẹp, localbrand nam cao cấp, localbrand nam hàn quốc, localbrand nam thời trang, localbrand nam công sở, localbrand nam thể thao, localbrand nam giá rẻ, localbrand nam sale ,trẻhọc sinh,sinh viên,năng động,cá tính,trendy,giá rẻ,sale,mới nhất,hot trend,Hàn Quốc,Nhật Bản,Âu Mỹ,đường phố,vintage,unisex',
                 },
                 {
                     key: 'meta-description',
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
                 {
                     key: 'meta-og:title',
                     property: 'og:title',
-                    content: 'Beliy Stresswear - Limited Edition Clothings',
+                    content: 'Beliy Stresswear - Limited Edition Clothing',
                 },
                 {
                     key: 'meta-og:description',
@@ -64,7 +64,7 @@ export default defineNuxtConfig({
                 {
                     key: 'meta-twitter:title',
                     property: 'twitter:title',
-                    content: 'Beliy Stresswear - Limited Edition Clothings',
+                    content: 'Beliy Stresswear - Limited Edition Clothing',
                 },
                 {
                     key: 'meta-twitter:description',
