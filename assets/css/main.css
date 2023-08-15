@@ -41,7 +41,8 @@
     .nuxt-icon--fill * {
         fill: none !important;
     }
-    body::-webkit-scrollbar {
+    body::-webkit-scrollbar,
+    .hidden-scrollbar::-webkit-scrollbar {
         display: none;
     }
 

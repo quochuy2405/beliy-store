@@ -111,7 +111,7 @@ onMounted(() => {
             </div>
         </div>
         <div
-            class="w-screen overflow-y-scroll lg:w-fit m-auto"
+            class="w-screen overflow-y-scroll lg:w-fit m-auto lg:hidden-scrollbar"
             @scroll="onSliderScroll"
         >
             <div

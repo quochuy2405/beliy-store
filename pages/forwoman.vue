@@ -76,7 +76,9 @@ const refactorData = async (data: Array<ProductType>) => {
 const fetch = async () => {
     const productRef = await collection(db, 'products')
 
-    const data = await findAll<ProductType>(productRef, [])
+    const data = await findAll<ProductType>(productRef, [
+        ['gender', ['all', 'woman']],
+    ])
         .then(async (data: Array<ProductType>) => {
             if (data) {
                 return await refactorData(data)
@@ -111,7 +113,7 @@ onMounted(() => {
             </div>
         </div>
         <div
-            class="w-screen overflow-y-scroll lg:w-fit m-auto"
+            class="w-screen overflow-y-scroll lg:w-fit m-auto lg:hidden-scrollbar"
             @scroll="onSliderScroll"
         >
             <div
