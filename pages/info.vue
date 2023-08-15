@@ -78,7 +78,7 @@ onMounted(() => {
                     </p>
                 </div>
                 <div className="w-full lg:w-4/12 ">
-                    <img
+                    <nuxt-img
                         className="w-32 h-32 m-auto"
                         src="@/assets/svg/logo.svg"
                         alt="Beliy"
@@ -123,7 +123,7 @@ onMounted(() => {
                             <div
                                 className="rounded-lg h-56 w-36 overflow-hidden"
                             >
-                                <img
+                                <nuxt-img
                                     src="/img/hb.png"
                                     class="h-full w-full object-cover"
                                 />
@@ -141,7 +141,7 @@ onMounted(() => {
                             <div
                                 className=" rounded-lg h-56 w-36 overflow-hidden"
                             >
-                                <img
+                                <nuxt-img
                                     src="/img/dl.png"
                                     class="h-full w-full object-cover"
                                 />

@@ -28,7 +28,7 @@ onMounted(() => {
                     >
                         <div class="pb-14 gap-8 flex flex-col">
                             <div class="h-36 w-fit">
-                                <img
+                                <nuxt-img
                                     src="@/assets/svg/logo.svg"
                                     class="w-full h-full"
                                     alt="Logo"

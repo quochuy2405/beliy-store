@@ -47,19 +47,19 @@ const addToCart = () => {
 <template>
     <div
         v-if="mode === 'small' && data?.name"
-        class="w-[50vw] md:w-[33.333333333vw] lg:w-[25vw] px-3 flex flex-col gap-2 relative pb-4"
+        class="w-[50vw] md:w-[33.333333333vw] lg:w-[20vw] px-3 flex flex-col gap-2 relative pb-4"
         :class="{
             '!w-full': wFull,
         }"
     >
         <div
-            class="group w-full md:h-[500px] h-60 rounded-sm overflow-hidden relative cursor-pointer"
+            class="group w-full md:h-[400px] h-60 rounded-sm overflow-hidden relative cursor-pointer"
         >
-            <img
+            <nuxt-img
                 :src="data?.imagesURL[0]"
                 class="w-full z-[3] h-full object-cover absolute group-hover:z-[4] group-hover:fade-out duration-1000"
             />
-            <img
+            <nuxt-img
                 :src="data?.imagesURL[2]"
                 class="w-full h-full z-[2] object-cover absolute group-hover:z-[5] group-hover:fade-in"
             />
@@ -123,8 +123,8 @@ const addToCart = () => {
         v-if="mode === 'medium' && data?.name"
         class="w-full px-3 flex flex-col gap-2 relative pb-5"
     >
-        <div class="w-full h-[400px] lg:h-[700px] rounded-sm overflow-hidden">
-            <img
+        <div class="w-full h-[400px] lg:h-[400px] rounded-sm overflow-hidden">
+            <nuxt-img
                 :src="data?.imagesURL[0] || ''"
                 class="w-full h-full z-0 object-cover"
             />

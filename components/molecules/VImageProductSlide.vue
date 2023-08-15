@@ -106,7 +106,7 @@ watch(currentIndex, () => {
                             class="text-gray-700 shadow-sm w-4 h-4"
                         /></div></ClientOnly
             ></span>
-            <img
+            <nuxt-img
                 :src="images[currentIndex]"
                 alt=""
                 class="w-full h-full object-cover lg:object-contain"
@@ -175,12 +175,14 @@ watch(currentIndex, () => {
                                     visible === 3,
                                 'w-[25vw]  lg:w-[calc((25vw/4)*3)] px-1':
                                     visible === 4,
+                                'w-[20vw]  lg:w-[calc((20vw/4)*3)] px-1':
+                                    visible === 5,
                             }"
                             ref="refWidthElement"
                             v-for="(image, index) in images"
                             @click="() => visible !== 1 && onClick(index)"
                         >
-                            <img
+                            <nuxt-img
                                 :src="image"
                                 :data="image"
                                 class="w-full h-full rounded-md object-cover object-top"
