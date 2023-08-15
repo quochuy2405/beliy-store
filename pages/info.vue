@@ -78,7 +78,7 @@ onMounted(() => {
                     </p>
                 </div>
                 <div className="w-full lg:w-4/12 ">
-                    <nuxt-img
+                    <img
                         className="w-32 h-32 m-auto"
                         src="@/assets/svg/logo.svg"
                         alt="Beliy"
