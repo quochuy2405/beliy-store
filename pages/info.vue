@@ -14,10 +14,10 @@ onMounted(() => {
 })
 </script>
 <template>
-    <LazyClientOnly>
-        <div
-            className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-2"
-        >
+    <div
+        className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-2"
+    >
+        <LazyClientOnly>
             <div class="flex flex-col justify-center items-center">
                 <h2 class="uppercase text-sm font-semibold">Hello Guys! 😘</h2>
                 <h1 className="text-4xl lg:text-4xl font-semibold">
@@ -154,7 +154,7 @@ onMounted(() => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </LazyClientOnly>
+            </div></LazyClientOnly
+        >
+    </div>
 </template>
