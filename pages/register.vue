@@ -40,7 +40,7 @@ const submitForm = () => {
             <div class="lg:flex-1 lg:justify-center lg:flex lg:flex-col">
                 <div class="pb-14 gap-8 flex flex-col">
                     <div class="h-36 w-fit">
-                        <nuxt-img
+                        <img
                             src="@/assets/svg/logo.svg"
                             class="w-full h-full"
                             alt="Logo"

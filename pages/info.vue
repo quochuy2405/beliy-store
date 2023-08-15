@@ -123,7 +123,7 @@ onMounted(() => {
                             <div
                                 className="rounded-lg h-56 w-36 overflow-hidden"
                             >
-                                <nuxt-img
+                                <img
                                     src="/img/hb.png"
                                     class="h-full w-full object-cover"
                                 />
@@ -141,7 +141,7 @@ onMounted(() => {
                             <div
                                 className=" rounded-lg h-56 w-36 overflow-hidden"
                             >
-                                <nuxt-img
+                                <img
                                     src="/img/dl.png"
                                     class="h-full w-full object-cover"
                                 />

@@ -108,7 +108,7 @@ onMounted(() => {
     >
         <div class="w-full flex" id="slideshow-lazy">
             <div class="w-screen h-full relative">
-                <nuxt-img
+                <img
                     :src="currentSlider.url"
                     class="w-full h-full absolute object-cover lg:object-contain lg:w-2/4 lg:right-0"
                     :class="sliderImage"

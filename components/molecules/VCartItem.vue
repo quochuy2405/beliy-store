@@ -37,7 +37,7 @@ const remove = () => {
 </script>
 <template>
     <div v-if="data && data.quantityOrder > 0" class="flex h-40 p-4 gap-2">
-        <nuxt-img
+        <img
             :src="data.imagesURL[0]"
             alt=""
             class="w-24 h-full rounded-md object-cover"
