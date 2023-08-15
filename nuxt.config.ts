@@ -23,6 +23,7 @@ export default defineNuxtConfig({
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
             title: 'Beliy Stresswear 👋🏻',
+            link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.svg' }],
             meta: [
                 {
                     name: 'keywords',
