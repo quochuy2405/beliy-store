@@ -106,7 +106,7 @@ watch(currentIndex, () => {
                             class="text-gray-700 shadow-sm w-4 h-4"
                         /></div></ClientOnly
             ></span>
-            <img
+            <nuxt-img
                 :src="images[currentIndex]"
                 alt=""
                 class="w-full h-full object-cover lg:object-contain"
@@ -182,7 +182,7 @@ watch(currentIndex, () => {
                             v-for="(image, index) in images"
                             @click="() => visible !== 1 && onClick(index)"
                         >
-                            <img
+                            <nuxt-img
                                 :src="image"
                                 :data="image"
                                 class="w-full h-full rounded-md object-cover object-top"

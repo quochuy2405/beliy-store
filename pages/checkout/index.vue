@@ -412,7 +412,7 @@ onMounted(() => {
                                     <span
                                         class="bg-white w-fit h-fit p-[1px] rounded-sm"
                                     >
-                                        <img
+                                        <nuxt-img
                                             src="/img/momo.png"
                                             class="w-5 h-5"
                                         />
@@ -450,7 +450,7 @@ onMounted(() => {
             <VModal v-if="!!modelType">
                 <div v-if="modelType === 'momo'" class="py-5 w-full pb-10">
                     <div class="w-4/5 h-fit m-auto">
-                        <img
+                        <nuxt-img
                             src="/img/momo-qr.png"
                             class="rounded-lg object-cover"
                         />
@@ -479,7 +479,7 @@ onMounted(() => {
                 </div>
                 <div v-if="modelType === 'bank'" class="py-5 w-full pb-10">
                     <div class="w-4/5 h-fit m-auto">
-                        <img
+                        <nuxt-img
                             src="/img/banking-qr.png"
                             class="rounded-lg object-cover"
                         />
@@ -514,7 +514,7 @@ onMounted(() => {
             <div
                 class="w-fit h-fit flex flex-col justify-center gap-2 items-center md:pb-[10%]"
             >
-                <img src="/img/hacker.png" class="w-20 h-20" />
+                <nuxt-img src="/img/hacker.png" class="w-20 h-20" />
                 <h2>☹️ Ôi dồi ôi. Có gì đó không đúng</h2>
                 <NuxtLink
                     href="/"
