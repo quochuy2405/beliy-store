@@ -4,8 +4,23 @@ export default defineNuxtConfig({
     css: ['/assets/css/main.css'],
     modules: ['nuxt-icon', '@pinia/nuxt', '@nuxt/image'],
     image: {
-        // imgix: {
-        //     baseURL: 'https://assets.imgix.net',
+        providers: {
+            huypuiKit: {
+                name: 'huypuiKit', // optional value to overrider provider name
+                provider: '~/providers/image', // Path to custom provider
+                options: {
+                    // ... provider options
+                    baseURL: 'https://ik.imagekit.io/xd9xrfp79/tr:w-800,h-800',
+                },
+            },
+        },
+        // imagekitC: {
+        //     ,
+        //     provider: '',
+        //     modifiers: {
+        //         effect: 'sharpen:100',
+        //         quality: 'auto:best',
+        //     },
         // },
         quality: 90,
         screens: {

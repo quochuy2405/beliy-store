@@ -38,10 +38,7 @@ const getProductId = async () => {
                         name,
                 )
                 const imageURL = await getDownloadURL(imageRef)
-                return imageURL.replace(
-                    'https://firebasestorage.googleapis.com/v0/b/beliystoreadmin.appspot.com/',
-                    'https://ik.imagekit.io/xd9xrfp79/',
-                )
+                return imageURL
             } catch (error) {
                 return ''
             }

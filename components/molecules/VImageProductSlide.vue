@@ -107,6 +107,7 @@ watch(currentIndex, () => {
                         /></div></ClientOnly
             ></span>
             <nuxt-img
+                provider="huypuiKit"
                 :src="images[currentIndex]"
                 alt=""
                 class="w-full h-full object-cover lg:object-contain"
@@ -183,6 +184,7 @@ watch(currentIndex, () => {
                             @click="() => visible !== 1 && onClick(index)"
                         >
                             <nuxt-img
+                                provider="huypuiKit"
                                 :src="image"
                                 :data="image"
                                 class="w-full h-full rounded-md object-cover object-top"

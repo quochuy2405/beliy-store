@@ -55,23 +55,15 @@ const addToCart = () => {
         <div
             class="group w-full md:h-[400px] h-60 rounded-sm overflow-hidden relative cursor-pointer"
         >
-            <nuxt-blur-image
-                :src="
-                    data?.imagesURL[0].replace(
-                        'https://firebasestorage.googleapis.com/v0/b/beliystoreadmin.appspot.com/',
-                        'https://ik.imagekit.io/xd9xrfp79/',
-                    )
-                "
+            <nuxt-img
+                provider="huypuiKit"
+                :src="data?.imagesURL[0]"
                 hash="LMON8$IV_4js%Nofs.ayt8xt%Mof"
                 class="w-full z-[3] h-full object-cover absolute group-hover:z-[4] group-hover:fade-out duration-1000"
             />
             <nuxt-img
-                :src="
-                    data?.imagesURL[2].replace(
-                        'https://firebasestorage.googleapis.com/v0/b/beliystoreadmin.appspot.com/',
-                        'https://ik.imagekit.io/xd9xrfp79/',
-                    )
-                "
+                provider="huypuiKit"
+                :src="data?.imagesURL[2]"
                 class="w-full h-full z-[2] object-cover absolute group-hover:z-[5] group-hover:fade-in"
             />
         </div>
@@ -136,6 +128,7 @@ const addToCart = () => {
     >
         <div class="w-full h-[400px] lg:h-[400px] rounded-sm overflow-hidden">
             <nuxt-img
+                provider="huypuiKit"
                 :src="data?.imagesURL[0] || ''"
                 class="w-full h-full z-0 object-cover"
             />
