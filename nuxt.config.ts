@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     css: ['/assets/css/main.css'],
     modules: ['nuxt-icon', '@pinia/nuxt', '@nuxt/image'],
     image: {
+        // imgix: {
+        //     baseURL: 'https://assets.imgix.net',
+        // },
         quality: 90,
         screens: {
             xs: 320,
