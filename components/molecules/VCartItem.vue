@@ -40,7 +40,7 @@ const remove = () => {
         <nuxt-img
             provider="huypuiKit"
             :src="data.imagesURL[0]"
-            alt=""
+            alt="beliy"
             class="w-24 h-full rounded-md object-cover"
         />
         <div class="flex gap-1 justify-between flex-1 flex-col">

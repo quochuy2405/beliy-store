@@ -50,6 +50,9 @@ export default defineNuxtConfig({
             mode: 'default', // default
         },
         head: {
+            htmlAttrs: {
+                lang: 'vi',
+            },
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
             title: 'Beliy Stresswear 👋🏻',

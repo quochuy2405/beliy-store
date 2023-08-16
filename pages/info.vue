@@ -117,6 +117,7 @@ onMounted(() => {
                             <nuxt-img
                                 src="/img/hb.png"
                                 class="h-full w-full object-cover"
+                                alt="bui quoc huy"
                             />
                         </div>
 
@@ -133,6 +134,7 @@ onMounted(() => {
                             <nuxt-img
                                 src="/img/dl.png"
                                 class="h-full w-full object-cover"
+                                alt="dieu linh"
                             />
                         </div>
                         <h1

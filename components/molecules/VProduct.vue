@@ -58,12 +58,13 @@ const addToCart = () => {
             <nuxt-img
                 provider="huypuiKit"
                 :src="data?.imagesURL[0]"
-                hash="LMON8$IV_4js%Nofs.ayt8xt%Mof"
+                alt="beliy"
                 class="w-full z-[3] h-full object-cover absolute group-hover:z-[4] group-hover:fade-out duration-1000"
             />
             <nuxt-img
                 provider="huypuiKit"
                 :src="data?.imagesURL[2]"
+                alt="beliy"
                 class="w-full h-full z-[2] object-cover absolute group-hover:z-[5] group-hover:fade-in"
             />
         </div>
@@ -130,6 +131,7 @@ const addToCart = () => {
             <nuxt-img
                 provider="huypuiKit"
                 :src="data?.imagesURL[0] || ''"
+                alt="beliy"
                 class="w-full h-full z-0 object-cover"
             />
         </div>

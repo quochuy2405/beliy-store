@@ -415,6 +415,7 @@ onMounted(() => {
                                         <nuxt-img
                                             src="/img/momo.png"
                                             class="w-5 h-5"
+                                            alt="momo"
                                         />
                                     </span>
                                 </div>
@@ -453,6 +454,7 @@ onMounted(() => {
                         <nuxt-img
                             src="/img/momo-qr.png"
                             class="rounded-lg object-cover"
+                            alt="momo"
                         />
                     </div>
 
@@ -482,6 +484,7 @@ onMounted(() => {
                         <nuxt-img
                             src="/img/banking-qr.png"
                             class="rounded-lg object-cover"
+                            alt="banking"
                         />
                     </div>
                     <VButton
@@ -514,7 +517,11 @@ onMounted(() => {
             <div
                 class="w-fit h-fit flex flex-col justify-center gap-2 items-center md:pb-[10%]"
             >
-                <nuxt-img src="/img/hacker.png" class="w-20 h-20" />
+                <nuxt-img
+                    src="/img/hacker.png"
+                    class="w-20 h-20"
+                    alt="hacker"
+                />
                 <h2>☹️ Ôi dồi ôi. Có gì đó không đúng</h2>
                 <NuxtLink
                     href="/"

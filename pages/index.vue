@@ -25,6 +25,7 @@ onMounted(() => {
             >
                 <nuxt-img
                     src="/img/JACKET4-1.png"
+                    alt="beliy"
                     class="w-full h-full object-cover absolute"
                 />
                 <div
@@ -61,17 +62,29 @@ onMounted(() => {
         <VProductSider id="must" :visible="5" />
         <div class="grid grid-cols-1 md:grid-cols-3">
             <div class="flex px-3 flex-col gap-1 mb-3">
-                <nuxt-img src="/img/JACKET3-1.png" />
+                <nuxt-img
+                    src="/img/JACKET3-1.png"
+                    class="w-full h-full object-cover"
+                    alt="beliy"
+                />
                 <h1 class="text-xl font-semibold">Sản Phẩm Độc Quyền</h1>
                 <NuxtLink href="/products" class="link">Xem ngay</NuxtLink>
             </div>
             <div class="flex px-3 flex-1 flex-col gap-1 mb-3">
-                <nuxt-img src="/img/JACKET3-1.png" />
+                <nuxt-img
+                    src="/img/JACKET3-1.png"
+                    class="w-full h-full object-cover"
+                    alt="beliy"
+                />
                 <h1 class="text-xl font-semibold">Phối đặc sắc</h1>
                 <NuxtLink href="/products" class="link">Xem ngay</NuxtLink>
             </div>
             <div class="flex px-3 flex-1 flex-col gap-1 mb-3">
-                <nuxt-img src="/img/JACKET3-1.png" />
+                <nuxt-img
+                    src="/img/JACKET3-1.png"
+                    class="w-full h-full object-cover"
+                    alt="beliy"
+                />
                 <h1 class="text-xl font-semibold">Dành cho bạn</h1>
                 <NuxtLink href="/products" class="link">Xem ngay</NuxtLink>
             </div>
@@ -91,6 +104,7 @@ onMounted(() => {
             <nuxt-img
                 src="/img/JACKET3-1.png"
                 class="w-full h-full object-contain"
+                alt="beliy"
             />
         </div>
     </div>

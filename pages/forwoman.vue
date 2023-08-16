@@ -107,7 +107,11 @@ onMounted(() => {
         <div
             class="flex w-full h-48 lg:h-[40vh] overflow-hidden px-3 flex-col gap-1 mb-3 relative"
         >
-            <nuxt-img src="/img/JACKET3-1.png" class="filter blur-[1px]" />
+            <nuxt-img
+                src="/img/JACKET3-1.png"
+                class="filter blur-[1px]"
+                alt="beliy"
+            />
             <div
                 class="absolute-center flex items-center justify-center gap-1 flex-col text-white"
             >
@@ -143,6 +147,7 @@ onMounted(() => {
                         <nuxt-img
                             src="/img/JACKET3-1.png"
                             class="w-full h-full z-0 object-cover"
+                            alt="beliy"
                         />
                     </div>
                 </div>

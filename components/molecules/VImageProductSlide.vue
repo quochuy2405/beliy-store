@@ -109,7 +109,7 @@ watch(currentIndex, () => {
             <nuxt-img
                 provider="huypuiKit"
                 :src="images[currentIndex]"
-                alt=""
+                alt="beliy"
                 class="w-full h-full object-cover lg:object-contain"
             />
         </div>
@@ -185,6 +185,7 @@ watch(currentIndex, () => {
                         >
                             <nuxt-img
                                 provider="huypuiKit"
+                                alt="beliy"
                                 :src="image"
                                 :data="image"
                                 class="w-full h-full rounded-md object-cover object-top"

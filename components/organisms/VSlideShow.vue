@@ -112,6 +112,7 @@ onMounted(() => {
                     :src="currentSlider.url"
                     class="w-full h-full absolute object-cover lg:object-contain lg:w-2/4 lg:right-0"
                     :class="sliderImage"
+                    alt="beliy"
                 />
                 <div
                     class="p-4 flex justify-center flex-col gap-2 h-full lg:p-[20%]"
