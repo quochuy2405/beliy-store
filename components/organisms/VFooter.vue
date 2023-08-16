@@ -8,7 +8,7 @@
                     class="ml-4 flex justify-center overflow-hidden items-center lg:ml-0 w-36 h-36"
                     passHref
                 >
-                    <img src="@/assets/svg/logo.svg" alt="beliy logo" />
+                    <img src="@/assets/svg/logo.svg" alt="Beliy logo" />
                 </NuxtLink>
                 <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                     <div>
