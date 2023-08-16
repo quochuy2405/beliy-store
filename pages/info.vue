@@ -77,7 +77,7 @@ onMounted(() => {
                 <img
                     className="w-32 h-32 m-auto"
                     src="@/assets/svg/logo.svg"
-                    alt="Beliy"
+                    alt="beliy logo"
                 />
             </div>
         </div>

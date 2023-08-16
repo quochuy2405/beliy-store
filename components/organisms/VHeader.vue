@@ -188,7 +188,7 @@ watch(
                 ></NuxtLink>
 
                 <NuxtLink href="/" class="w-16 h-10">
-                    <img src="@/assets/svg/logo.svg" />
+                    <img src="@/assets/svg/logo.svg" alt="beliy logo" />
                 </NuxtLink>
                 <div class="hidden lg:flex lg:gap-8">
                     <NuxtLink
