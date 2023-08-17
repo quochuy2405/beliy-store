@@ -61,23 +61,18 @@ const sliderImage = computed(() => ({
     'fade-out': fadeOut.value,
 }))
 
-const moveSlider = () => {
+const moveSlider = async () => {
+    if (sliderPosition.value >= sliders.length - 1) {
+        sliderPosition.value = 0
+    } else {
+        sliderPosition.value++
+    }
     fadeIn.value = false
     fadeOut.value = true
-    setTimeout(() => {
-        fadeOut.value = false
-    }, 1400)
-    setTimeout(() => {
-        fadeIn.value = true
-    })
-    setTimeout(() => {
-        if (sliderPosition.value >= sliders.length - 1) {
-            sliderPosition.value = 0
-        } else {
-            sliderPosition.value++
-        }
-
+    await setTimeout(() => {
         currentSlider.value = sliders[sliderPosition.value]
+        fadeIn.value = true
+        fadeOut.value = false
     }, 500)
 }
 
@@ -87,9 +82,9 @@ onMounted(() => {
         id: 'slideshow',
         listener: (entries) => {
             if (entries[0].isIntersecting) {
-                time = setInterval(() => {
-                    moveSlider()
-                }, 5000)
+                time = setInterval(async () => {
+                    await moveSlider()
+                }, 4000)
             } else {
                 clearInterval(time)
             }
