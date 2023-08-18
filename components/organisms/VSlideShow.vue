@@ -10,7 +10,7 @@ const sliders = [
         description: "So soft, you don't want to take it off.",
         router: '/products',
         textButton: 'Shop now',
-        url: '/img/JACKET3-1.png',
+        url: '/img/JK1.png',
         animation: 'fade-in',
     },
     {
@@ -21,7 +21,7 @@ const sliders = [
         description: "So soft, you don't want to take it off.",
         router: '/formen',
         textButton: 'Shop',
-        url: '/img/JACKET3-2.png',
+        url: '/img/JK2.png',
         animation: 'fade-left',
     },
     {
@@ -32,7 +32,7 @@ const sliders = [
         description: "So soft, you don't want to take it off.",
         router: '/forwoman',
         textButton: 'Shop',
-        url: '/img/JACKET4-2.png',
+        url: '/img/JK3.png',
         animation: 'fade-right',
     },
     {
@@ -43,7 +43,7 @@ const sliders = [
         description: "So soft, you don't want to take it off.",
         router: '/products',
         textButton: 'Shop',
-        url: '/img/JACKET4-1.png',
+        url: '/img/JK4.png',
         animation: 'fade-bottom',
     },
 ]

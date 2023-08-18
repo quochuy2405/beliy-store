@@ -22,7 +22,7 @@ export default defineNuxtConfig({
         //         quality: 'auto:best',
         //     },
         // },
-        quality: 90,
+        quality: 95,
         screens: {
             xs: 320,
             sm: 640,

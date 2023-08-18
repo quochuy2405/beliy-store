@@ -2,7 +2,7 @@
 import { VToast } from '@/components/atoms'
 import { VGotoTop } from '@/components/molecules'
 import { VFooter, VHeader } from '@/components/organisms'
-const maintenance = false
+const maintenance = true
 </script>
 <template>
     <div>
