@@ -21,10 +21,10 @@ onMounted(() => {
         >
             <div
                 class="w-full h-[40vh] lg:!h-[70vh] first:h-[64vh] last:h-[64vh] m-auto overflow-x-hidden flex relative mt-1 flex-col justify-end md:w-full md:!h-[40vh] md:last:col-span-2 lg:last:col-span-1"
-                v-for="_ in [1, 2, 3]"
+                v-for="i in [5, 3, 4]"
             >
                 <nuxt-img
-                    src="/img/JACKET4-1.png"
+                    :src="`/img/JK${i}.png`"
                     alt="beliy"
                     class="w-full h-full object-cover absolute"
                 />
@@ -63,7 +63,7 @@ onMounted(() => {
         <div class="grid grid-cols-1 md:grid-cols-3">
             <div class="flex px-3 flex-col gap-1 mb-3">
                 <nuxt-img
-                    src="/img/JACKET3-1.png"
+                    src="/img/JK1.png"
                     class="w-full h-full object-cover"
                     alt="beliy"
                 />
@@ -72,7 +72,7 @@ onMounted(() => {
             </div>
             <div class="flex px-3 flex-1 flex-col gap-1 mb-3">
                 <nuxt-img
-                    src="/img/JACKET3-1.png"
+                    src="/img/JK2.png"
                     class="w-full h-full object-cover"
                     alt="beliy"
                 />
@@ -81,7 +81,7 @@ onMounted(() => {
             </div>
             <div class="flex px-3 flex-1 flex-col gap-1 mb-3">
                 <nuxt-img
-                    src="/img/JACKET3-1.png"
+                    src="/img/JK1.png"
                     class="w-full h-full object-cover"
                     alt="beliy"
                 />
@@ -102,7 +102,7 @@ onMounted(() => {
             class="flex h-56 lg:h-[70vh] overflow-hidden px-3 flex-col gap-1 mb-3"
         >
             <nuxt-img
-                src="/img/JACKET3-1.png"
+                src="/img/JK3.png"
                 class="w-full h-full object-contain"
                 alt="beliy"
             />

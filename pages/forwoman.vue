@@ -108,8 +108,8 @@ onMounted(() => {
             class="flex w-full h-48 lg:h-[40vh] overflow-hidden px-3 flex-col gap-1 mb-3 relative"
         >
             <nuxt-img
-                src="/img/JACKET3-1.png"
-                class="filter blur-[1px]"
+                src="/img/JK5.png"
+                class="object-contain h-full w-full"
                 alt="beliy"
             />
             <div
@@ -145,7 +145,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <nuxt-img
-                            src="/img/JACKET3-1.png"
+                            src="/img/JK3.png"
                             class="w-full h-full z-0 object-cover"
                             alt="beliy"
                         />
