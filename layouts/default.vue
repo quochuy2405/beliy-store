@@ -24,8 +24,8 @@ const maintenance = true
                 class="w-20 h-20"
                 alt="beliy"
             />
-            <h2>☹️ Xin lỗi vì bất tiện này</h2>
-            <h1 class="font-semibold">Beliy sẽ sớm quay lại ngay thôi! 🤗</h1>
+            <h2>☹️ Chủ bận đi làm...</h2>
+            <h1 class="font-semibold">Beliy sẽ không quay lại nữa.🤗</h1>
         </div>
     </div>
 </template>
