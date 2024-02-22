@@ -142,7 +142,7 @@ onMounted(() => {
                             </p>
                         </div>
                         <nuxt-img
-                            src="/img/JK3.png"
+                            :src="category.thumnail"
                             class="w-full h-full z-0 object-cover"
                             alt="beliy"
                         />
