@@ -50,7 +50,7 @@ const formData = reactive<OrderForm>({
     phone: '',
     subAddress: '',
 })
-const provinces = useFetch<Array<any>>('https://provinces.open-api.vn/api/', {
+const provinces = useFetch<Array<any>>('https://vn-public-apis.fpo.vn/provinces/getAll?limit=-1', {
     server: false,
 })
 
