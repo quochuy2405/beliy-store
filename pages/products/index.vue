@@ -102,10 +102,10 @@ onMounted(() => {
 <template>
     <div>
         <div
-            class="flex w-full h-48 lg:h-[40vh] overflow-hidden px-3 flex-col gap-1 mb-3 relative"
+            class="flex  mt-20 w-full h-48 lg:h-[40vh] overflow-hidden px-3 flex-col gap-1 mb-3 relative"
         >
             <nuxt-img
-                src="/img/JK5.png"
+                src="https://i.pinimg.com/736x/80/10/d9/8010d9787bb0ed34010fd48f58608c6a.jpg"
                 class="object-contain h-full w-full"
                 alt="beliy"
             />

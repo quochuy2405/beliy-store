@@ -2,7 +2,7 @@
 import { findAll } from '@/composables/firebase/base'
 import { db, storage } from '@/composables/firebase/config'
 import { ProductType } from '@/types/product'
-import { collection } from '@firebase/firestore'
+import { collection } from 'firebase/firestore'
 import { getDownloadURL, ref as storageRef } from 'firebase/storage'
 import { VProduct, VSkeleton } from '../molecules'
 
@@ -22,19 +22,24 @@ let timeOut: NodeJS.Timeout
 const itemCount = 5
 // functions
 const fetch = async () => {
-    const productRef = await collection(db, 'products')
+    try {
+        const productRef = await collection(db, 'products')
 
-    const data = await findAll<ProductType>(productRef, [])
-        .then(async (data: Array<ProductType>) => {
-            if (data) {
-                products.value = await refactorData(data)
-            }
-        })
-        .catch(() => {
-            products.value = []
-        })
+        const data = await findAll<ProductType>(productRef, [])
+            .then(async (data: Array<ProductType>) => {
+                if (data) {
+                  products.value = await refactorData(data)
+                    
+                }
+            })
+            .catch(() => {
+                products.value = []
+            })
 
-    return data
+        return data
+    } catch (error) {
+        return null
+    }
 }
 
 const moveSliderLeft = async () => {

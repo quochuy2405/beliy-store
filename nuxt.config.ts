@@ -10,7 +10,7 @@ export default defineNuxtConfig({
                 provider: '~/providers/image', // Path to custom provider
                 options: {
                     // ... provider options
-                    baseURL: 'https://ik.imagekit.io/xd9xrfp79/tr:w-800,h-800',
+                    baseURL: 'https://ik.imagekit.io/xd9xrfp79/tr:w-800,h-800/',
                 },
             },
         },

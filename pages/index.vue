@@ -102,7 +102,7 @@ onMounted(() => {
             class="flex h-56 lg:h-[70vh] overflow-hidden px-3 flex-col gap-1 mb-3"
         >
             <nuxt-img
-                src="/img/JK3.png"
+                src="https://i.pinimg.com/564x/a1/ea/ab/a1eaabfc1f939b67c187652e0cd8f0bc.jpg"
                 class="w-full h-full object-contain"
                 alt="beliy"
             />

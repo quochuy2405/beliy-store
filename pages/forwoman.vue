@@ -18,11 +18,11 @@ useHead({
 
 // variables
 const categories = [
-    { id: 1, name: 'Shirts', value: '', thumnail: '' },
-    { id: 2, name: 'Jackets', value: '', thumnail: '' },
-    { id: 3, name: 'Crop Top', value: '', thumnail: '' },
-    { id: 4, name: 'Baby Tee', value: '', thumnail: '' },
-    { id: 5, name: 'New Products', value: '', thumnail: '' },
+    { id: 1, name: 'Shirts', value: '', thumnail: 'https://i.pinimg.com/564x/b4/23/67/b4236791c54c9a485c59434461f0750d.jpg' },
+    { id: 2, name: 'Jackets', value: '', thumnail: 'https://i.pinimg.com/564x/81/bd/20/81bd205a79b00504e243fa0fc5e180dd.jpg' },
+    { id: 3, name: 'Crop Top', value: '', thumnail: 'https://i.pinimg.com/564x/04/15/75/041575af492af15cf956f9ae44240ef4.jpg' },
+    { id: 4, name: 'Baby Tee', value: '', thumnail: 'https://i.pinimg.com/564x/a8/3d/82/a83d8218d394cfa01d80b37be6a49cb9.jpg' },
+    { id: 5, name: 'New Products', value: '', thumnail: 'https://i.pinimg.com/564x/e0/3d/bf/e03dbf38ac256c8cda935ef0f297242d.jpg' },
 ]
 let time: NodeJS.Timeout
 const styleView = ref<'small' | 'medium'>('small')
@@ -105,10 +105,10 @@ onMounted(() => {
 <template>
     <div>
         <div
-            class="flex w-full h-48 lg:h-[40vh] overflow-hidden px-3 flex-col gap-1 mb-3 relative"
+            class="flex w-full h-48 mt-20 lg:h-[40vh] overflow-hidden px-3 flex-col gap-1 mb-3 relative"
         >
             <nuxt-img
-                src="/img/JK5.png"
+                src="https://i.pinimg.com/564x/a1/ea/ab/a1eaabfc1f939b67c187652e0cd8f0bc.jpg"
                 class="object-contain h-full w-full"
                 alt="beliy"
             />
@@ -145,8 +145,8 @@ onMounted(() => {
                             </p>
                         </div>
                         <nuxt-img
-                            src="/img/JK3.png"
-                            class="w-full h-full z-0 object-cover"
+                            :src="category.thumnail"
+                            class="w-full h-full z-0 object-cover !object-top"
                             alt="beliy"
                         />
                     </div>

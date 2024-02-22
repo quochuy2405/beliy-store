@@ -9,18 +9,22 @@ export const onObserverElement = ({
     callback?: () => any
     listener?: (entries?: IntersectionObserverEntry[]) => any
 }) => {
-    const callbackObserver = async (entries: IntersectionObserverEntry[]) => {
-        if (entries[0].isIntersecting && condition) {
-            await callback?.()
+    try {
+        const callbackObserver = async (
+            entries: IntersectionObserverEntry[],
+        ) => {
+            if (entries[0].isIntersecting && condition) {
+                await callback?.()
+            }
+            listener?.(entries)
         }
-        listener?.(entries)
-    }
-    const observer = new IntersectionObserver(callbackObserver, {
-        root: document.querySelector(`${id}`),
-        threshold: 0.2,
-    })
+        const observer = new IntersectionObserver(callbackObserver, {
+            root: document.querySelector(`${id}`),
+            threshold: 0.2,
+        })
 
-    observer.observe(document.querySelector(`#${id}-lazy`))
+        observer.observe(document.querySelector(`#${id}-lazy`))
+    } catch (error) {}
 }
 export const findItemInArray = (array, targetData) => {
     return array.find((item) => {
